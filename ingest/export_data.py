@@ -20,7 +20,8 @@ DB_PARAMS = {
     'port': 5432
 }
 
-DEST_DATA_DIR = os.environ.get('DEST_DATA_DIR', '/var/www/pharmaciedegarde24.fr/site/src/data')
+DEST_DATA_DIR = os.environ.get('DEST_DATA_DIR', os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'site', 'src', 'data'))
+PUBLIC_DATA_DIR = os.environ.get('PUBLIC_DATA_DIR', os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'site', 'public', 'data'))
 
 def main():
     os.makedirs(DEST_DATA_DIR, exist_ok=True)
@@ -160,6 +161,19 @@ def main():
             json.dump(ph_list, f, ensure_ascii=False)
 
     print(f"✓ Exported {len(by_dept)} departement shards to {shards_dir}/")
+
+    # Sync to public/data if different directory
+    if PUBLIC_DATA_DIR and os.path.abspath(PUBLIC_DATA_DIR) != os.path.abspath(DEST_DATA_DIR):
+        import shutil
+        os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
+        pub_shards = os.path.join(PUBLIC_DATA_DIR, 'shards')
+        os.makedirs(pub_shards, exist_ok=True)
+        shutil.copy2(os.path.join(DEST_DATA_DIR, 'departements.json'), os.path.join(PUBLIC_DATA_DIR, 'departements.json'))
+        shutil.copy2(os.path.join(DEST_DATA_DIR, 'top-communes.json'), os.path.join(PUBLIC_DATA_DIR, 'top-communes.json'))
+        for f in os.listdir(shards_dir):
+            if f.endswith('.json'):
+                shutil.copy2(os.path.join(shards_dir, f), os.path.join(pub_shards, f))
+        print(f"✓ Synchronized data shards to {PUBLIC_DATA_DIR}/")
 
     cur.close()
     conn.close()

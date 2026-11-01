@@ -56,6 +56,7 @@ Ultimo inventario documentato: **2026-10-11** (solo lettura SSH).
 | `gsc.realtimediscover.com` | static `/var/www/gsc.realtimediscover.com/public`, API PM2 → `:8787` | Staging RealTime Discover (OAuth); deploy `scripts/deploy-gsc-contabo.sh` |
 | `uktvtonight.co.uk` / `www` | static Astro `/var/www/uktvtonight.co.uk/dist` | DB `uktvtonight`, cron 05:30 daily |
 | `modelyearguide.com` / `www` | static Astro `/var/www/modelyearguide.com/dist` | US Automotive NHTSA Reliability Guide (AdSense ca-pub-2168172914069272 + Cloudflare) |
+| `pharmaciedegarde24.fr` / `www` | Cloudflare Pages + Astro SSG `/var/www/pharmaciedegarde24.fr` | DB `pharmaciedegarde`, cron 05:25 daily (enrich 2 farmacie/die + shifts + IndexNow + Google Indexing) |
 
 Siti presenti sotto `/var/www` ma **non** necessariamente in `sites-enabled`:  
 `123programmitv.it`, `fernsehheute.de`, `codebase`, ecc. — verificare prima di assumere che siano offline.
@@ -118,6 +119,7 @@ Database rilevati (non eliminare):
 - `programmitv`
 - `stock_tracker`
 - `uktvtonight` (proprietario: uktvtonight_app - uktvtonight.co.uk)
+- `pharmaciedegarde` (proprietario: pharmaciedegarde_app - pharmaciedegarde24.fr)
 
 Nuovo progetto:
 
@@ -149,6 +151,7 @@ Gruppi principali (non disabilitare senza capire l’impatto):
 - **Fernsehheute DE:** EPG/tmdb/rebuild astro (04:xx–05:xx).
 - **UK TV Tonight:** Rebuild EPG mattutino (05:30), refresh EPG e ping IndexNow serale pre-prime time (17:30 = 16:30 UK), ping notturno domani (23:30 = 22:30 UK). Log in `/var/log/uktvtonight/`.
 - **PrezzoBenza (prezzobenza.it):** Rebuild notturno (02:30), ingestione dati MIMIT, deploy Cloudflare Pages e ping IndexNow. Log in `/var/log/prezzobenza-rebuild.log`.
+- **PharmacieDeGarde (pharmaciedegarde24.fr):** Aggiornamento giornaliero turni guardia (05:25), arricchimento Google Places (2 farmacie/giorno), build Astro SSG, deploy Cloudflare Pages, purge cache e ping IndexNow + Google Indexing API. Log in `/var/log/pharmaciedegarde24/daily.log`.
 
 Prima di aggiungere cron RealTime Discover: usare `flock` + log dedicato sotto `/var/log/realtimediscover/`.
 
