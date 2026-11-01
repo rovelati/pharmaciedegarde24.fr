@@ -83,8 +83,11 @@ const ldBlocks = [
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
 
-    <!-- AdSense & CMP -->
-    <CmpConsent pubId="ca-pub-7294584988081191" />
+    <!-- Google AdSense Account Verification -->
+    <meta name="google-adsense-account" content="ca-pub-2168172914069272" />
+
+    <!-- Google Consent Mode v2, GA4 & AdSense / Funding Choices CMP -->
+    <CmpConsent pubId="ca-pub-2168172914069272" gaId="G-H0QJ65JZ88" />
   </head>
   <body>
     {showEmergencyBanner && <EmergencyBanner />}

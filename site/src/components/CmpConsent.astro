@@ -1,10 +1,14 @@
 ---
 export interface Props {
   pubId?: string;
+  gaId?: string;
 }
-const { pubId = 'ca-pub-7294584988081191' } = Astro.props;
+const {
+  pubId = 'ca-pub-2168172914069272',
+  gaId = 'G-H0QJ65JZ88',
+} = Astro.props;
 ---
-<!-- Google Consent Mode v2 Default Settings -->
+<!-- Google Consent Mode v2 Default Settings (Must execute before any Google tags) -->
 <script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -15,10 +19,20 @@ const { pubId = 'ca-pub-7294584988081191' } = Astro.props;
     'analytics_storage': 'denied',
     'wait_for_update': 500
   });
+  gtag('js', new Date());
+  gtag('config', 'G-H0QJ65JZ88');
 </script>
 
-<!-- Google AdSense & Funding Choices CMP -->
+<!-- Google tag (gtag.js) GA4 -->
 <script
+  is:inline
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+></script>
+
+<!-- Google AdSense & Funding Choices CMP (TCF v2.2 / Consent Mode v2) -->
+<script
+  is:inline
   async
   src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubId}`}
   crossorigin="anonymous"
