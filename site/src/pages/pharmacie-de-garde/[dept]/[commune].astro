@@ -61,7 +61,7 @@ export async function getStaticPaths() {
 
 const { commune, dept, pharmacies } = Astro.props;
 
-// Active guard shifts
+// Active guard shifts (open now)
 const now = new Date();
 const onGuardList = pharmacies.filter((p: any) => {
   if (p.isOpen24h) return true;
@@ -71,6 +71,11 @@ const onGuardList = pharmacies.filter((p: any) => {
     return now >= d && now <= f;
   });
 });
+
+const closedList = pharmacies.filter((p: any) => !onGuardList.includes(p));
+
+// Display list for primary section: if active guards exist, show them; otherwise show top 6 with clear notice
+const primaryList = onGuardList.length > 0 ? onGuardList : pharmacies.slice(0, 8);
 
 const center: [number, number] = (commune.lat && commune.lon)
   ? [commune.lat, commune.lon]
@@ -161,11 +166,13 @@ const faqLd = {
       <div class="commune-badges">
         <span class="badge badge-open">Ville : {commune.nom}</span>
         <span class="badge badge-garde">{commune.codePostal || dept.code}</span>
-        <span class="badge badge-night">{pharmacies.length} pharmacies</span>
+        <span class="badge badge-night">
+          {onGuardList.length > 0 ? `${onGuardList.length} de garde maintenant` : `${pharmacies.length} pharmacies`}
+        </span>
       </div>
       <h1>Pharmacie de Garde à {commune.nom}</h1>
       <p class="lead">
-        Consultez la liste des pharmacies ouvertes et de garde pour les urgences médicales de nuit, les dimanches et jours fériés à <strong>{commune.nom}</strong> ({dept.nom}).
+        Officines actuellement ouvertes et service de garde d'urgence (dimanches, nuits et jours fériés) à <strong>{commune.nom}</strong> ({dept.nom}).
       </p>
     </div>
 
@@ -186,30 +193,48 @@ const faqLd = {
       </div>
     </div>
 
-    <!-- Map -->
+    <!-- Clustered Map with Open-Only by default -->
     <section class="commune-map-section">
-      <h2>Carte des pharmacies à {commune.nom}</h2>
-      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} />
+      <div class="map-section-title-row">
+        <h2>Carte des pharmacies à {commune.nom}</h2>
+        <span class="muted">Affichage par palloncino regroupé</span>
+      </div>
+      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} cityName={commune.nom} defaultOnlyOpen={true} />
     </section>
 
     <AdSlot slot="8901234567" />
 
-    <!-- List of Pharmacies -->
+    <!-- List of Open / On-Call Pharmacies -->
     <section class="commune-list-section">
       <div class="list-heading">
         <h2>
           {onGuardList.length > 0 
-            ? `Officines de garde à ${commune.nom} (${onGuardList.length})` 
-            : `Toutes les pharmacies à ${commune.nom} (${pharmacies.length})`}
+            ? `🟢 Pharmacies actuellement ouvertes et de garde à ${commune.nom} (${onGuardList.length})` 
+            : `Pharmacies d'astreinte recommandées à ${commune.nom} (${primaryList.length})`}
         </h2>
-        <span class="muted">Mis à jour en direct</span>
+        <span class="badge badge-open">Vérification en direct</span>
       </div>
 
       <div class="grid grid-cols-2 pharma-grid">
-        {pharmacies.map((p: any) => (
+        {primaryList.map((p: any) => (
           <PharmacyCard pharmacy={p} />
         ))}
       </div>
+
+      <!-- Collapsible for other closed pharmacies -->
+      {closedList.length > 0 && onGuardList.length > 0 && (
+        <details class="closed-accordion">
+          <summary class="closed-summary">
+            <span>📋 Afficher les {closedList.length} autres pharmacies de {commune.nom} (fermées actuellement)</span>
+            <span class="accordion-arrow">▼</span>
+          </summary>
+          <div class="grid grid-cols-2 pharma-grid closed-grid">
+            {closedList.map((p: any) => (
+              <PharmacyCard pharmacy={p} />
+            ))}
+          </div>
+        </details>
+      )}
     </section>
 
     <AdSlot slot="9012345678" />
@@ -283,13 +308,55 @@ const faqLd = {
   .commune-map-section {
     margin-bottom: 2.5rem;
   }
-  .list-heading {
+  .map-section-title-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin-bottom: 0.5rem;
+  }
+  .list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1.2rem;
     flex-wrap: wrap;
     gap: 8px;
+  }
+  .pharma-grid {
+    margin-top: 1rem;
+  }
+  .closed-accordion {
+    margin-top: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .closed-summary {
+    padding: 1rem 1.4rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface-2);
+    user-select: none;
+  }
+  .closed-summary:hover {
+    color: var(--cross);
+  }
+  .accordion-arrow {
+    font-size: 0.8rem;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+  }
+  .closed-accordion[open] .accordion-arrow {
+    transform: rotate(180deg);
+  }
+  .closed-grid {
+    padding: 1.2rem;
   }
   .commune-faq-section {
     margin-top: 3.5rem;

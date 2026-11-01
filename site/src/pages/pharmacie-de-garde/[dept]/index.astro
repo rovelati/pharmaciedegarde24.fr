@@ -138,8 +138,8 @@ const faqLd = {
     <!-- Map of pharmacies -->
     {displayList.length > 0 && (
       <section class="map-section">
-        <h2>Localisation des pharmacies — {dept.nom}</h2>
-        <PharmacyMap pharmacies={displayList} />
+        <h2>Localisation des pharmacies de garde — {dept.nom}</h2>
+        <PharmacyMap pharmacies={pharmacies} defaultOnlyOpen={true} cityName={dept.nom} />
       </section>
     )}
 
