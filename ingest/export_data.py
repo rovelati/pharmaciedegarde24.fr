@@ -20,7 +20,7 @@ DB_PARAMS = {
     'port': 5432
 }
 
-DEST_DATA_DIR = os.path.expanduser('/var/www/pharmaciedegarde24.fr/site/src/data')
+DEST_DATA_DIR = os.environ.get('DEST_DATA_DIR', '/var/www/pharmaciedegarde24.fr/site/src/data')
 
 def main():
     os.makedirs(DEST_DATA_DIR, exist_ok=True)
@@ -102,6 +102,8 @@ def main():
     cur.execute("""
         SELECT p.id, p.finess_id, p.nom, p.slug, p.adresse, p.code_postal, p.ville,
                p.departement_code, p.lat, p.lon, p.telephone, p.is_open_24h,
+               p.google_rating, p.google_user_ratings_total, p.google_reviews,
+               p.google_photos, p.google_website, p.editorial_summary, p.google_opening_hours,
                s.type_garde, s.date_debut, s.date_fin, s.notes
         FROM pharmacies p
         LEFT JOIN garde_shifts s ON s.pharmacy_id = p.id AND s.date_fin >= %s AND s.date_debut <= %s + INTERVAL '7 days'
@@ -112,7 +114,9 @@ def main():
     # Group by dept
     by_dept = {}
     for r in all_rows:
-        p_id, finess, nom, slug, adresse, cp, ville, dept_code, lat, lon, tel, is_24, g_type, g_debut, g_fin, g_notes = r
+        (p_id, finess, nom, slug, adresse, cp, ville, dept_code, lat, lon, tel, is_24,
+         g_rating, g_reviews_cnt, g_reviews, g_photos, g_website, g_editorial, g_hours,
+         g_type, g_debut, g_fin, g_notes) = r
         if dept_code not in by_dept:
             by_dept[dept_code] = {}
 
@@ -130,6 +134,13 @@ def main():
                 'lon': float(lon) if lon else None,
                 'telephone': tel or '',
                 'isOpen24h': bool(is_24),
+                'googleRating': float(g_rating) if g_rating else None,
+                'googleReviewsTotal': int(g_reviews_cnt or 0),
+                'googleReviews': g_reviews or [],
+                'googlePhotos': g_photos or [],
+                'googleWebsite': g_website or '',
+                'editorialSummary': g_editorial or '',
+                'googleOpeningHours': g_hours or [],
                 'shifts': []
             }
 

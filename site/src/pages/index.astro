@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import HeroSearch from '../components/HeroSearch.astro';
 import AdSlot from '../components/AdSlot.astro';
+import LiveDateBadge from '../components/LiveDateBadge.astro';
 import departements from '../data/departements.json';
 import topCommunes from '../data/top-communes.json';
 
@@ -56,6 +57,7 @@ const faqLd = {
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="wrap hero-content">
+      <LiveDateBadge prefix="Service de garde national en direct :" />
       <div class="hero-badge">
         <span class="pulse-dot"></span>
         <span>Service d'Urgence Pharmaceutique National</span>

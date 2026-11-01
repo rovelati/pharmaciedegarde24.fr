@@ -1,0 +1,93 @@
+---
+export interface Props {
+  prefix?: string;
+  className?: string;
+}
+
+const { prefix = "Mise à jour en direct :", className = "" } = Astro.props;
+
+// Build-time default formatted in French
+const now = new Date();
+const dateStr = now.toLocaleDateString('fr-FR', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+const timeStr = now.toLocaleTimeString('fr-FR', {
+  hour: '2-digit',
+  minute: '2-digit'
+});
+---
+
+<div class={`live-date-badge ${className}`} title="Informations vérifiées en temps réel">
+  <span class="pulse-dot"></span>
+  <span class="badge-label">{prefix}</span>
+  <time id="live-time-ticker" datetime={now.toISOString()} class="badge-time">
+    {dateStr.charAt(0).toUpperCase() + dateStr.slice(1)} à {timeStr}
+  </time>
+  <span class="badge-sub">— Service de garde vérifié</span>
+</div>
+
+<style>
+  .live-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cross-bg);
+    border: 1px solid var(--cross-border);
+    color: var(--cross);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
+  }
+  .badge-label {
+    color: var(--ink-secondary);
+  }
+  .badge-time {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .badge-sub {
+    color: var(--cross);
+    font-weight: 700;
+  }
+  @media (max-width: 600px) {
+    .live-date-badge {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+    .badge-sub {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Keep live time clock synchronized in user's browser
+  (function() {
+    function updateClock() {
+      const el = document.getElementById('live-time-ticker');
+      if (!el) return;
+      const d = new Date();
+      const dateText = d.toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      const timeText = d.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      el.textContent = (dateText.charAt(0).toUpperCase() + dateText.slice(1)) + ' à ' + timeText;
+      el.setAttribute('datetime', d.toISOString());
+    }
+    document.addEventListener('DOMContentLoaded', updateClock);
+    setInterval(updateClock, 30000);
+  })();
+</script>

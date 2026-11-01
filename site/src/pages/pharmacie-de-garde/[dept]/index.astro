@@ -3,6 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import PharmacyCard from '../../../components/PharmacyCard.astro';
 import PharmacyMap from '../../../components/PharmacyMap.astro';
 import AdSlot from '../../../components/AdSlot.astro';
+import LiveDateBadge from '../../../components/LiveDateBadge.astro';
 import departements from '../../../data/departements.json';
 import topCommunes from '../../../data/top-communes.json';
 import fs from 'node:fs';
@@ -90,6 +91,7 @@ const faqLd = {
   jsonLd={faqLd}
 >
   <div class="wrap dept-page">
+    <LiveDateBadge prefix="Statut des officines en direct :" />
     <div class="dept-header-box">
       <div class="dept-badge-row">
         <span class="badge badge-open">Département {dept.code}</span>

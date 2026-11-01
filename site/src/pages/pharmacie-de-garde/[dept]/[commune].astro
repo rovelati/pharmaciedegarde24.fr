@@ -3,6 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import PharmacyCard from '../../../components/PharmacyCard.astro';
 import PharmacyMap from '../../../components/PharmacyMap.astro';
 import AdSlot from '../../../components/AdSlot.astro';
+import LiveDateBadge from '../../../components/LiveDateBadge.astro';
 import departements from '../../../data/departements.json';
 import topCommunes from '../../../data/top-communes.json';
 import fs from 'node:fs';
@@ -11,8 +12,6 @@ import path from 'node:path';
 export async function getStaticPaths() {
   const shardsDir = path.resolve('./src/data/shards');
   const deptMap = new Map(departements.map(d => [d.code, d]));
-
-  // Cache shards in memory during build
   const shardCache = new Map();
 
   return topCommunes.map(commune => {
@@ -33,8 +32,6 @@ export async function getStaticPaths() {
     }
 
     const deptPharmacies = shardCache.get(deptCode) || [];
-    
-    // Filter pharmacies matching this commune name or postal code
     const communeNameLower = commune.nom.toLowerCase();
     const postal = commune.codePostal || '';
 
@@ -45,7 +42,6 @@ export async function getStaticPaths() {
     });
 
     if (matched.length === 0) {
-      // Fallback to closest or first from dept
       matched = deptPharmacies.slice(0, 10);
     }
 
@@ -86,32 +82,66 @@ const breadcrumbs = [
   { name: commune.nom, href: `/pharmacie-de-garde/${dept.code}/${commune.slug}/` },
 ];
 
+// ItemList Schema.org
+const itemListLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": `Pharmacies de garde à ${commune.nom}`,
+  "description": `Liste officielle des officines de pharmacie et gardes d'urgence à ${commune.nom} (${commune.codePostal || dept.code}).`,
+  "numberOfItems": pharmacies.length,
+  "itemListElement": pharmacies.map((p: any, idx: number) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "Pharmacy",
+      "name": p.nom,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": p.adresse,
+        "addressLocality": p.ville,
+        "postalCode": p.codePostal,
+        "addressCountry": "FR"
+      },
+      "telephone": p.telephone || undefined,
+      "url": `https://pharmaciedegarde24.fr/pharmacie/${p.slug}/`
+    }
+  }))
+};
+
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": `Où trouver une pharmacie de garde cette nuit à ${commune.nom} (${commune.codePostal || dept.code}) ?`,
+      "name": `Où trouver une pharmacie de garde aujourd'hui ou cette nuit à ${commune.nom} (${commune.codePostal || dept.code}) ?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": `À ${commune.nom}, la garde de nuit (20h-8h) s'effectue à volets fermés. Pour connaître l'officine d'astreinte exacte ou vous faire ouvrir, composez le 3237 ou contactez le commissariat / brigade de gendarmerie locale (composez le 17) muni de votre ordonnance médicale urgente.`
+        "text": `À ${commune.nom}, la garde de nuit (20h00 - 08h00) est assurée à volets fermés. Pour obtenir l'adresse de l'officine d'astreinte ou vous faire ouvrir, contactez le 3237 (Résogardes) ou présentez-vous au commissariat de police ou à la brigade de gendarmerie la plus proche (composez le 17) avec votre ordonnance médicale urgente.`
       }
     },
     {
       "@type": "Question",
-      "name": `Combien de pharmacies sont recensées à ${commune.nom} ?`,
+      "name": `Quelles pharmacies sont ouvertes le dimanche à ${commune.nom} ?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": `La commune de ${commune.nom} compte ${pharmacies.length} pharmacies d'officine référencées dans notre annuaire national de santé.`
+        "text": `Le dimanche entre 08h00 et 20h00, une ou plusieurs officines de garde sont ouvertes en libre accès à ${commune.nom} ou dans le secteur sanitaire de ${dept.nom}. Vous pouvez vous y rendre sans démarche policière préalable.`
       }
     },
     {
       "@type": "Question",
-      "name": `Quels sont les frais de garde en pharmacie à ${commune.nom} ?`,
+      "name": `Combien de pharmacies d'officine sont recensées à ${commune.nom} ?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": `Les honoraires de garde légaux s'élèvent à 5 € par ordonnance en journée les dimanches et jours fériés, et 8 € la nuit (20h-8h). Ils sont intégralement remboursés par la Sécurité Sociale avec une prescription médicale urgente.`
+        "text": `La commune de ${commune.nom} compte actuellement ${pharmacies.length} pharmacies d'officine répertoriées au fichier national officiel FINESS.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Les honoraires de garde sont-ils remboursés par la Sécurité Sociale à ${commune.nom} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Oui, les honoraires légaux (5 € le dimanche et jours fériés, 8 € la nuit) sont intégralement remboursés à 100% par l'Assurance Maladie dès lors que vous présentez une prescription médicale urgente rédigée par un médecin en dehors des heures d'ouverture standard.`
       }
     }
   ]
@@ -119,12 +149,14 @@ const faqLd = {
 ---
 
 <Base
-  title={`Pharmacie de Garde ${commune.nom} (${commune.codePostal || dept.code}) — Ouverte Aujourd'hui et Nuit`}
-  description={`Pharmacies de garde à ${commune.nom} (${commune.codePostal || dept.code}). Numéros de téléphone directs, adresses, carte interactive et officines ouvertes 24h/24, le dimanche et la nuit.`}
+  title={`Pharmacie de Garde à ${commune.nom} (${commune.codePostal || dept.code}) Aujourd'hui : Ouverte Maintenant et Nuit 24h`}
+  description={`Trouvez les pharmacies de garde à ${commune.nom} ouvertes maintenant : horaires aujourd'hui, service de garde de nuit 24h/24, plan d'accès et téléphone direct pour appeler immédiatement.`}
   breadcrumbs={breadcrumbs}
-  jsonLd={faqLd}
+  jsonLd={[itemListLd, faqLd]}
 >
   <div class="wrap commune-page">
+    <LiveDateBadge prefix="Situation en temps réel :" />
+
     <div class="commune-header">
       <div class="commune-badges">
         <span class="badge badge-open">Ville : {commune.nom}</span>
@@ -170,7 +202,7 @@ const faqLd = {
             ? `Officines de garde à ${commune.nom} (${onGuardList.length})` 
             : `Toutes les pharmacies à ${commune.nom} (${pharmacies.length})`}
         </h2>
-        <span class="muted">Mis à jour automatiquement</span>
+        <span class="muted">Mis à jour en direct</span>
       </div>
 
       <div class="grid grid-cols-2 pharma-grid">

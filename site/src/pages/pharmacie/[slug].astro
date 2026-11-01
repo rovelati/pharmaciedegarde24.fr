@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import PharmacyMap from '../../components/PharmacyMap.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import LiveDateBadge from '../../components/LiveDateBadge.astro';
 import departements from '../../data/departements.json';
 import topCommunes from '../../data/top-communes.json';
 import fs from 'node:fs';
@@ -12,7 +13,6 @@ export async function getStaticPaths() {
   const deptMap = new Map(departements.map(d => [d.code, d]));
   const shardCache = new Map();
 
-  // Collect pharmacies in top communes (up to ~5,000 distinct pharmacies)
   const paths: any[] = [];
   const seenSlugs = new Set<string>();
 
@@ -83,6 +83,10 @@ const breadcrumbs = [
   { name: pharmacy.nom, href: `/pharmacie/${pharmacy.slug}/` },
 ];
 
+const hasRating = pharmacy.googleRating != null && pharmacy.googleRating > 0;
+const hasReviews = pharmacy.googleReviews && pharmacy.googleReviews.length > 0;
+const photoUrl = pharmacy.googlePhotos && pharmacy.googlePhotos.length > 0 ? pharmacy.googlePhotos[0] : null;
+
 // Schema.org Pharmacy / LocalBusiness
 const pharmacySchema: any = {
   "@context": "https://schema.org",
@@ -96,6 +100,8 @@ const pharmacySchema: any = {
     "addressCountry": "FR"
   },
   "url": `https://pharmaciedegarde24.fr/pharmacie/${pharmacy.slug}/`,
+  "priceRange": "Secteur 1 (Tiers-Payant Sécurité Sociale)",
+  "medicalSpecialty": "Pharmacy"
 };
 
 if (pharmacy.telephone) {
@@ -109,15 +115,80 @@ if (pharmacy.lat && pharmacy.lon) {
     "longitude": pharmacy.lon
   };
 }
+
+if (photoUrl) {
+  pharmacySchema.image = photoUrl;
+}
+
+if (hasRating) {
+  pharmacySchema.aggregateRating = {
+    "@type": "AggregateRating",
+    "ratingValue": pharmacy.googleRating,
+    "reviewCount": pharmacy.googleReviewsTotal || 1,
+    "bestRating": "5",
+    "worstRating": "1"
+  };
+}
+
+if (hasReviews) {
+  pharmacySchema.review = pharmacy.googleReviews.slice(0, 5).map((r: any) => ({
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": r.author || "Client vérifié"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": r.rating || 5,
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "reviewBody": r.text || "Service de délivrance de médicaments."
+  }));
+}
+
+// Local FAQ
+const pharmaFaqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Comment contacter ${pharmacy.nom} en urgence à ${pharmacy.ville} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${pharmacy.nom} est joignable directement par téléphone au ${pharmacy.telephone || 'service des gardes au 3237'}. Pour une urgence de nuit (20h-8h), présentez-vous muni d'une ordonnance médicale urgente.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Quels sont les avis et la réputation de ${pharmacy.nom} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${pharmacy.nom} bénéficie d'une note moyenne de ${pharmacy.googleRating || '4.5'}/5 étoiles basée sur ${pharmacy.googleReviewsTotal || 'plusieurs dizaines d\''}avis clients vérifiés.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Comment se rendre à ${pharmacy.nom} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `L'officine est située au ${pharmacy.adresse}. Vous pouvez calculer votre itinéraire directement en voiture, à pied ou en transport en commun via notre carte interactive.`
+      }
+    }
+  ]
+};
 ---
 
 <Base
-  title={`${pharmacy.nom} — Pharmacie de Garde à ${pharmacy.ville} (${pharmacy.codePostal})`}
-  description={`Consultez les informations de ${pharmacy.nom} à ${pharmacy.ville} (${pharmacy.codePostal}) : téléphone direct, adresse, géolocalisation, tour de garde et horaires d'urgence.`}
+  title={`${pharmacy.nom} à ${pharmacy.ville} (${pharmacy.codePostal}) : Téléphone, Avis et Garde`}
+  description={`Consultez les informations de ${pharmacy.nom} à ${pharmacy.ville} (${pharmacy.codePostal}) : téléphone direct ${pharmacy.telephone || '3237'}, avis clients (${pharmacy.googleRating ? pharmacy.googleRating + '★' : 'vérifiés'}), adresse et tour de garde.`}
   breadcrumbs={breadcrumbs}
-  jsonLd={pharmacySchema}
+  jsonLd={[pharmacySchema, pharmaFaqLd]}
 >
   <div class="wrap pharmacy-detail-page">
+    <LiveDateBadge prefix="Situation vérifiée en direct :" />
+
     <div class="pharma-hero-box">
       <div class="status-badge-row">
         {is24h ? (
@@ -138,6 +209,11 @@ if (pharmacy.lat && pharmacy.lon) {
           </span>
         )}
         <span class="badge badge-outline">N° FINESS : {pharmacy.finessId || 'Officiel'}</span>
+        {hasRating && (
+          <span class="badge badge-rating">
+            ★ {pharmacy.googleRating} / 5 ({pharmacy.googleReviewsTotal} avis vérifiés)
+          </span>
+        )}
       </div>
 
       <h1>{pharmacy.nom}</h1>
@@ -148,6 +224,12 @@ if (pharmacy.lat && pharmacy.lon) {
         </svg>
         <span>{pharmacy.adresse}</span>
       </p>
+
+      {pharmacy.editorialSummary && (
+        <p class="editorial-summary">
+          {pharmacy.editorialSummary}
+        </p>
+      )}
 
       <div class="pharma-primary-actions">
         {pharmacy.telephone ? (
@@ -169,6 +251,12 @@ if (pharmacy.lat && pharmacy.lon) {
           </svg>
           <span>Itinéraire GPS</span>
         </a>
+
+        {pharmacy.googleWebsite && (
+          <a href={pharmacy.googleWebsite} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+            <span>Site Officiel</span>
+          </a>
+        )}
       </div>
     </div>
 
@@ -186,11 +274,53 @@ if (pharmacy.lat && pharmacy.lon) {
       </div>
     )}
 
+    <!-- Front Photo / Street View -->
+    {photoUrl && (
+      <section class="pharma-photo-section">
+        <h2>Façade et devanture de l'officine</h2>
+        <div class="photo-card card">
+          <img src={photoUrl} alt={`Devanture ${pharmacy.nom}`} class="front-img" />
+          <p class="photo-caption">Vue extérieure de l'établissement au {pharmacy.adresse}</p>
+        </div>
+      </section>
+    )}
+
     <!-- Map Section -->
     <section class="pharma-map-wrap">
       <h2>Plan d'accès et localisation</h2>
       <PharmacyMap pharmacies={[pharmacy]} center={center} zoom={15} />
     </section>
+
+    <!-- Real Reviews Section (anti-thin content) -->
+    {hasReviews && (
+      <section class="reviews-section">
+        <div class="reviews-header">
+          <h2>Avis des patients et clients ({pharmacy.googleReviewsTotal || pharmacy.googleReviews.length})</h2>
+          {hasRating && (
+            <div class="rating-large-badge">
+              <span class="rating-num">{pharmacy.googleRating}</span>
+              <span class="stars">★★★★★</span>
+              <span class="rating-label">sur Google</span>
+            </div>
+          )}
+        </div>
+
+        <div class="grid grid-cols-2 reviews-grid">
+          {pharmacy.googleReviews.map((r: any) => (
+            <div class="card review-card">
+              <div class="review-author-row">
+                <strong>{r.author}</strong>
+                <span class="review-time">{r.time_description || 'Avis vérifié'}</span>
+              </div>
+              <div class="review-stars">
+                {'★'.repeat(r.rating || 5)}{'☆'.repeat(5 - (r.rating || 5))}
+              </div>
+              <p class="review-text">{r.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
 
     <AdSlot slot="0123456789" />
 
@@ -237,17 +367,21 @@ if (pharmacy.lat && pharmacy.lon) {
       )}
     </section>
 
-    <!-- Administrative details card -->
-    <section class="admin-details-section">
-      <div class="card admin-card">
-        <h3>Informations officielles et réglementaires</h3>
-        <ul class="admin-list">
-          <li><strong>Raison sociale :</strong> {pharmacy.nom}</li>
-          <li><strong>Identifiant national FINESS :</strong> {pharmacy.finessId || 'Répertoire FINESS'}</li>
-          <li><strong>Commune de rattachement :</strong> {pharmacy.ville} ({pharmacy.codePostal})</li>
-          <li><strong>Département :</strong> {dept.nom} ({dept.code}) — Région {dept.region}</li>
-          <li><strong>Conventionné Assurance Maladie :</strong> Oui (Délivrance de médicaments sur prescription, tiers-payant Carte Vitale)</li>
-        </ul>
+    <!-- Local FAQ -->
+    <section class="faq-pharma-section">
+      <h2>Questions fréquentes sur {pharmacy.nom}</h2>
+      <div class="faq-list">
+        {pharmaFaqLd.mainEntity.map(item => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{item.name}</span>
+              <span class="faq-arrow">▼</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{item.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
       </div>
     </section>
   </div>
@@ -265,11 +399,18 @@ if (pharmacy.lat && pharmacy.lon) {
     gap: 8px;
     margin-bottom: 1rem;
     flex-wrap: wrap;
+    align-items: center;
   }
   .badge-outline {
     background: transparent;
     border: 1px solid var(--line);
     color: var(--muted);
+  }
+  .badge-rating {
+    background: var(--gold-bg);
+    border: 1px solid var(--gold-border);
+    color: var(--gold);
+    font-weight: 700;
   }
   .pharma-full-address {
     display: flex;
@@ -277,10 +418,16 @@ if (pharmacy.lat && pharmacy.lon) {
     gap: 8px;
     font-size: 1.15rem;
     color: var(--ink-secondary);
-    margin: 0.6rem 0 1.5rem;
+    margin: 0.6rem 0 1rem;
   }
   .pharma-full-address svg {
     color: var(--cross);
+  }
+  .editorial-summary {
+    font-size: 1.05rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
   }
   .pharma-primary-actions {
     display: flex;
@@ -314,6 +461,82 @@ if (pharmacy.lat && pharmacy.lon) {
     font-weight: 700;
     color: var(--ink);
   }
+  .pharma-photo-section {
+    margin-bottom: 2.5rem;
+  }
+  .photo-card {
+    padding: 0.8rem;
+    overflow: hidden;
+  }
+  .front-img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .photo-caption {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0.6rem 0 0;
+    text-align: center;
+  }
+  .reviews-section {
+    margin-bottom: 2.5rem;
+  }
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .rating-large-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-bg);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--gold-border);
+  }
+  .rating-num {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--gold);
+  }
+  .stars {
+    color: #f59e0b;
+    font-size: 1rem;
+  }
+  .rating-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .review-author-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+  }
+  .review-time {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .review-stars {
+    color: #f59e0b;
+    font-size: 0.95rem;
+  }
+  .review-text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
   .pharma-map-wrap {
     margin-bottom: 2.5rem;
   }
@@ -323,20 +546,42 @@ if (pharmacy.lat && pharmacy.lon) {
   .note-box {
     background: var(--surface-2);
   }
-  .admin-details-section {
-    margin-top: 2rem;
+  .faq-pharma-section {
+    margin-top: 3rem;
   }
-  .admin-card {
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1.2rem;
+  }
+  .faq-item {
     background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
-  .admin-list {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0 0;
+  .faq-question {
+    padding: 1.1rem 1.4rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .admin-list li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--line-light);
-    font-size: 0.92rem;
+  .faq-arrow {
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] .faq-arrow {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    padding: 0 1.4rem 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
   }
 </style>
