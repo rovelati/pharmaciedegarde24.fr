@@ -84,7 +84,12 @@ const photoUrl = pharmacy.googlePhotos && pharmacy.googlePhotos.length > 0 ? pha
         )}
       </div>
 
-      <span class="dept-badge">Dép. {pharmacy.departementCode}</span>
+      <div class="status-right" style="display: flex; gap: 6px; align-items: center;">
+        {pharmacy.distanceKm != null && !pharmacy.isLocal && (
+          <span class="badge badge-dist" title="Distance approximative">à {pharmacy.distanceKm} km</span>
+        )}
+        <span class="dept-badge">Dép. {pharmacy.departementCode}</span>
+      </div>
     </div>
 
     <h3 class="pharma-nom">

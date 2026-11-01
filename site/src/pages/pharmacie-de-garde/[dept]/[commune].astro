@@ -10,6 +10,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export async function getStaticPaths() {
+  function getDistanceKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
   const shardsDir = path.resolve('./src/data/shards');
   const deptMap = new Map(departements.map(d => [d.code, d]));
   const shardCache = new Map();
@@ -34,16 +44,43 @@ export async function getStaticPaths() {
     const deptPharmacies = shardCache.get(deptCode) || [];
     const communeNameLower = commune.nom.toLowerCase();
     const postal = commune.codePostal || '';
+    const cLat = commune.lat;
+    const cLon = commune.lon;
 
-    let matched = deptPharmacies.filter((p: any) => {
+    // 1. Direct commune pharmacies
+    const localPharmacies = deptPharmacies.filter((p: any) => {
       const pVille = (p.ville || '').toLowerCase();
       const pCp = p.codePostal || '';
       return pVille === communeNameLower || (postal && pCp.startsWith(postal.slice(0, 4)));
-    });
+    }).map((p: any) => ({
+      ...p,
+      distanceKm: (cLat && cLon && p.lat && p.lon)
+        ? Math.round(getDistanceKm(cLat, cLon, p.lat, p.lon) * 10) / 10
+        : null,
+      isLocal: true,
+    }));
 
-    if (matched.length === 0) {
-      matched = deptPharmacies.slice(0, 10);
+    // 2. Expand radius: Nearby pharmacies in neighbouring communes within 20 km
+    let nearbyPharmacies: any[] = [];
+    if (cLat && cLon) {
+      const localIds = new Set(localPharmacies.map((p: any) => p.id));
+      nearbyPharmacies = deptPharmacies
+        .filter((p: any) => !localIds.has(p.id) && p.lat && p.lon)
+        .map((p: any) => {
+          const dist = getDistanceKm(cLat, cLon, p.lat, p.lon);
+          return {
+            ...p,
+            distanceKm: Math.round(dist * 10) / 10,
+            isLocal: false,
+          };
+        })
+        .filter((p: any) => p.distanceKm <= 20)
+        .sort((a: any, b: any) => a.distanceKm - b.distanceKm)
+        .slice(0, 15);
     }
+
+    const matched = [...localPharmacies, ...nearbyPharmacies];
+    const finalPharmacies = matched.length > 0 ? matched : deptPharmacies.slice(0, 10);
 
     return {
       params: {
@@ -53,7 +90,7 @@ export async function getStaticPaths() {
       props: {
         commune,
         dept,
-        pharmacies: matched,
+        pharmacies: finalPharmacies,
       }
     };
   });

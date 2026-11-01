@@ -251,6 +251,16 @@ p {
   border: 1px solid var(--night-border);
 }
 
+.badge-dist {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0284c7;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+}
+
 .badge-urgent {
   background: var(--urgent-bg);
   color: var(--urgent);
@@ -336,17 +346,28 @@ p {
 
 /* Ad slots */
 .adslot {
-  min-height: 250px;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface-2);
-  border: 1px dashed var(--line);
-  border-radius: var(--radius-md);
+  background: transparent !important;
+  border: none !important;
   color: var(--muted);
   font-size: 0.8rem;
   margin: 1.5rem 0;
   overflow: hidden;
+}
+
+.adslot ins.adsbygoogle {
+  background: transparent !important;
+}
+
+.adslot ins.adsbygoogle[data-ad-status="unfilled"],
+.adslot ins.adsbygoogle:empty {
+  display: none !important;
+  min-height: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
 }
 
 /* Forms & Inputs */

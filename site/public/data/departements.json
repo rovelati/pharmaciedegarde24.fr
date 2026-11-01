@@ -1,0 +1,810 @@
+[
+  {
+    "code": "01",
+    "nom": "Ain",
+    "slug": "ain-01",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 159,
+    "count24h": 0
+  },
+  {
+    "code": "02",
+    "nom": "Aisne",
+    "slug": "aisne-02",
+    "region": "Hauts-de-France",
+    "pharmacyCount": 164,
+    "count24h": 0
+  },
+  {
+    "code": "03",
+    "nom": "Allier",
+    "slug": "allier-03",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 125,
+    "count24h": 0
+  },
+  {
+    "code": "04",
+    "nom": "Alpes-de-Haute-Provence",
+    "slug": "alpes-de-haute-provence-04",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "pharmacyCount": 59,
+    "count24h": 0
+  },
+  {
+    "code": "05",
+    "nom": "Hautes-Alpes",
+    "slug": "hautes-alpes-05",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "pharmacyCount": 56,
+    "count24h": 0
+  },
+  {
+    "code": "06",
+    "nom": "Alpes-Maritimes",
+    "slug": "alpes-maritimes-06",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "pharmacyCount": 434,
+    "count24h": 2
+  },
+  {
+    "code": "07",
+    "nom": "Ardèche",
+    "slug": "ardeche-07",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 97,
+    "count24h": 0
+  },
+  {
+    "code": "08",
+    "nom": "Ardennes",
+    "slug": "ardennes-08",
+    "region": "Grand Est",
+    "pharmacyCount": 104,
+    "count24h": 0
+  },
+  {
+    "code": "09",
+    "nom": "Ariège",
+    "slug": "ariege-09",
+    "region": "Occitanie",
+    "pharmacyCount": 49,
+    "count24h": 0
+  },
+  {
+    "code": "10",
+    "nom": "Aube",
+    "slug": "aube-10",
+    "region": "Grand Est",
+    "pharmacyCount": 84,
+    "count24h": 0
+  },
+  {
+    "code": "11",
+    "nom": "Aude",
+    "slug": "aude-11",
+    "region": "Occitanie",
+    "pharmacyCount": 138,
+    "count24h": 0
+  },
+  {
+    "code": "12",
+    "nom": "Aveyron",
+    "slug": "aveyron-12",
+    "region": "Occitanie",
+    "pharmacyCount": 104,
+    "count24h": 0
+  },
+  {
+    "code": "13",
+    "nom": "Bouches-du-Rhône",
+    "slug": "bouches-du-rhone-13",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "pharmacyCount": 730,
+    "count24h": 2
+  },
+  {
+    "code": "14",
+    "nom": "Calvados",
+    "slug": "calvados-14",
+    "region": "Normandie",
+    "pharmacyCount": 205,
+    "count24h": 0
+  },
+  {
+    "code": "15",
+    "nom": "Cantal",
+    "slug": "cantal-15",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 66,
+    "count24h": 0
+  },
+  {
+    "code": "16",
+    "nom": "Charente",
+    "slug": "charente-16",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 120,
+    "count24h": 0
+  },
+  {
+    "code": "17",
+    "nom": "Charente-Maritime",
+    "slug": "charente-maritime-17",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 215,
+    "count24h": 0
+  },
+  {
+    "code": "18",
+    "nom": "Cher",
+    "slug": "cher-18",
+    "region": "Centre-Val de Loire",
+    "pharmacyCount": 99,
+    "count24h": 0
+  },
+  {
+    "code": "19",
+    "nom": "Corrèze",
+    "slug": "correze-19",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 92,
+    "count24h": 0
+  },
+  {
+    "code": "21",
+    "nom": "Côte-d'Or",
+    "slug": "cote-dor-21",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 162,
+    "count24h": 0
+  },
+  {
+    "code": "22",
+    "nom": "Côtes-d'Armor",
+    "slug": "cotes-darmor-22",
+    "region": "Bretagne",
+    "pharmacyCount": 184,
+    "count24h": 0
+  },
+  {
+    "code": "23",
+    "nom": "Creuse",
+    "slug": "creuse-23",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 56,
+    "count24h": 0
+  },
+  {
+    "code": "24",
+    "nom": "Dordogne",
+    "slug": "dordogne-24",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 137,
+    "count24h": 0
+  },
+  {
+    "code": "25",
+    "nom": "Doubs",
+    "slug": "doubs-25",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 174,
+    "count24h": 0
+  },
+  {
+    "code": "26",
+    "nom": "Drôme",
+    "slug": "drome-26",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 150,
+    "count24h": 0
+  },
+  {
+    "code": "27",
+    "nom": "Eure",
+    "slug": "eure-27",
+    "region": "Normandie",
+    "pharmacyCount": 140,
+    "count24h": 0
+  },
+  {
+    "code": "28",
+    "nom": "Eure-et-Loir",
+    "slug": "eure-et-loir-28",
+    "region": "Centre-Val de Loire",
+    "pharmacyCount": 106,
+    "count24h": 0
+  },
+  {
+    "code": "29",
+    "nom": "Finistère",
+    "slug": "finistere-29",
+    "region": "Bretagne",
+    "pharmacyCount": 291,
+    "count24h": 0
+  },
+  {
+    "code": "2A",
+    "nom": "Corse-du-Sud",
+    "slug": "corse-du-sud-2a",
+    "region": "Corse",
+    "pharmacyCount": 120,
+    "count24h": 0
+  },
+  {
+    "code": "2B",
+    "nom": "Haute-Corse",
+    "slug": "haute-corse-2b",
+    "region": "Corse",
+    "pharmacyCount": 138,
+    "count24h": 0
+  },
+  {
+    "code": "30",
+    "nom": "Gard",
+    "slug": "gard-30",
+    "region": "Occitanie",
+    "pharmacyCount": 476,
+    "count24h": 0
+  },
+  {
+    "code": "31",
+    "nom": "Haute-Garonne",
+    "slug": "haute-garonne-31",
+    "region": "Occitanie",
+    "pharmacyCount": 789,
+    "count24h": 1
+  },
+  {
+    "code": "32",
+    "nom": "Gers",
+    "slug": "gers-32",
+    "region": "Occitanie",
+    "pharmacyCount": 64,
+    "count24h": 0
+  },
+  {
+    "code": "33",
+    "nom": "Gironde",
+    "slug": "gironde-33",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 512,
+    "count24h": 2
+  },
+  {
+    "code": "34",
+    "nom": "Hérault",
+    "slug": "herault-34",
+    "region": "Occitanie",
+    "pharmacyCount": 383,
+    "count24h": 1
+  },
+  {
+    "code": "35",
+    "nom": "Ille-et-Vilaine",
+    "slug": "ille-et-vilaine-35",
+    "region": "Bretagne",
+    "pharmacyCount": 287,
+    "count24h": 0
+  },
+  {
+    "code": "36",
+    "nom": "Indre",
+    "slug": "indre-36",
+    "region": "Centre-Val de Loire",
+    "pharmacyCount": 79,
+    "count24h": 0
+  },
+  {
+    "code": "37",
+    "nom": "Indre-et-Loire",
+    "slug": "indre-et-loire-37",
+    "region": "Centre-Val de Loire",
+    "pharmacyCount": 188,
+    "count24h": 0
+  },
+  {
+    "code": "38",
+    "nom": "Isère",
+    "slug": "isere-38",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 369,
+    "count24h": 0
+  },
+  {
+    "code": "39",
+    "nom": "Jura",
+    "slug": "jura-39",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 86,
+    "count24h": 0
+  },
+  {
+    "code": "40",
+    "nom": "Landes",
+    "slug": "landes-40",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 130,
+    "count24h": 0
+  },
+  {
+    "code": "41",
+    "nom": "Loir-et-Cher",
+    "slug": "loir-et-cher-41",
+    "region": "Centre-Val de Loire",
+    "pharmacyCount": 97,
+    "count24h": 0
+  },
+  {
+    "code": "42",
+    "nom": "Loire",
+    "slug": "loire-42",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 208,
+    "count24h": 0
+  },
+  {
+    "code": "43",
+    "nom": "Haute-Loire",
+    "slug": "haute-loire-43",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 78,
+    "count24h": 0
+  },
+  {
+    "code": "44",
+    "nom": "Loire-Atlantique",
+    "slug": "loire-atlantique-44",
+    "region": "Pays de la Loire",
+    "pharmacyCount": 388,
+    "count24h": 2
+  },
+  {
+    "code": "45",
+    "nom": "Loiret",
+    "slug": "loiret-45",
+    "region": "Centre-Val de Loire",
+    "pharmacyCount": 175,
+    "count24h": 0
+  },
+  {
+    "code": "46",
+    "nom": "Lot",
+    "slug": "lot-46",
+    "region": "Occitanie",
+    "pharmacyCount": 63,
+    "count24h": 0
+  },
+  {
+    "code": "47",
+    "nom": "Lot-et-Garonne",
+    "slug": "lot-et-garonne-47",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 116,
+    "count24h": 0
+  },
+  {
+    "code": "48",
+    "nom": "Lozère",
+    "slug": "lozere-48",
+    "region": "Occitanie",
+    "pharmacyCount": 40,
+    "count24h": 0
+  },
+  {
+    "code": "49",
+    "nom": "Maine-et-Loire",
+    "slug": "maine-et-loire-49",
+    "region": "Pays de la Loire",
+    "pharmacyCount": 227,
+    "count24h": 0
+  },
+  {
+    "code": "50",
+    "nom": "Manche",
+    "slug": "manche-50",
+    "region": "Normandie",
+    "pharmacyCount": 134,
+    "count24h": 0
+  },
+  {
+    "code": "51",
+    "nom": "Marne",
+    "slug": "marne-51",
+    "region": "Grand Est",
+    "pharmacyCount": 178,
+    "count24h": 0
+  },
+  {
+    "code": "52",
+    "nom": "Haute-Marne",
+    "slug": "haute-marne-52",
+    "region": "Grand Est",
+    "pharmacyCount": 60,
+    "count24h": 0
+  },
+  {
+    "code": "53",
+    "nom": "Mayenne",
+    "slug": "mayenne-53",
+    "region": "Pays de la Loire",
+    "pharmacyCount": 82,
+    "count24h": 0
+  },
+  {
+    "code": "54",
+    "nom": "Meurthe-et-Moselle",
+    "slug": "meurthe-et-moselle-54",
+    "region": "Grand Est",
+    "pharmacyCount": 251,
+    "count24h": 0
+  },
+  {
+    "code": "55",
+    "nom": "Meuse",
+    "slug": "meuse-55",
+    "region": "Grand Est",
+    "pharmacyCount": 56,
+    "count24h": 0
+  },
+  {
+    "code": "56",
+    "nom": "Morbihan",
+    "slug": "morbihan-56",
+    "region": "Bretagne",
+    "pharmacyCount": 229,
+    "count24h": 0
+  },
+  {
+    "code": "57",
+    "nom": "Moselle",
+    "slug": "moselle-57",
+    "region": "Grand Est",
+    "pharmacyCount": 256,
+    "count24h": 0
+  },
+  {
+    "code": "58",
+    "nom": "Nièvre",
+    "slug": "nievre-58",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 74,
+    "count24h": 0
+  },
+  {
+    "code": "59",
+    "nom": "Nord",
+    "slug": "nord-59",
+    "region": "Hauts-de-France",
+    "pharmacyCount": 866,
+    "count24h": 1
+  },
+  {
+    "code": "60",
+    "nom": "Oise",
+    "slug": "oise-60",
+    "region": "Hauts-de-France",
+    "pharmacyCount": 209,
+    "count24h": 0
+  },
+  {
+    "code": "61",
+    "nom": "Orne",
+    "slug": "orne-61",
+    "region": "Normandie",
+    "pharmacyCount": 84,
+    "count24h": 0
+  },
+  {
+    "code": "62",
+    "nom": "Pas-de-Calais",
+    "slug": "pas-de-calais-62",
+    "region": "Hauts-de-France",
+    "pharmacyCount": 477,
+    "count24h": 0
+  },
+  {
+    "code": "63",
+    "nom": "Puy-de-Dôme",
+    "slug": "puy-de-dome-63",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 224,
+    "count24h": 0
+  },
+  {
+    "code": "64",
+    "nom": "Pyrénées-Atlantiques",
+    "slug": "pyrenees-atlantiques-64",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 239,
+    "count24h": 0
+  },
+  {
+    "code": "65",
+    "nom": "Hautes-Pyrénées",
+    "slug": "hautes-pyrenees-65",
+    "region": "Occitanie",
+    "pharmacyCount": 88,
+    "count24h": 0
+  },
+  {
+    "code": "66",
+    "nom": "Pyrénées-Orientales",
+    "slug": "pyrenees-orientales-66",
+    "region": "Occitanie",
+    "pharmacyCount": 169,
+    "count24h": 0
+  },
+  {
+    "code": "67",
+    "nom": "Bas-Rhin",
+    "slug": "bas-rhin-67",
+    "region": "Grand Est",
+    "pharmacyCount": 273,
+    "count24h": 1
+  },
+  {
+    "code": "68",
+    "nom": "Haut-Rhin",
+    "slug": "haut-rhin-68",
+    "region": "Grand Est",
+    "pharmacyCount": 186,
+    "count24h": 0
+  },
+  {
+    "code": "69",
+    "nom": "Rhône",
+    "slug": "rhone-69",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 535,
+    "count24h": 3
+  },
+  {
+    "code": "70",
+    "nom": "Haute-Saône",
+    "slug": "haute-saone-70",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 82,
+    "count24h": 0
+  },
+  {
+    "code": "71",
+    "nom": "Saône-et-Loire",
+    "slug": "saone-et-loire-71",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 172,
+    "count24h": 0
+  },
+  {
+    "code": "72",
+    "nom": "Sarthe",
+    "slug": "sarthe-72",
+    "region": "Pays de la Loire",
+    "pharmacyCount": 151,
+    "count24h": 0
+  },
+  {
+    "code": "73",
+    "nom": "Savoie",
+    "slug": "savoie-73",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 146,
+    "count24h": 0
+  },
+  {
+    "code": "74",
+    "nom": "Haute-Savoie",
+    "slug": "haute-savoie-74",
+    "region": "Auvergne-Rhône-Alpes",
+    "pharmacyCount": 219,
+    "count24h": 0
+  },
+  {
+    "code": "75",
+    "nom": "Paris",
+    "slug": "paris-75",
+    "region": "Île-de-France",
+    "pharmacyCount": 870,
+    "count24h": 8
+  },
+  {
+    "code": "76",
+    "nom": "Seine-Maritime",
+    "slug": "seine-maritime-76",
+    "region": "Normandie",
+    "pharmacyCount": 336,
+    "count24h": 0
+  },
+  {
+    "code": "77",
+    "nom": "Seine-et-Marne",
+    "slug": "seine-et-marne-77",
+    "region": "Île-de-France",
+    "pharmacyCount": 344,
+    "count24h": 0
+  },
+  {
+    "code": "78",
+    "nom": "Yvelines",
+    "slug": "yvelines-78",
+    "region": "Île-de-France",
+    "pharmacyCount": 368,
+    "count24h": 0
+  },
+  {
+    "code": "79",
+    "nom": "Deux-Sèvres",
+    "slug": "deux-sevres-79",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 119,
+    "count24h": 0
+  },
+  {
+    "code": "80",
+    "nom": "Somme",
+    "slug": "somme-80",
+    "region": "Hauts-de-France",
+    "pharmacyCount": 186,
+    "count24h": 0
+  },
+  {
+    "code": "81",
+    "nom": "Tarn",
+    "slug": "tarn-81",
+    "region": "Occitanie",
+    "pharmacyCount": 128,
+    "count24h": 0
+  },
+  {
+    "code": "82",
+    "nom": "Tarn-et-Garonne",
+    "slug": "tarn-et-garonne-82",
+    "region": "Occitanie",
+    "pharmacyCount": 72,
+    "count24h": 0
+  },
+  {
+    "code": "83",
+    "nom": "Var",
+    "slug": "var-83",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "pharmacyCount": 364,
+    "count24h": 0
+  },
+  {
+    "code": "84",
+    "nom": "Vaucluse",
+    "slug": "vaucluse-84",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "pharmacyCount": 195,
+    "count24h": 0
+  },
+  {
+    "code": "85",
+    "nom": "Vendée",
+    "slug": "vendee-85",
+    "region": "Pays de la Loire",
+    "pharmacyCount": 207,
+    "count24h": 0
+  },
+  {
+    "code": "86",
+    "nom": "Vienne",
+    "slug": "vienne-86",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 139,
+    "count24h": 0
+  },
+  {
+    "code": "87",
+    "nom": "Haute-Vienne",
+    "slug": "haute-vienne-87",
+    "region": "Nouvelle-Aquitaine",
+    "pharmacyCount": 145,
+    "count24h": 0
+  },
+  {
+    "code": "88",
+    "nom": "Vosges",
+    "slug": "vosges-88",
+    "region": "Grand Est",
+    "pharmacyCount": 125,
+    "count24h": 0
+  },
+  {
+    "code": "89",
+    "nom": "Yonne",
+    "slug": "yonne-89",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 97,
+    "count24h": 0
+  },
+  {
+    "code": "90",
+    "nom": "Territoire de Belfort",
+    "slug": "territoire-de-belfort-90",
+    "region": "Bourgogne-Franche-Comté",
+    "pharmacyCount": 47,
+    "count24h": 0
+  },
+  {
+    "code": "91",
+    "nom": "Essonne",
+    "slug": "essonne-91",
+    "region": "Île-de-France",
+    "pharmacyCount": 324,
+    "count24h": 0
+  },
+  {
+    "code": "92",
+    "nom": "Hauts-de-Seine",
+    "slug": "hauts-de-seine-92",
+    "region": "Île-de-France",
+    "pharmacyCount": 447,
+    "count24h": 0
+  },
+  {
+    "code": "93",
+    "nom": "Seine-Saint-Denis",
+    "slug": "seine-saint-denis-93",
+    "region": "Île-de-France",
+    "pharmacyCount": 390,
+    "count24h": 1
+  },
+  {
+    "code": "94",
+    "nom": "Val-de-Marne",
+    "slug": "val-de-marne-94",
+    "region": "Île-de-France",
+    "pharmacyCount": 372,
+    "count24h": 0
+  },
+  {
+    "code": "95",
+    "nom": "Val-d'Oise",
+    "slug": "val-doise-95",
+    "region": "Île-de-France",
+    "pharmacyCount": 317,
+    "count24h": 0
+  },
+  {
+    "code": "971",
+    "nom": "Guadeloupe",
+    "slug": "guadeloupe-971",
+    "region": "Guadeloupe",
+    "pharmacyCount": 160,
+    "count24h": 0
+  },
+  {
+    "code": "972",
+    "nom": "Martinique",
+    "slug": "martinique-972",
+    "region": "Martinique",
+    "pharmacyCount": 136,
+    "count24h": 0
+  },
+  {
+    "code": "973",
+    "nom": "Guyane",
+    "slug": "guyane-973",
+    "region": "Guyane",
+    "pharmacyCount": 52,
+    "count24h": 0
+  },
+  {
+    "code": "974",
+    "nom": "La Réunion",
+    "slug": "la-reunion-974",
+    "region": "La Réunion",
+    "pharmacyCount": 245,
+    "count24h": 0
+  },
+  {
+    "code": "976",
+    "nom": "Mayotte",
+    "slug": "mayotte-976",
+    "region": "Mayotte",
+    "pharmacyCount": 27,
+    "count24h": 0
+  }
+]

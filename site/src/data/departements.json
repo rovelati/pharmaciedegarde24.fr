@@ -4,7 +4,7 @@
     "nom": "Ain",
     "slug": "ain-01",
     "region": "Auvergne-Rhône-Alpes",
-    "pharmacyCount": 0,
+    "pharmacyCount": 159,
     "count24h": 0
   },
   {
@@ -12,7 +12,7 @@
     "nom": "Aisne",
     "slug": "aisne-02",
     "region": "Hauts-de-France",
-    "pharmacyCount": 0,
+    "pharmacyCount": 164,
     "count24h": 0
   },
   {
@@ -20,7 +20,7 @@
     "nom": "Allier",
     "slug": "allier-03",
     "region": "Auvergne-Rhône-Alpes",
-    "pharmacyCount": 0,
+    "pharmacyCount": 125,
     "count24h": 0
   },
   {
@@ -28,7 +28,7 @@
     "nom": "Alpes-de-Haute-Provence",
     "slug": "alpes-de-haute-provence-04",
     "region": "Provence-Alpes-Côte d'Azur",
-    "pharmacyCount": 0,
+    "pharmacyCount": 59,
     "count24h": 0
   },
   {
@@ -36,7 +36,7 @@
     "nom": "Hautes-Alpes",
     "slug": "hautes-alpes-05",
     "region": "Provence-Alpes-Côte d'Azur",
-    "pharmacyCount": 0,
+    "pharmacyCount": 56,
     "count24h": 0
   },
   {
@@ -44,15 +44,15 @@
     "nom": "Alpes-Maritimes",
     "slug": "alpes-maritimes-06",
     "region": "Provence-Alpes-Côte d'Azur",
-    "pharmacyCount": 0,
-    "count24h": 0
+    "pharmacyCount": 434,
+    "count24h": 2
   },
   {
     "code": "07",
     "nom": "Ardèche",
     "slug": "ardeche-07",
     "region": "Auvergne-Rhône-Alpes",
-    "pharmacyCount": 0,
+    "pharmacyCount": 97,
     "count24h": 0
   },
   {
@@ -60,7 +60,7 @@
     "nom": "Ardennes",
     "slug": "ardennes-08",
     "region": "Grand Est",
-    "pharmacyCount": 0,
+    "pharmacyCount": 104,
     "count24h": 0
   },
   {
@@ -68,7 +68,7 @@
     "nom": "Ariège",
     "slug": "ariege-09",
     "region": "Occitanie",
-    "pharmacyCount": 0,
+    "pharmacyCount": 49,
     "count24h": 0
   },
   {
@@ -140,7 +140,7 @@
     "nom": "Cher",
     "slug": "cher-18",
     "region": "Centre-Val de Loire",
-    "pharmacyCount": 0,
+    "pharmacyCount": 99,
     "count24h": 0
   },
   {
@@ -148,7 +148,7 @@
     "nom": "Corrèze",
     "slug": "correze-19",
     "region": "Nouvelle-Aquitaine",
-    "pharmacyCount": 0,
+    "pharmacyCount": 92,
     "count24h": 0
   },
   {
@@ -156,7 +156,7 @@
     "nom": "Côte-d'Or",
     "slug": "cote-dor-21",
     "region": "Bourgogne-Franche-Comté",
-    "pharmacyCount": 0,
+    "pharmacyCount": 162,
     "count24h": 0
   },
   {
@@ -164,7 +164,7 @@
     "nom": "Côtes-d'Armor",
     "slug": "cotes-darmor-22",
     "region": "Bretagne",
-    "pharmacyCount": 70,
+    "pharmacyCount": 184,
     "count24h": 0
   },
   {
@@ -220,7 +220,7 @@
     "nom": "Finistère",
     "slug": "finistere-29",
     "region": "Bretagne",
-    "pharmacyCount": 279,
+    "pharmacyCount": 291,
     "count24h": 0
   },
   {
@@ -228,7 +228,7 @@
     "nom": "Corse-du-Sud",
     "slug": "corse-du-sud-2a",
     "region": "Corse",
-    "pharmacyCount": 60,
+    "pharmacyCount": 120,
     "count24h": 0
   },
   {
@@ -236,7 +236,7 @@
     "nom": "Haute-Corse",
     "slug": "haute-corse-2b",
     "region": "Corse",
-    "pharmacyCount": 69,
+    "pharmacyCount": 138,
     "count24h": 0
   },
   {
@@ -244,7 +244,7 @@
     "nom": "Gard",
     "slug": "gard-30",
     "region": "Occitanie",
-    "pharmacyCount": 238,
+    "pharmacyCount": 476,
     "count24h": 0
   },
   {
@@ -252,7 +252,7 @@
     "nom": "Haute-Garonne",
     "slug": "haute-garonne-31",
     "region": "Occitanie",
-    "pharmacyCount": 395,
+    "pharmacyCount": 789,
     "count24h": 1
   },
   {
@@ -284,7 +284,7 @@
     "nom": "Ille-et-Vilaine",
     "slug": "ille-et-vilaine-35",
     "region": "Bretagne",
-    "pharmacyCount": 1,
+    "pharmacyCount": 287,
     "count24h": 0
   },
   {
@@ -292,7 +292,7 @@
     "nom": "Indre",
     "slug": "indre-36",
     "region": "Centre-Val de Loire",
-    "pharmacyCount": 0,
+    "pharmacyCount": 79,
     "count24h": 0
   },
   {
@@ -300,7 +300,7 @@
     "nom": "Indre-et-Loire",
     "slug": "indre-et-loire-37",
     "region": "Centre-Val de Loire",
-    "pharmacyCount": 2,
+    "pharmacyCount": 188,
     "count24h": 0
   },
   {

@@ -160,26 +160,39 @@ def main():
         reader = csv.DictReader(io.TextIOWrapper(res, encoding='utf-8', errors='ignore'))
         pharmacy_rows = []
         slug_counts = {}
+        seen_finess_ids = set()
 
         for row in reader:
             cat = row.get('libcategetab', '')
             if cat not in ["Pharmacie d'Officine", 'Propharmacie']:
                 continue
 
-            finess_id = row.get('finess_et', '').strip()
+            finess_et = row.get('finess_et', '').strip()
+            finess_ej = row.get('finess_ej', '').strip()
             raw_nom = row.get('rs', '').strip()
-            if not finess_id or not raw_nom:
+            if not raw_nom or (not finess_et and not finess_ej):
                 continue
+
+            finess_id = finess_et or finess_ej
+            if finess_id in seen_finess_ids:
+                finess_id = f"{finess_id}_{slugify(raw_nom)[:8]}"
+            seen_finess_ids.add(finess_id)
 
             nom = clean_pharmacy_name(raw_nom)
             cp = (row.get('code_postal') or '').strip()
+            if len(cp) == 4 and cp.isdigit():
+                cp = cp.zfill(5) # Add missing leading zero (e.g. 06500 for Menton, 01000 for Bourg-en-Bresse)
+
             ville = (row.get('ville') or '').strip().title()
             dept_code = cp[:2] if len(cp) >= 2 else ''
             if cp.startswith('97') and len(cp) >= 3:
                 dept_code = cp[:3] # DOM-TOM: 971, 972, 973, 974, 976
             elif cp.startswith('20'):
                 # Corse 2A / 2B
-                dept_code = '2A' if int(cp) <= 20190 else '2B'
+                try:
+                    dept_code = '2A' if int(cp) <= 20190 else '2B'
+                except ValueError:
+                    dept_code = '2A'
 
             if dept_code not in valid_dept_codes:
                 continue

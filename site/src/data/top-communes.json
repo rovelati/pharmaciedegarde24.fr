@@ -105,7 +105,7 @@
     "population": 514819,
     "lat": 43.6007,
     "lon": 1.4328,
-    "pharmacyCount": 153
+    "pharmacyCount": 306
   },
   {
     "insee": "06088",
@@ -123,7 +123,7 @@
     "population": 357737,
     "lat": 43.7032,
     "lon": 7.2528,
-    "pharmacyCount": 0
+    "pharmacyCount": 152
   },
   {
     "insee": "44109",
@@ -231,7 +231,7 @@
     "population": 230890,
     "lat": 48.1159,
     "lon": -1.6884,
-    "pharmacyCount": 0
+    "pharmacyCount": 57
   },
   {
     "insee": "83137",
@@ -327,7 +327,7 @@
     "population": 161830,
     "lat": 47.3319,
     "lon": 5.0322,
-    "pharmacyCount": 0
+    "pharmacyCount": 51
   },
   {
     "insee": "49007",
@@ -392,7 +392,7 @@
     "population": 151839,
     "lat": 43.8322,
     "lon": 4.3429,
-    "pharmacyCount": 54
+    "pharmacyCount": 108
   },
   {
     "insee": "13001",
@@ -475,7 +475,7 @@
     "population": 142346,
     "lat": 48.4085,
     "lon": -4.4996,
-    "pharmacyCount": 39
+    "pharmacyCount": 40
   },
   {
     "insee": "37261",
@@ -492,7 +492,7 @@
     "population": 139259,
     "lat": 47.3943,
     "lon": 0.6949,
-    "pharmacyCount": 2
+    "pharmacyCount": 46
   },
   {
     "insee": "80021",
@@ -1110,7 +1110,7 @@
     "population": 77637,
     "lat": 43.5823,
     "lon": 7.1048,
-    "pharmacyCount": 0
+    "pharmacyCount": 33
   },
   {
     "insee": "94068",
@@ -1143,7 +1143,7 @@
     "population": 76320,
     "lat": 41.9228,
     "lon": 8.7058,
-    "pharmacyCount": 32
+    "pharmacyCount": 64
   },
   {
     "insee": "97209",
@@ -1190,7 +1190,7 @@
     "population": 74350,
     "lat": 43.5454,
     "lon": 7.0152,
-    "pharmacyCount": 0
+    "pharmacyCount": 36
   },
   {
     "insee": "93051",
@@ -1448,7 +1448,7 @@
     "population": 64186,
     "lat": 47.078,
     "lon": 2.3983,
-    "pharmacyCount": 0
+    "pharmacyCount": 22
   },
   {
     "insee": "83126",
@@ -1947,7 +1947,7 @@
     "population": 53354,
     "lat": 43.6712,
     "lon": 7.1502,
-    "pharmacyCount": 0
+    "pharmacyCount": 17
   },
   {
     "insee": "69256",
@@ -1992,7 +1992,7 @@
     "population": 52813,
     "lat": 49.8475,
     "lon": 3.279,
-    "pharmacyCount": 0
+    "pharmacyCount": 24
   },
   {
     "insee": "78586",
@@ -2133,7 +2133,7 @@
     "population": 50970,
     "lat": 43.656,
     "lon": 6.937,
-    "pharmacyCount": 0
+    "pharmacyCount": 18
   },
   {
     "insee": "93010",
@@ -2286,7 +2286,7 @@
     "population": 47439,
     "lat": 48.6465,
     "lon": -2.0066,
-    "pharmacyCount": 0
+    "pharmacyCount": 20
   },
   {
     "insee": "93046",
@@ -2361,7 +2361,7 @@
     "population": 47095,
     "lat": 45.145,
     "lon": 1.5144,
-    "pharmacyCount": 0
+    "pharmacyCount": 21
   },
   {
     "insee": "2B033",
@@ -2377,7 +2377,7 @@
     "population": 46867,
     "lat": 42.6861,
     "lon": 9.424,
-    "pharmacyCount": 28
+    "pharmacyCount": 56
   },
   {
     "insee": "33522",
@@ -2438,7 +2438,7 @@
     "population": 46125,
     "lat": 44.125,
     "lon": 4.0905,
-    "pharmacyCount": 18
+    "pharmacyCount": 36
   },
   {
     "insee": "11069",
@@ -2529,7 +2529,7 @@
     "population": 45560,
     "lat": 49.7802,
     "lon": 4.7304,
-    "pharmacyCount": 0
+    "pharmacyCount": 23
   },
   {
     "insee": "94002",
@@ -2634,7 +2634,7 @@
     "population": 44364,
     "lat": 48.5108,
     "lon": -2.7657,
-    "pharmacyCount": 6
+    "pharmacyCount": 17
   },
   {
     "insee": "13047",
@@ -2815,7 +2815,7 @@
     "population": 42963,
     "lat": 46.8023,
     "lon": 1.6903,
-    "pharmacyCount": 0
+    "pharmacyCount": 14
   },
   {
     "insee": "62041",
@@ -2890,7 +2890,7 @@
     "population": 42372,
     "lat": 46.2027,
     "lon": 5.2469,
-    "pharmacyCount": 0
+    "pharmacyCount": 15
   },
   {
     "insee": "93032",
@@ -2920,7 +2920,7 @@
     "population": 41938,
     "lat": 43.5745,
     "lon": 7.001,
-    "pharmacyCount": 0
+    "pharmacyCount": 16
   },
   {
     "insee": "16015",
@@ -2995,7 +2995,7 @@
     "population": 41293,
     "lat": 44.5797,
     "lon": 6.0616,
-    "pharmacyCount": 0
+    "pharmacyCount": 13
   },
   {
     "insee": "78498",
@@ -3025,7 +3025,7 @@
     "population": 40882,
     "lat": 43.6116,
     "lon": 1.3245,
-    "pharmacyCount": 11
+    "pharmacyCount": 22
   },
   {
     "insee": "59650",
@@ -3236,7 +3236,7 @@
     "population": 38423,
     "lat": 47.3374,
     "lon": 0.6544,
-    "pharmacyCount": 0
+    "pharmacyCount": 10
   },
   {
     "insee": "93073",
@@ -3886,7 +3886,7 @@
     "population": 33147,
     "lat": 46.3428,
     "lon": 2.608,
-    "pharmacyCount": 0
+    "pharmacyCount": 17
   },
   {
     "insee": "58194",
@@ -4036,7 +4036,7 @@
     "population": 32172,
     "lat": 43.6865,
     "lon": 7.1822,
-    "pharmacyCount": 0
+    "pharmacyCount": 10
   },
   {
     "insee": "97610",
@@ -4367,7 +4367,7 @@
     "population": 30604,
     "lat": 43.7961,
     "lon": 7.498,
-    "pharmacyCount": 0
+    "pharmacyCount": 17
   },
   {
     "insee": "78146",
@@ -4427,7 +4427,7 @@
     "population": 30168,
     "lat": 43.5747,
     "lon": 1.3338,
-    "pharmacyCount": 9
+    "pharmacyCount": 18
   },
   {
     "insee": "38053",
@@ -4667,7 +4667,7 @@
     "population": 29259,
     "lat": 43.5787,
     "lon": 7.0604,
-    "pharmacyCount": 0
+    "pharmacyCount": 10
   },
   {
     "insee": "24322",
@@ -4848,7 +4848,7 @@
     "population": 28046,
     "lat": 49.3766,
     "lon": 3.3235,
-    "pharmacyCount": 0
+    "pharmacyCount": 17
   },
   {
     "insee": "91691",
@@ -4968,7 +4968,7 @@
     "population": 27604,
     "lat": 43.641,
     "lon": 1.377,
-    "pharmacyCount": 12
+    "pharmacyCount": 24
   },
   {
     "insee": "95607",
@@ -5374,7 +5374,7 @@
     "population": 26079,
     "lat": 43.4407,
     "lon": 1.2987,
-    "pharmacyCount": 14
+    "pharmacyCount": 28
   },
   {
     "insee": "34057",
