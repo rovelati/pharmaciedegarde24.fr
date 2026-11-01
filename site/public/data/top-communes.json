@@ -1,0 +1,5409 @@
+[
+  {
+    "insee": "75056",
+    "nom": "Paris",
+    "slug": "paris",
+    "departementCode": "75",
+    "departementNom": "Paris",
+    "departementSlug": "paris-75",
+    "postalCodes": [
+      "75001",
+      "75002",
+      "75003",
+      "75004",
+      "75005",
+      "75006",
+      "75007",
+      "75008",
+      "75009",
+      "75010",
+      "75011",
+      "75012",
+      "75013",
+      "75014",
+      "75015",
+      "75016",
+      "75017",
+      "75018",
+      "75019",
+      "75020",
+      "75116"
+    ],
+    "population": 2103778,
+    "lat": 48.8589,
+    "lon": 2.347,
+    "pharmacyCount": 870
+  },
+  {
+    "insee": "13055",
+    "nom": "Marseille",
+    "slug": "marseille",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13001",
+      "13002",
+      "13003",
+      "13004",
+      "13005",
+      "13006",
+      "13007",
+      "13008",
+      "13009",
+      "13010",
+      "13011",
+      "13012",
+      "13013",
+      "13014",
+      "13015",
+      "13016"
+    ],
+    "population": 886040,
+    "lat": 43.2803,
+    "lon": 5.3806,
+    "pharmacyCount": 356
+  },
+  {
+    "insee": "69123",
+    "nom": "Lyon",
+    "slug": "lyon",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69001",
+      "69002",
+      "69003",
+      "69004",
+      "69005",
+      "69006",
+      "69007",
+      "69008",
+      "69009"
+    ],
+    "population": 519127,
+    "lat": 45.758,
+    "lon": 4.8351,
+    "pharmacyCount": 157
+  },
+  {
+    "insee": "31555",
+    "nom": "Toulouse",
+    "slug": "toulouse",
+    "departementCode": "31",
+    "departementNom": "Haute-Garonne",
+    "departementSlug": "haute-garonne-31",
+    "postalCodes": [
+      "31000",
+      "31100",
+      "31200",
+      "31300",
+      "31400",
+      "31500"
+    ],
+    "population": 514819,
+    "lat": 43.6007,
+    "lon": 1.4328,
+    "pharmacyCount": 153
+  },
+  {
+    "insee": "06088",
+    "nom": "Nice",
+    "slug": "nice",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06000",
+      "06100",
+      "06200",
+      "06300"
+    ],
+    "population": 357737,
+    "lat": 43.7032,
+    "lon": 7.2528,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "44109",
+    "nom": "Nantes",
+    "slug": "nantes",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44000",
+      "44100",
+      "44200",
+      "44300"
+    ],
+    "population": 327734,
+    "lat": 47.2382,
+    "lon": -1.5603,
+    "pharmacyCount": 80
+  },
+  {
+    "insee": "34172",
+    "nom": "Montpellier",
+    "slug": "montpellier",
+    "departementCode": "34",
+    "departementNom": "Hérault",
+    "departementSlug": "herault-34",
+    "postalCodes": [
+      "34000",
+      "34070",
+      "34080",
+      "34090"
+    ],
+    "population": 310240,
+    "lat": 43.61,
+    "lon": 3.8742,
+    "pharmacyCount": 94
+  },
+  {
+    "insee": "67482",
+    "nom": "Strasbourg",
+    "slug": "strasbourg",
+    "departementCode": "67",
+    "departementNom": "Bas-Rhin",
+    "departementSlug": "bas-rhin-67",
+    "postalCodes": [
+      "67000",
+      "67100",
+      "67200"
+    ],
+    "population": 293771,
+    "lat": 48.5691,
+    "lon": 7.7621,
+    "pharmacyCount": 78
+  },
+  {
+    "insee": "33063",
+    "nom": "Bordeaux",
+    "slug": "bordeaux",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33000",
+      "33100",
+      "33200",
+      "33300",
+      "33800"
+    ],
+    "population": 267991,
+    "lat": 44.8624,
+    "lon": -0.5848,
+    "pharmacyCount": 105
+  },
+  {
+    "insee": "59350",
+    "nom": "Lille",
+    "slug": "lille",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59000",
+      "59160",
+      "59260",
+      "59777",
+      "59800"
+    ],
+    "population": 238246,
+    "lat": 50.6311,
+    "lon": 3.0468,
+    "pharmacyCount": 78
+  },
+  {
+    "insee": "35238",
+    "nom": "Rennes",
+    "slug": "rennes",
+    "departementCode": "35",
+    "departementNom": "Ille-et-Vilaine",
+    "departementSlug": "ille-et-vilaine-35",
+    "postalCodes": [
+      "35000",
+      "35200",
+      "35700"
+    ],
+    "population": 230890,
+    "lat": 48.1159,
+    "lon": -1.6884,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "83137",
+    "nom": "Toulon",
+    "slug": "toulon",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83000",
+      "83100",
+      "83200"
+    ],
+    "population": 179116,
+    "lat": 43.1364,
+    "lon": 5.9334,
+    "pharmacyCount": 75
+  },
+  {
+    "insee": "51454",
+    "nom": "Reims",
+    "slug": "reims",
+    "departementCode": "51",
+    "departementNom": "Marne",
+    "departementSlug": "marne-51",
+    "postalCodes": [
+      "51100"
+    ],
+    "population": 177674,
+    "lat": 49.2535,
+    "lon": 4.0551,
+    "pharmacyCount": 62
+  },
+  {
+    "insee": "42218",
+    "nom": "Saint-Étienne",
+    "slug": "saint-etienne",
+    "departementCode": "42",
+    "departementNom": "Loire",
+    "departementSlug": "loire-42",
+    "postalCodes": [
+      "42000",
+      "42100",
+      "42230"
+    ],
+    "population": 173136,
+    "lat": 45.4241,
+    "lon": 4.3665,
+    "pharmacyCount": 53
+  },
+  {
+    "insee": "76351",
+    "nom": "Le Havre",
+    "slug": "le-havre",
+    "departementCode": "76",
+    "departementNom": "Seine-Maritime",
+    "departementSlug": "seine-maritime-76",
+    "postalCodes": [
+      "76600",
+      "76610",
+      "76620"
+    ],
+    "population": 166687,
+    "lat": 49.4958,
+    "lon": 0.1312,
+    "pharmacyCount": 46
+  },
+  {
+    "insee": "69266",
+    "nom": "Villeurbanne",
+    "slug": "villeurbanne",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69100"
+    ],
+    "population": 163684,
+    "lat": 45.7719,
+    "lon": 4.8898,
+    "pharmacyCount": 39
+  },
+  {
+    "insee": "21231",
+    "nom": "Dijon",
+    "slug": "dijon",
+    "departementCode": "21",
+    "departementNom": "Côte-d'Or",
+    "departementSlug": "cote-dor-21",
+    "postalCodes": [
+      "21000"
+    ],
+    "population": 161830,
+    "lat": 47.3319,
+    "lon": 5.0322,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "49007",
+    "nom": "Angers",
+    "slug": "angers",
+    "departementCode": "49",
+    "departementNom": "Maine-et-Loire",
+    "departementSlug": "maine-et-loire-49",
+    "postalCodes": [
+      "49000",
+      "49100"
+    ],
+    "population": 159022,
+    "lat": 47.4819,
+    "lon": -0.5629,
+    "pharmacyCount": 45
+  },
+  {
+    "insee": "38185",
+    "nom": "Grenoble",
+    "slug": "grenoble",
+    "departementCode": "38",
+    "departementNom": "Isère",
+    "departementSlug": "isere-38",
+    "postalCodes": [
+      "38000",
+      "38100"
+    ],
+    "population": 156140,
+    "lat": 45.1842,
+    "lon": 5.7155,
+    "pharmacyCount": 59
+  },
+  {
+    "insee": "97411",
+    "nom": "Saint-Denis",
+    "slug": "saint-denis",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97400",
+      "97417",
+      "97490"
+    ],
+    "population": 155634,
+    "lat": -20.9434,
+    "lon": 55.4444,
+    "pharmacyCount": 44
+  },
+  {
+    "insee": "30189",
+    "nom": "Nîmes",
+    "slug": "nimes",
+    "departementCode": "30",
+    "departementNom": "Gard",
+    "departementSlug": "gard-30",
+    "postalCodes": [
+      "30000",
+      "30900"
+    ],
+    "population": 151839,
+    "lat": 43.8322,
+    "lon": 4.3429,
+    "pharmacyCount": 54
+  },
+  {
+    "insee": "13001",
+    "nom": "Aix-en-Provence",
+    "slug": "aix-en-provence",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13080",
+      "13090",
+      "13100",
+      "13290",
+      "13540"
+    ],
+    "population": 149695,
+    "lat": 43.536,
+    "lon": 5.3879,
+    "pharmacyCount": 52
+  },
+  {
+    "insee": "93066",
+    "nom": "Saint-Denis",
+    "slug": "saint-denis",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93200",
+      "93210",
+      "93380"
+    ],
+    "population": 149077,
+    "lat": 48.9378,
+    "lon": 2.3657,
+    "pharmacyCount": 34
+  },
+  {
+    "insee": "63113",
+    "nom": "Clermont-Ferrand",
+    "slug": "clermont-ferrand",
+    "departementCode": "63",
+    "departementNom": "Puy-de-Dôme",
+    "departementSlug": "puy-de-dome-63",
+    "postalCodes": [
+      "63000",
+      "63100"
+    ],
+    "population": 146351,
+    "lat": 45.787,
+    "lon": 3.1127,
+    "pharmacyCount": 52
+  },
+  {
+    "insee": "72181",
+    "nom": "Le Mans",
+    "slug": "le-mans",
+    "departementCode": "72",
+    "departementNom": "Sarthe",
+    "departementSlug": "sarthe-72",
+    "postalCodes": [
+      "72000",
+      "72100"
+    ],
+    "population": 146249,
+    "lat": 47.9819,
+    "lon": 0.1957,
+    "pharmacyCount": 42
+  },
+  {
+    "insee": "29019",
+    "nom": "Brest",
+    "slug": "brest",
+    "departementCode": "29",
+    "departementNom": "Finistère",
+    "departementSlug": "finistere-29",
+    "postalCodes": [
+      "29200"
+    ],
+    "population": 142346,
+    "lat": 48.4085,
+    "lon": -4.4996,
+    "pharmacyCount": 39
+  },
+  {
+    "insee": "37261",
+    "nom": "Tours",
+    "slug": "tours",
+    "departementCode": "37",
+    "departementNom": "Indre-et-Loire",
+    "departementSlug": "indre-et-loire-37",
+    "postalCodes": [
+      "37000",
+      "37100",
+      "37200"
+    ],
+    "population": 139259,
+    "lat": 47.3943,
+    "lon": 0.6949,
+    "pharmacyCount": 2
+  },
+  {
+    "insee": "80021",
+    "nom": "Amiens",
+    "slug": "amiens",
+    "departementCode": "80",
+    "departementNom": "Somme",
+    "departementSlug": "somme-80",
+    "postalCodes": [
+      "80000",
+      "80080",
+      "80090"
+    ],
+    "population": 136449,
+    "lat": 49.8987,
+    "lon": 2.2847,
+    "pharmacyCount": 46
+  },
+  {
+    "insee": "74010",
+    "nom": "Annecy",
+    "slug": "annecy",
+    "departementCode": "74",
+    "departementNom": "Haute-Savoie",
+    "departementSlug": "haute-savoie-74",
+    "postalCodes": [
+      "74000",
+      "74370",
+      "74600",
+      "74940",
+      "74960"
+    ],
+    "population": 132117,
+    "lat": 45.9024,
+    "lon": 6.1264,
+    "pharmacyCount": 45
+  },
+  {
+    "insee": "87085",
+    "nom": "Limoges",
+    "slug": "limoges",
+    "departementCode": "87",
+    "departementNom": "Haute-Vienne",
+    "departementSlug": "haute-vienne-87",
+    "postalCodes": [
+      "87000",
+      "87100",
+      "87280"
+    ],
+    "population": 129937,
+    "lat": 45.8567,
+    "lon": 1.226,
+    "pharmacyCount": 55
+  },
+  {
+    "insee": "57463",
+    "nom": "Metz",
+    "slug": "metz",
+    "departementCode": "57",
+    "departementNom": "Moselle",
+    "departementSlug": "moselle-57",
+    "postalCodes": [
+      "57000",
+      "57050",
+      "57070"
+    ],
+    "population": 122572,
+    "lat": 49.1048,
+    "lon": 6.1962,
+    "pharmacyCount": 42
+  },
+  {
+    "insee": "66136",
+    "nom": "Perpignan",
+    "slug": "perpignan",
+    "departementCode": "66",
+    "departementNom": "Pyrénées-Orientales",
+    "departementSlug": "pyrenees-orientales-66",
+    "postalCodes": [
+      "66000",
+      "66100"
+    ],
+    "population": 121616,
+    "lat": 42.699,
+    "lon": 2.9045,
+    "pharmacyCount": 51
+  },
+  {
+    "insee": "92012",
+    "nom": "Boulogne-Billancourt",
+    "slug": "boulogne-billancourt",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92100"
+    ],
+    "population": 119019,
+    "lat": 48.8375,
+    "lon": 2.2429,
+    "pharmacyCount": 34
+  },
+  {
+    "insee": "25056",
+    "nom": "Besançon",
+    "slug": "besancon",
+    "departementCode": "25",
+    "departementNom": "Doubs",
+    "departementSlug": "doubs-25",
+    "postalCodes": [
+      "25000"
+    ],
+    "population": 118489,
+    "lat": 47.2602,
+    "lon": 6.0123,
+    "pharmacyCount": 40
+  },
+  {
+    "insee": "76540",
+    "nom": "Rouen",
+    "slug": "rouen",
+    "departementCode": "76",
+    "departementNom": "Seine-Maritime",
+    "departementSlug": "seine-maritime-76",
+    "postalCodes": [
+      "76000",
+      "76100"
+    ],
+    "population": 117662,
+    "lat": 49.4412,
+    "lon": 1.0912,
+    "pharmacyCount": 34
+  },
+  {
+    "insee": "45234",
+    "nom": "Orléans",
+    "slug": "orleans",
+    "departementCode": "45",
+    "departementNom": "Loiret",
+    "departementSlug": "loiret-45",
+    "postalCodes": [
+      "45000",
+      "45100"
+    ],
+    "population": 116357,
+    "lat": 47.8734,
+    "lon": 1.9122,
+    "pharmacyCount": 25
+  },
+  {
+    "insee": "93048",
+    "nom": "Montreuil",
+    "slug": "montreuil",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93100"
+    ],
+    "population": 111934,
+    "lat": 48.8637,
+    "lon": 2.4491,
+    "pharmacyCount": 28
+  },
+  {
+    "insee": "14118",
+    "nom": "Caen",
+    "slug": "caen",
+    "departementCode": "14",
+    "departementNom": "Calvados",
+    "departementSlug": "calvados-14",
+    "postalCodes": [
+      "14000"
+    ],
+    "population": 109400,
+    "lat": 49.1846,
+    "lon": -0.3722,
+    "pharmacyCount": 35
+  },
+  {
+    "insee": "97415",
+    "nom": "Saint-Paul",
+    "slug": "saint-paul",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97411",
+      "97422",
+      "97423",
+      "97434",
+      "97435",
+      "97460"
+    ],
+    "population": 108088,
+    "lat": -21.0366,
+    "lon": 55.3402,
+    "pharmacyCount": 30
+  },
+  {
+    "insee": "95018",
+    "nom": "Argenteuil",
+    "slug": "argenteuil",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95100"
+    ],
+    "population": 106130,
+    "lat": 48.9501,
+    "lon": 2.2478,
+    "pharmacyCount": 27
+  },
+  {
+    "insee": "68224",
+    "nom": "Mulhouse",
+    "slug": "mulhouse",
+    "departementCode": "68",
+    "departementNom": "Haut-Rhin",
+    "departementSlug": "haut-rhin-68",
+    "postalCodes": [
+      "68100",
+      "68200"
+    ],
+    "population": 104978,
+    "lat": 47.7526,
+    "lon": 7.3255,
+    "pharmacyCount": 35
+  },
+  {
+    "insee": "54395",
+    "nom": "Nancy",
+    "slug": "nancy",
+    "departementCode": "54",
+    "departementNom": "Meurthe-et-Moselle",
+    "departementSlug": "meurthe-et-moselle-54",
+    "postalCodes": [
+      "54000",
+      "54100"
+    ],
+    "population": 103671,
+    "lat": 48.6881,
+    "lon": 6.1734,
+    "pharmacyCount": 42
+  },
+  {
+    "insee": "59599",
+    "nom": "Tourcoing",
+    "slug": "tourcoing",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59200"
+    ],
+    "population": 98772,
+    "lat": 50.721,
+    "lon": 3.1577,
+    "pharmacyCount": 31
+  },
+  {
+    "insee": "59512",
+    "nom": "Roubaix",
+    "slug": "roubaix",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59100"
+    ],
+    "population": 98286,
+    "lat": 50.6887,
+    "lon": 3.1843,
+    "pharmacyCount": 30
+  },
+  {
+    "insee": "92050",
+    "nom": "Nanterre",
+    "slug": "nanterre",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92000"
+    ],
+    "population": 97783,
+    "lat": 48.8974,
+    "lon": 2.2018,
+    "pharmacyCount": 24
+  },
+  {
+    "insee": "94081",
+    "nom": "Vitry-sur-Seine",
+    "slug": "vitry-sur-seine",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94400"
+    ],
+    "population": 93963,
+    "lat": 48.7893,
+    "lon": 2.3951,
+    "pharmacyCount": 24
+  },
+  {
+    "insee": "92004",
+    "nom": "Asnières-sur-Seine",
+    "slug": "asnieres-sur-seine",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92600"
+    ],
+    "population": 93941,
+    "lat": 48.9181,
+    "lon": 2.2935,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "94028",
+    "nom": "Créteil",
+    "slug": "creteil",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94000"
+    ],
+    "population": 93397,
+    "lat": 48.7845,
+    "lon": 2.4523,
+    "pharmacyCount": 23
+  },
+  {
+    "insee": "84007",
+    "nom": "Avignon",
+    "slug": "avignon",
+    "departementCode": "84",
+    "departementNom": "Vaucluse",
+    "departementSlug": "vaucluse-84",
+    "postalCodes": [
+      "84000",
+      "84140"
+    ],
+    "population": 92188,
+    "lat": 43.9416,
+    "lon": 4.8333,
+    "pharmacyCount": 38
+  },
+  {
+    "insee": "92025",
+    "nom": "Colombes",
+    "slug": "colombes",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92700"
+    ],
+    "population": 91053,
+    "lat": 48.9218,
+    "lon": 2.2469,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "86194",
+    "nom": "Poitiers",
+    "slug": "poitiers",
+    "departementCode": "86",
+    "departementNom": "Vienne",
+    "departementSlug": "vienne-86",
+    "postalCodes": [
+      "86000"
+    ],
+    "population": 89916,
+    "lat": 46.5846,
+    "lon": 0.3715,
+    "pharmacyCount": 29
+  },
+  {
+    "insee": "93001",
+    "nom": "Aubervilliers",
+    "slug": "aubervilliers",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93300"
+    ],
+    "population": 88365,
+    "lat": 48.9128,
+    "lon": 2.3886,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "93005",
+    "nom": "Aulnay-sous-Bois",
+    "slug": "aulnay-sous-bois",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93600"
+    ],
+    "population": 87599,
+    "lat": 48.9457,
+    "lon": 2.4918,
+    "pharmacyCount": 21
+  },
+  {
+    "insee": "59183",
+    "nom": "Dunkerque",
+    "slug": "dunkerque",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59140",
+      "59240",
+      "59279",
+      "59430",
+      "59640"
+    ],
+    "population": 86263,
+    "lat": 51.0183,
+    "lon": 2.3431,
+    "pharmacyCount": 40
+  },
+  {
+    "insee": "97416",
+    "nom": "Saint-Pierre",
+    "slug": "saint-pierre",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97410",
+      "97432"
+    ],
+    "population": 85038,
+    "lat": -21.309,
+    "lon": 55.5044,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "78646",
+    "nom": "Versailles",
+    "slug": "versailles",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78000"
+    ],
+    "population": 84095,
+    "lat": 48.8039,
+    "lon": 2.1191,
+    "pharmacyCount": 26
+  },
+  {
+    "insee": "92026",
+    "nom": "Courbevoie",
+    "slug": "courbevoie",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92400"
+    ],
+    "population": 82902,
+    "lat": 48.8976,
+    "lon": 2.2574,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "92063",
+    "nom": "Rueil-Malmaison",
+    "slug": "rueil-malmaison",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92500"
+    ],
+    "population": 82874,
+    "lat": 48.8717,
+    "lon": 2.1806,
+    "pharmacyCount": 23
+  },
+  {
+    "insee": "97422",
+    "nom": "Le Tampon",
+    "slug": "le-tampon",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97418",
+      "97430"
+    ],
+    "population": 82579,
+    "lat": -21.225,
+    "lon": 55.5701,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "34032",
+    "nom": "Béziers",
+    "slug": "beziers",
+    "departementCode": "34",
+    "departementNom": "Hérault",
+    "departementSlug": "herault-34",
+    "postalCodes": [
+      "34500"
+    ],
+    "population": 81545,
+    "lat": 43.3481,
+    "lon": 3.2342,
+    "pharmacyCount": 34
+  },
+  {
+    "insee": "64445",
+    "nom": "Pau",
+    "slug": "pau",
+    "departementCode": "64",
+    "departementNom": "Pyrénées-Atlantiques",
+    "departementSlug": "pyrenees-atlantiques-64",
+    "postalCodes": [
+      "64000"
+    ],
+    "population": 80441,
+    "lat": 43.3219,
+    "lon": -0.3435,
+    "pharmacyCount": 32
+  },
+  {
+    "insee": "17300",
+    "nom": "La Rochelle",
+    "slug": "la-rochelle",
+    "departementCode": "17",
+    "departementNom": "Charente-Maritime",
+    "departementSlug": "charente-maritime-17",
+    "postalCodes": [
+      "17000"
+    ],
+    "population": 79851,
+    "lat": 46.162,
+    "lon": -1.1765,
+    "pharmacyCount": 29
+  },
+  {
+    "insee": "50129",
+    "nom": "Cherbourg-en-Cotentin",
+    "slug": "cherbourg-en-cotentin",
+    "departementCode": "50",
+    "departementNom": "Manche",
+    "departementSlug": "manche-50",
+    "postalCodes": [
+      "50100",
+      "50110",
+      "50120",
+      "50130",
+      "50460",
+      "50470"
+    ],
+    "population": 78258,
+    "lat": 49.6277,
+    "lon": -1.6356,
+    "pharmacyCount": 26
+  },
+  {
+    "insee": "33281",
+    "nom": "Mérignac",
+    "slug": "merignac",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33700"
+    ],
+    "population": 78090,
+    "lat": 44.8313,
+    "lon": -0.682,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "94017",
+    "nom": "Champigny-sur-Marne",
+    "slug": "champigny-sur-marne",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94500"
+    ],
+    "population": 78072,
+    "lat": 48.8173,
+    "lon": 2.5206,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "06004",
+    "nom": "Antibes",
+    "slug": "antibes",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06160",
+      "06600"
+    ],
+    "population": 77637,
+    "lat": 43.5823,
+    "lon": 7.1048,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "94068",
+    "nom": "Saint-Maur-des-Fossés",
+    "slug": "saint-maur-des-fosses",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94100",
+      "94210"
+    ],
+    "population": 76572,
+    "lat": 48.7999,
+    "lon": 2.4921,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "2A004",
+    "nom": "Ajaccio",
+    "slug": "ajaccio",
+    "departementCode": "2A",
+    "departementNom": "Corse-du-Sud",
+    "departementSlug": "corse-du-sud-2a",
+    "postalCodes": [
+      "20000",
+      "20090",
+      "20167"
+    ],
+    "population": 76320,
+    "lat": 41.9228,
+    "lon": 8.7058,
+    "pharmacyCount": 32
+  },
+  {
+    "insee": "97209",
+    "nom": "Fort-de-France",
+    "slug": "fort-de-france",
+    "departementCode": "972",
+    "departementNom": "Martinique",
+    "departementSlug": "martinique-972",
+    "postalCodes": [
+      "97200",
+      "97234"
+    ],
+    "population": 75506,
+    "lat": 14.6492,
+    "lon": -61.0686,
+    "pharmacyCount": 39
+  },
+  {
+    "insee": "44184",
+    "nom": "Saint-Nazaire",
+    "slug": "saint-nazaire",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44600"
+    ],
+    "population": 74568,
+    "lat": 47.2768,
+    "lon": -2.2392,
+    "pharmacyCount": 24
+  },
+  {
+    "insee": "06029",
+    "nom": "Cannes",
+    "slug": "cannes",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06150",
+      "06400"
+    ],
+    "population": 74350,
+    "lat": 43.5454,
+    "lon": 7.0152,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "93051",
+    "nom": "Noisy-le-Grand",
+    "slug": "noisy-le-grand",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93160"
+    ],
+    "population": 72978,
+    "lat": 48.8327,
+    "lon": 2.556,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "93029",
+    "nom": "Drancy",
+    "slug": "drancy",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93700"
+    ],
+    "population": 72390,
+    "lat": 48.925,
+    "lon": 2.4446,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "97611",
+    "nom": "Mamoudzou",
+    "slug": "mamoudzou",
+    "departementCode": "976",
+    "departementNom": "Mayotte",
+    "departementSlug": "mayotte-976",
+    "postalCodes": [
+      "97600",
+      "97605"
+    ],
+    "population": 71437,
+    "lat": -12.7875,
+    "lon": 45.1964,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "95127",
+    "nom": "Cergy",
+    "slug": "cergy",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95000",
+      "95800"
+    ],
+    "population": 70906,
+    "lat": 49.0373,
+    "lon": 2.0455,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "92044",
+    "nom": "Levallois-Perret",
+    "slug": "levallois-perret",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92300"
+    ],
+    "population": 68092,
+    "lat": 48.8946,
+    "lon": 2.2874,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "92040",
+    "nom": "Issy-les-Moulineaux",
+    "slug": "issy-les-moulineaux",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92130"
+    ],
+    "population": 67669,
+    "lat": 48.824,
+    "lon": 2.2628,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "62193",
+    "nom": "Calais",
+    "slug": "calais",
+    "departementCode": "62",
+    "departementNom": "Pas-de-Calais",
+    "departementSlug": "pas-de-calais-62",
+    "postalCodes": [
+      "62100"
+    ],
+    "population": 67571,
+    "lat": 50.9523,
+    "lon": 1.869,
+    "pharmacyCount": 27
+  },
+  {
+    "insee": "33318",
+    "nom": "Pessac",
+    "slug": "pessac",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33600"
+    ],
+    "population": 67339,
+    "lat": 44.786,
+    "lon": -0.681,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "68066",
+    "nom": "Colmar",
+    "slug": "colmar",
+    "departementCode": "68",
+    "departementNom": "Haut-Rhin",
+    "departementSlug": "haut-rhin-68",
+    "postalCodes": [
+      "68000"
+    ],
+    "population": 66970,
+    "lat": 48.1115,
+    "lon": 7.3924,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "91228",
+    "nom": "Évry-Courcouronnes",
+    "slug": "evry-courcouronnes",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91000",
+      "91080"
+    ],
+    "population": 66919,
+    "lat": 48.6287,
+    "lon": 2.4313,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "69259",
+    "nom": "Vénissieux",
+    "slug": "venissieux",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69200"
+    ],
+    "population": 65502,
+    "lat": 45.7012,
+    "lon": 4.8805,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "94041",
+    "nom": "Ivry-sur-Seine",
+    "slug": "ivry-sur-seine",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94200"
+    ],
+    "population": 65064,
+    "lat": 48.8125,
+    "lon": 2.3872,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "26362",
+    "nom": "Valence",
+    "slug": "valence",
+    "departementCode": "26",
+    "departementNom": "Drôme",
+    "departementSlug": "drome-26",
+    "postalCodes": [
+      "26000"
+    ],
+    "population": 64458,
+    "lat": 44.9234,
+    "lon": 4.9164,
+    "pharmacyCount": 25
+  },
+  {
+    "insee": "92024",
+    "nom": "Clichy",
+    "slug": "clichy",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92110"
+    ],
+    "population": 64410,
+    "lat": 48.9041,
+    "lon": 2.3041,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "29232",
+    "nom": "Quimper",
+    "slug": "quimper",
+    "departementCode": "29",
+    "departementNom": "Finistère",
+    "departementSlug": "finistere-29",
+    "postalCodes": [
+      "29000"
+    ],
+    "population": 64385,
+    "lat": 47.9982,
+    "lon": -4.0972,
+    "pharmacyCount": 24
+  },
+  {
+    "insee": "92002",
+    "nom": "Antony",
+    "slug": "antony",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92160"
+    ],
+    "population": 64263,
+    "lat": 48.7507,
+    "lon": 2.2976,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "18033",
+    "nom": "Bourges",
+    "slug": "bourges",
+    "departementCode": "18",
+    "departementNom": "Cher",
+    "departementSlug": "cher-18",
+    "postalCodes": [
+      "18000"
+    ],
+    "population": 64186,
+    "lat": 47.078,
+    "lon": 2.3983,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "83126",
+    "nom": "La Seyne-sur-Mer",
+    "slug": "la-seyne-sur-mer",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83500"
+    ],
+    "population": 63732,
+    "lat": 43.0837,
+    "lon": 5.8789,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "82121",
+    "nom": "Montauban",
+    "slug": "montauban",
+    "departementCode": "82",
+    "departementNom": "Tarn-et-Garonne",
+    "departementSlug": "tarn-et-garonne-82",
+    "postalCodes": [
+      "82000"
+    ],
+    "population": 62945,
+    "lat": 44.0217,
+    "lon": 1.3646,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "59009",
+    "nom": "Villeneuve-d'Ascq",
+    "slug": "villeneuve-dascq",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59491",
+      "59493",
+      "59650"
+    ],
+    "population": 62868,
+    "lat": 50.6362,
+    "lon": 3.1619,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "97302",
+    "nom": "Cayenne",
+    "slug": "cayenne",
+    "departementCode": "973",
+    "departementNom": "Guyane",
+    "departementSlug": "guyane-973",
+    "postalCodes": [
+      "97300"
+    ],
+    "population": 62675,
+    "lat": 4.9464,
+    "lon": -52.3319,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "93007",
+    "nom": "Le Blanc-Mesnil",
+    "slug": "le-blanc-mesnil",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93150"
+    ],
+    "population": 62376,
+    "lat": 48.9372,
+    "lon": 2.4576,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "10387",
+    "nom": "Troyes",
+    "slug": "troyes",
+    "departementCode": "10",
+    "departementNom": "Aube",
+    "departementSlug": "aube-10",
+    "postalCodes": [
+      "10000"
+    ],
+    "population": 62088,
+    "lat": 48.2924,
+    "lon": 4.0761,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "93055",
+    "nom": "Pantin",
+    "slug": "pantin",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93500"
+    ],
+    "population": 61929,
+    "lat": 48.9006,
+    "lon": 2.4085,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "94076",
+    "nom": "Villejuif",
+    "slug": "villejuif",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94800"
+    ],
+    "population": 60183,
+    "lat": 48.7934,
+    "lon": 2.3603,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "73065",
+    "nom": "Chambéry",
+    "slug": "chambery",
+    "departementCode": "73",
+    "departementNom": "Savoie",
+    "departementSlug": "savoie-73",
+    "postalCodes": [
+      "73000"
+    ],
+    "population": 59964,
+    "lat": 45.5822,
+    "lon": 5.9064,
+    "pharmacyCount": 25
+  },
+  {
+    "insee": "79191",
+    "nom": "Niort",
+    "slug": "niort",
+    "departementCode": "79",
+    "departementNom": "Deux-Sèvres",
+    "departementSlug": "deux-sevres-79",
+    "postalCodes": [
+      "79000"
+    ],
+    "population": 59854,
+    "lat": 46.3274,
+    "lon": -0.4613,
+    "pharmacyCount": 24
+  },
+  {
+    "insee": "83061",
+    "nom": "Fréjus",
+    "slug": "frejus",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83370",
+      "83600"
+    ],
+    "population": 59719,
+    "lat": 43.4553,
+    "lon": 6.7848,
+    "pharmacyCount": 21
+  },
+  {
+    "insee": "92051",
+    "nom": "Neuilly-sur-Seine",
+    "slug": "neuilly-sur-seine",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92200"
+    ],
+    "population": 59538,
+    "lat": 48.8862,
+    "lon": 2.2651,
+    "pharmacyCount": 21
+  },
+  {
+    "insee": "95585",
+    "nom": "Sarcelles",
+    "slug": "sarcelles",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95200"
+    ],
+    "population": 59173,
+    "lat": 48.9925,
+    "lon": 2.3858,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "97409",
+    "nom": "Saint-André",
+    "slug": "saint-andre",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97440"
+    ],
+    "population": 58885,
+    "lat": -20.9568,
+    "lon": 55.6374,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "92023",
+    "nom": "Clamart",
+    "slug": "clamart",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92140"
+    ],
+    "population": 58576,
+    "lat": 48.7957,
+    "lon": 2.2518,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "56121",
+    "nom": "Lorient",
+    "slug": "lorient",
+    "departementCode": "56",
+    "departementNom": "Morbihan",
+    "departementSlug": "morbihan-56",
+    "postalCodes": [
+      "56100"
+    ],
+    "population": 58329,
+    "lat": 47.7494,
+    "lon": -3.3799,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "11262",
+    "nom": "Narbonne",
+    "slug": "narbonne",
+    "departementCode": "11",
+    "departementNom": "Aude",
+    "departementSlug": "aude-11",
+    "postalCodes": [
+      "11100"
+    ],
+    "population": 57587,
+    "lat": 43.1493,
+    "lon": 3.0337,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "93008",
+    "nom": "Bobigny",
+    "slug": "bobigny",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93000"
+    ],
+    "population": 56927,
+    "lat": 48.9073,
+    "lon": 2.4432,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "77284",
+    "nom": "Meaux",
+    "slug": "meaux",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77100"
+    ],
+    "population": 56905,
+    "lat": 48.9573,
+    "lon": 2.9035,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "94046",
+    "nom": "Maisons-Alfort",
+    "slug": "maisons-alfort",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94700"
+    ],
+    "population": 56799,
+    "lat": 48.8017,
+    "lon": 2.44,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "83069",
+    "nom": "Hyères",
+    "slug": "hyeres",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83400"
+    ],
+    "population": 55858,
+    "lat": 43.1139,
+    "lon": 6.2357,
+    "pharmacyCount": 24
+  },
+  {
+    "insee": "56260",
+    "nom": "Vannes",
+    "slug": "vannes",
+    "departementCode": "56",
+    "departementNom": "Morbihan",
+    "departementSlug": "morbihan-56",
+    "postalCodes": [
+      "56000"
+    ],
+    "population": 55790,
+    "lat": 47.6577,
+    "lon": -2.7485,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "60057",
+    "nom": "Beauvais",
+    "slug": "beauvais",
+    "departementCode": "60",
+    "departementNom": "Oise",
+    "departementSlug": "oise-60",
+    "postalCodes": [
+      "60000"
+    ],
+    "population": 55550,
+    "lat": 49.4425,
+    "lon": 2.0877,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "97414",
+    "nom": "Saint-Louis",
+    "slug": "saint-louis",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97421",
+      "97450"
+    ],
+    "population": 54941,
+    "lat": -21.2254,
+    "lon": 55.4224,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "85191",
+    "nom": "La Roche-sur-Yon",
+    "slug": "la-roche-sur-yon",
+    "departementCode": "85",
+    "departementNom": "Vendée",
+    "departementSlug": "vendee-85",
+    "postalCodes": [
+      "85000"
+    ],
+    "population": 54849,
+    "lat": 46.6659,
+    "lon": -1.4162,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "77108",
+    "nom": "Chelles",
+    "slug": "chelles",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77500"
+    ],
+    "population": 54620,
+    "lat": 48.8845,
+    "lon": 2.5954,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "91174",
+    "nom": "Corbeil-Essonnes",
+    "slug": "corbeil-essonnes",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91100"
+    ],
+    "population": 54471,
+    "lat": 48.5973,
+    "lon": 2.4646,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "97311",
+    "nom": "Saint-Laurent-du-Maroni",
+    "slug": "saint-laurent-du-maroni",
+    "departementCode": "973",
+    "departementNom": "Guyane",
+    "departementSlug": "guyane-973",
+    "postalCodes": [
+      "97320"
+    ],
+    "population": 54429,
+    "lat": 4.9478,
+    "lon": -54.0105,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "49099",
+    "nom": "Cholet",
+    "slug": "cholet",
+    "departementCode": "49",
+    "departementNom": "Maine-et-Loire",
+    "departementSlug": "maine-et-loire-49",
+    "postalCodes": [
+      "49300"
+    ],
+    "population": 54404,
+    "lat": 47.0358,
+    "lon": -0.875,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "64102",
+    "nom": "Bayonne",
+    "slug": "bayonne",
+    "departementCode": "64",
+    "departementNom": "Pyrénées-Atlantiques",
+    "departementSlug": "pyrenees-atlantiques-64",
+    "postalCodes": [
+      "64100"
+    ],
+    "population": 54306,
+    "lat": 43.4844,
+    "lon": -1.4611,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "94033",
+    "nom": "Fontenay-sous-Bois",
+    "slug": "fontenay-sous-bois",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94120"
+    ],
+    "population": 53757,
+    "lat": 48.8503,
+    "lon": 2.4736,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "93070",
+    "nom": "Saint-Ouen-sur-Seine",
+    "slug": "saint-ouen-sur-seine",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93400"
+    ],
+    "population": 53615,
+    "lat": 48.9118,
+    "lon": 2.3329,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "06027",
+    "nom": "Cagnes-sur-Mer",
+    "slug": "cagnes-sur-mer",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06800"
+    ],
+    "population": 53354,
+    "lat": 43.6712,
+    "lon": 7.1502,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "69256",
+    "nom": "Vaulx-en-Velin",
+    "slug": "vaulx-en-velin",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69120"
+    ],
+    "population": 53069,
+    "lat": 45.7776,
+    "lon": 4.925,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "93031",
+    "nom": "Épinay-sur-Seine",
+    "slug": "epinay-sur-seine",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93800"
+    ],
+    "population": 52833,
+    "lat": 48.9544,
+    "lon": 2.3172,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "02691",
+    "nom": "Saint-Quentin",
+    "slug": "saint-quentin",
+    "departementCode": "02",
+    "departementNom": "Aisne",
+    "departementSlug": "aisne-02",
+    "postalCodes": [
+      "02100"
+    ],
+    "population": 52813,
+    "lat": 49.8475,
+    "lon": 3.279,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "78586",
+    "nom": "Sartrouville",
+    "slug": "sartrouville",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78500"
+    ],
+    "population": 52763,
+    "lat": 48.9374,
+    "lon": 2.1744,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "93071",
+    "nom": "Sevran",
+    "slug": "sevran",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93270"
+    ],
+    "population": 52535,
+    "lat": 48.9378,
+    "lon": 2.5311,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "13004",
+    "nom": "Arles",
+    "slug": "arles",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13104",
+      "13123",
+      "13129",
+      "13200",
+      "13280"
+    ],
+    "population": 51811,
+    "lat": 43.5441,
+    "lon": 4.6513,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "91377",
+    "nom": "Massy",
+    "slug": "massy",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91300"
+    ],
+    "population": 51729,
+    "lat": 48.7263,
+    "lon": 2.2696,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "81004",
+    "nom": "Albi",
+    "slug": "albi",
+    "departementCode": "81",
+    "departementNom": "Tarn",
+    "departementSlug": "tarn-81",
+    "postalCodes": [
+      "81000"
+    ],
+    "population": 51290,
+    "lat": 43.929,
+    "lon": 2.1323,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "97101",
+    "nom": "Les Abymes",
+    "slug": "les-abymes",
+    "departementCode": "971",
+    "departementNom": "Guadeloupe",
+    "departementSlug": "guadeloupe-971",
+    "postalCodes": [
+      "97139",
+      "97142"
+    ],
+    "population": 51055,
+    "lat": 16.2678,
+    "lon": -61.4967,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "92036",
+    "nom": "Gennevilliers",
+    "slug": "gennevilliers",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92230"
+    ],
+    "population": 50979,
+    "lat": 48.9319,
+    "lon": 2.288,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "44162",
+    "nom": "Saint-Herblain",
+    "slug": "saint-herblain",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44800"
+    ],
+    "population": 50973,
+    "lat": 47.2246,
+    "lon": -1.6306,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "06069",
+    "nom": "Grasse",
+    "slug": "grasse",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06130",
+      "06520"
+    ],
+    "population": 50970,
+    "lat": 43.656,
+    "lon": 6.937,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "93010",
+    "nom": "Bondy",
+    "slug": "bondy",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93140"
+    ],
+    "population": 50595,
+    "lat": 48.9036,
+    "lon": 2.4846,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "85194",
+    "nom": "Les Sables-d'Olonne",
+    "slug": "les-sables-dolonne",
+    "departementCode": "85",
+    "departementNom": "Vendée",
+    "departementSlug": "vendee-85",
+    "postalCodes": [
+      "85100",
+      "85180",
+      "85340"
+    ],
+    "population": 49603,
+    "lat": 46.5264,
+    "lon": -1.7611,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "53130",
+    "nom": "Laval",
+    "slug": "laval",
+    "departementCode": "53",
+    "departementNom": "Mayenne",
+    "departementSlug": "mayenne-53",
+    "postalCodes": [
+      "53000"
+    ],
+    "population": 49400,
+    "lat": 48.0578,
+    "lon": -0.7692,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "27229",
+    "nom": "Évreux",
+    "slug": "evreux",
+    "departementCode": "27",
+    "departementNom": "Eure",
+    "departementSlug": "eure-27",
+    "postalCodes": [
+      "27000"
+    ],
+    "population": 49360,
+    "lat": 49.018,
+    "lon": 1.1406,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "69290",
+    "nom": "Saint-Priest",
+    "slug": "saint-priest",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69800"
+    ],
+    "population": 49229,
+    "lat": 45.7014,
+    "lon": 4.9474,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "92073",
+    "nom": "Suresnes",
+    "slug": "suresnes",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92150"
+    ],
+    "population": 48956,
+    "lat": 48.871,
+    "lon": 2.2183,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "13056",
+    "nom": "Martigues",
+    "slug": "martigues",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13117",
+      "13500"
+    ],
+    "population": 48298,
+    "lat": 43.3839,
+    "lon": 5.0451,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "94080",
+    "nom": "Vincennes",
+    "slug": "vincennes",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94300"
+    ],
+    "population": 48193,
+    "lat": 48.8471,
+    "lon": 2.4383,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "13005",
+    "nom": "Aubagne",
+    "slug": "aubagne",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13400"
+    ],
+    "population": 47529,
+    "lat": 43.2904,
+    "lon": 5.5643,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "35288",
+    "nom": "Saint-Malo",
+    "slug": "saint-malo",
+    "departementCode": "35",
+    "departementNom": "Ille-et-Vilaine",
+    "departementSlug": "ille-et-vilaine-35",
+    "postalCodes": [
+      "35400"
+    ],
+    "population": 47439,
+    "lat": 48.6465,
+    "lon": -2.0066,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "93046",
+    "nom": "Livry-Gargan",
+    "slug": "livry-gargan",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93190"
+    ],
+    "population": 47228,
+    "lat": 48.9184,
+    "lon": 2.5351,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "41018",
+    "nom": "Blois",
+    "slug": "blois",
+    "departementCode": "41",
+    "departementNom": "Loir-et-Cher",
+    "departementSlug": "loir-et-cher-41",
+    "postalCodes": [
+      "41000"
+    ],
+    "population": 47219,
+    "lat": 47.5813,
+    "lon": 1.3049,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "93064",
+    "nom": "Rosny-sous-Bois",
+    "slug": "rosny-sous-bois",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93110"
+    ],
+    "population": 47180,
+    "lat": 48.8744,
+    "lon": 2.4872,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "93027",
+    "nom": "La Courneuve",
+    "slug": "la-courneuve",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93120"
+    ],
+    "population": 47167,
+    "lat": 48.9341,
+    "lon": 2.3986,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "19031",
+    "nom": "Brive-la-Gaillarde",
+    "slug": "brive-la-gaillarde",
+    "departementCode": "19",
+    "departementNom": "Corrèze",
+    "departementSlug": "correze-19",
+    "postalCodes": [
+      "19100"
+    ],
+    "population": 47095,
+    "lat": 45.145,
+    "lon": 1.5144,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "2B033",
+    "nom": "Bastia",
+    "slug": "bastia",
+    "departementCode": "2B",
+    "departementNom": "Haute-Corse",
+    "departementSlug": "haute-corse-2b",
+    "postalCodes": [
+      "20200",
+      "20600"
+    ],
+    "population": 46867,
+    "lat": 42.6861,
+    "lon": 9.424,
+    "pharmacyCount": 28
+  },
+  {
+    "insee": "33522",
+    "nom": "Talence",
+    "slug": "talence",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33400"
+    ],
+    "population": 46338,
+    "lat": 44.8061,
+    "lon": -0.5918,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "92048",
+    "nom": "Meudon",
+    "slug": "meudon",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92190",
+      "92360"
+    ],
+    "population": 46334,
+    "lat": 48.8028,
+    "lon": 2.2288,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "92049",
+    "nom": "Montrouge",
+    "slug": "montrouge",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92120"
+    ],
+    "population": 46324,
+    "lat": 48.8159,
+    "lon": 2.3163,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "30007",
+    "nom": "Alès",
+    "slug": "ales",
+    "departementCode": "30",
+    "departementNom": "Gard",
+    "departementSlug": "gard-30",
+    "postalCodes": [
+      "30100"
+    ],
+    "population": 46125,
+    "lat": 44.125,
+    "lon": 4.0905,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "11069",
+    "nom": "Carcassonne",
+    "slug": "carcassonne",
+    "departementCode": "11",
+    "departementNom": "Aude",
+    "departementSlug": "aude-11",
+    "postalCodes": [
+      "11000"
+    ],
+    "population": 46080,
+    "lat": 43.2078,
+    "lon": 2.3491,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "77288",
+    "nom": "Melun",
+    "slug": "melun",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77000"
+    ],
+    "population": 45995,
+    "lat": 48.5421,
+    "lon": 2.6552,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "94022",
+    "nom": "Choisy-le-Roi",
+    "slug": "choisy-le-roi",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94600"
+    ],
+    "population": 45946,
+    "lat": 48.7635,
+    "lon": 2.4202,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "78551",
+    "nom": "Saint-Germain-en-Laye",
+    "slug": "saint-germain-en-laye",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78100",
+      "78112"
+    ],
+    "population": 45931,
+    "lat": 48.931,
+    "lon": 2.1052,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "90010",
+    "nom": "Belfort",
+    "slug": "belfort",
+    "departementCode": "90",
+    "departementNom": "Territoire de Belfort",
+    "departementSlug": "territoire-de-belfort-90",
+    "postalCodes": [
+      "90000"
+    ],
+    "population": 45912,
+    "lat": 47.6458,
+    "lon": 6.841,
+    "pharmacyCount": 20
+  },
+  {
+    "insee": "08105",
+    "nom": "Charleville-Mézières",
+    "slug": "charleville-mezieres",
+    "departementCode": "08",
+    "departementNom": "Ardennes",
+    "departementSlug": "ardennes-08",
+    "postalCodes": [
+      "08000"
+    ],
+    "population": 45560,
+    "lat": 49.7802,
+    "lon": 4.7304,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "94002",
+    "nom": "Alfortville",
+    "slug": "alfortville",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94140"
+    ],
+    "population": 45531,
+    "lat": 48.7963,
+    "lon": 2.4214,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "93053",
+    "nom": "Noisy-le-Sec",
+    "slug": "noisy-le-sec",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93130"
+    ],
+    "population": 45510,
+    "lat": 48.8917,
+    "lon": 2.4578,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "34301",
+    "nom": "Sète",
+    "slug": "sete",
+    "departementCode": "34",
+    "departementNom": "Hérault",
+    "departementSlug": "herault-34",
+    "postalCodes": [
+      "34200"
+    ],
+    "population": 45337,
+    "lat": 43.3844,
+    "lon": 3.6441,
+    "pharmacyCount": 22
+  },
+  {
+    "insee": "71076",
+    "nom": "Chalon-sur-Saône",
+    "slug": "chalon-sur-saone",
+    "departementCode": "71",
+    "departementNom": "Saône-et-Loire",
+    "departementSlug": "saone-et-loire-71",
+    "postalCodes": [
+      "71100"
+    ],
+    "population": 45102,
+    "lat": 46.7896,
+    "lon": 4.8509,
+    "pharmacyCount": 21
+  },
+  {
+    "insee": "92007",
+    "nom": "Bagneux",
+    "slug": "bagneux",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92220"
+    ],
+    "population": 44572,
+    "lat": 48.798,
+    "lon": 2.3093,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "65440",
+    "nom": "Tarbes",
+    "slug": "tarbes",
+    "departementCode": "65",
+    "departementNom": "Hautes-Pyrénées",
+    "departementSlug": "hautes-pyrenees-65",
+    "postalCodes": [
+      "65000"
+    ],
+    "population": 44399,
+    "lat": 43.2387,
+    "lon": 0.0653,
+    "pharmacyCount": 21
+  },
+  {
+    "insee": "22278",
+    "nom": "Saint-Brieuc",
+    "slug": "saint-brieuc",
+    "departementCode": "22",
+    "departementNom": "Côtes-d'Armor",
+    "departementSlug": "cotes-darmor-22",
+    "postalCodes": [
+      "22000"
+    ],
+    "population": 44364,
+    "lat": 48.5108,
+    "lon": -2.7657,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "13047",
+    "nom": "Istres",
+    "slug": "istres",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13118",
+      "13800"
+    ],
+    "population": 44292,
+    "lat": 43.5455,
+    "lon": 4.9477,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "13103",
+    "nom": "Salon-de-Provence",
+    "slug": "salon-de-provence",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13300"
+    ],
+    "population": 44194,
+    "lat": 43.643,
+    "lon": 5.049,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "92062",
+    "nom": "Puteaux",
+    "slug": "puteaux",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92800"
+    ],
+    "population": 44002,
+    "lat": 48.8824,
+    "lon": 2.2384,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "69034",
+    "nom": "Caluire-et-Cuire",
+    "slug": "caluire-et-cuire",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69300"
+    ],
+    "population": 43597,
+    "lat": 45.7986,
+    "lon": 4.8494,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "44143",
+    "nom": "Rezé",
+    "slug": "reze",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44400"
+    ],
+    "population": 43556,
+    "lat": 47.1733,
+    "lon": -1.5573,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "78361",
+    "nom": "Mantes-la-Jolie",
+    "slug": "mantes-la-jolie",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78200"
+    ],
+    "population": 43526,
+    "lat": 48.9961,
+    "lon": 1.6918,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "59606",
+    "nom": "Valenciennes",
+    "slug": "valenciennes",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59300"
+    ],
+    "population": 43468,
+    "lat": 50.362,
+    "lon": 3.5142,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "64024",
+    "nom": "Anglet",
+    "slug": "anglet",
+    "departementCode": "64",
+    "departementNom": "Pyrénées-Atlantiques",
+    "departementSlug": "pyrenees-atlantiques-64",
+    "postalCodes": [
+      "64600"
+    ],
+    "population": 43271,
+    "lat": 43.4893,
+    "lon": -1.5193,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "93006",
+    "nom": "Bagnolet",
+    "slug": "bagnolet",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93170"
+    ],
+    "population": 43086,
+    "lat": 48.8671,
+    "lon": 2.4252,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "69029",
+    "nom": "Bron",
+    "slug": "bron",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69500"
+    ],
+    "population": 42982,
+    "lat": 45.7355,
+    "lon": 4.9116,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "51108",
+    "nom": "Châlons-en-Champagne",
+    "slug": "chalons-en-champagne",
+    "departementCode": "51",
+    "departementNom": "Marne",
+    "departementSlug": "marne-51",
+    "postalCodes": [
+      "51000"
+    ],
+    "population": 42971,
+    "lat": 48.9656,
+    "lon": 4.3801,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "36044",
+    "nom": "Châteauroux",
+    "slug": "chateauroux",
+    "departementCode": "36",
+    "departementNom": "Indre",
+    "departementSlug": "indre-36",
+    "postalCodes": [
+      "36000"
+    ],
+    "population": 42963,
+    "lat": 46.8023,
+    "lon": 1.6903,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "62041",
+    "nom": "Arras",
+    "slug": "arras",
+    "departementCode": "62",
+    "departementNom": "Pas-de-Calais",
+    "departementSlug": "pas-de-calais-62",
+    "postalCodes": [
+      "62000"
+    ],
+    "population": 42875,
+    "lat": 50.2893,
+    "lon": 2.7679,
+    "pharmacyCount": 19
+  },
+  {
+    "insee": "57672",
+    "nom": "Thionville",
+    "slug": "thionville",
+    "departementCode": "57",
+    "departementNom": "Moselle",
+    "departementSlug": "moselle-57",
+    "postalCodes": [
+      "57100"
+    ],
+    "population": 42658,
+    "lat": 49.3718,
+    "lon": 6.1443,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "33550",
+    "nom": "Villenave-d'Ornon",
+    "slug": "villenave-dornon",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33140"
+    ],
+    "population": 42545,
+    "lat": 44.7736,
+    "lon": -0.5523,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "81065",
+    "nom": "Castres",
+    "slug": "castres",
+    "departementCode": "81",
+    "departementNom": "Tarn",
+    "departementSlug": "tarn-81",
+    "postalCodes": [
+      "81100"
+    ],
+    "population": 42505,
+    "lat": 43.6132,
+    "lon": 2.2448,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "01053",
+    "nom": "Bourg-en-Bresse",
+    "slug": "bourg-en-bresse",
+    "departementCode": "01",
+    "departementNom": "Ain",
+    "departementSlug": "ain-01",
+    "postalCodes": [
+      "01000"
+    ],
+    "population": 42372,
+    "lat": 46.2027,
+    "lon": 5.2469,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "93032",
+    "nom": "Gagny",
+    "slug": "gagny",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93220"
+    ],
+    "population": 42313,
+    "lat": 48.8826,
+    "lon": 2.545,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "06030",
+    "nom": "Le Cannet",
+    "slug": "le-cannet",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06110"
+    ],
+    "population": 41938,
+    "lat": 43.5745,
+    "lon": 7.001,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "16015",
+    "nom": "Angoulême",
+    "slug": "angouleme",
+    "departementCode": "16",
+    "departementNom": "Charente",
+    "departementSlug": "charente-16",
+    "postalCodes": [
+      "16000"
+    ],
+    "population": 41908,
+    "lat": 45.6458,
+    "lon": 0.145,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "95268",
+    "nom": "Garges-lès-Gonesse",
+    "slug": "garges-les-gonesse",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95140"
+    ],
+    "population": 41791,
+    "lat": 48.9696,
+    "lon": 2.4035,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "93078",
+    "nom": "Villepinte",
+    "slug": "villepinte",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93420"
+    ],
+    "population": 41470,
+    "lat": 48.956,
+    "lon": 2.5323,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "93072",
+    "nom": "Stains",
+    "slug": "stains",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93240"
+    ],
+    "population": 41388,
+    "lat": 48.9578,
+    "lon": 2.3868,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "05061",
+    "nom": "Gap",
+    "slug": "gap",
+    "departementCode": "05",
+    "departementNom": "Hautes-Alpes",
+    "departementSlug": "hautes-alpes-05",
+    "postalCodes": [
+      "05000"
+    ],
+    "population": 41293,
+    "lat": 44.5797,
+    "lon": 6.0616,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "78498",
+    "nom": "Poissy",
+    "slug": "poissy",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78300"
+    ],
+    "population": 40983,
+    "lat": 48.9241,
+    "lon": 2.025,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "31149",
+    "nom": "Colomiers",
+    "slug": "colomiers",
+    "departementCode": "31",
+    "departementNom": "Haute-Garonne",
+    "departementSlug": "haute-garonne-31",
+    "postalCodes": [
+      "31770"
+    ],
+    "population": 40882,
+    "lat": 43.6116,
+    "lon": 1.3245,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "59650",
+    "nom": "Wattrelos",
+    "slug": "wattrelos",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59150"
+    ],
+    "population": 40847,
+    "lat": 50.7125,
+    "lon": 3.2159,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "83050",
+    "nom": "Draguignan",
+    "slug": "draguignan",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83300"
+    ],
+    "population": 40826,
+    "lat": 43.5346,
+    "lon": 6.4651,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "60159",
+    "nom": "Compiègne",
+    "slug": "compiegne",
+    "departementCode": "60",
+    "departementNom": "Oise",
+    "departementSlug": "oise-60",
+    "postalCodes": [
+      "60200"
+    ],
+    "population": 40761,
+    "lat": 49.4006,
+    "lon": 2.8547,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "26198",
+    "nom": "Montélimar",
+    "slug": "montelimar",
+    "departementCode": "26",
+    "departementNom": "Drôme",
+    "departementSlug": "drome-26",
+    "postalCodes": [
+      "26200"
+    ],
+    "population": 40595,
+    "lat": 44.5545,
+    "lon": 4.7454,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "62160",
+    "nom": "Boulogne-sur-Mer",
+    "slug": "boulogne-sur-mer",
+    "departementCode": "62",
+    "departementNom": "Pas-de-Calais",
+    "departementSlug": "pas-de-calais-62",
+    "postalCodes": [
+      "62200"
+    ],
+    "population": 40539,
+    "lat": 50.7303,
+    "lon": 1.6062,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "59178",
+    "nom": "Douai",
+    "slug": "douai",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59500"
+    ],
+    "population": 40250,
+    "lat": 50.3785,
+    "lon": 3.1004,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "59378",
+    "nom": "Marcq-en-Barœul",
+    "slug": "marcq-en-barul",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59700"
+    ],
+    "population": 40184,
+    "lat": 50.6793,
+    "lon": 3.1006,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "93050",
+    "nom": "Neuilly-sur-Marne",
+    "slug": "neuilly-sur-marne",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93330"
+    ],
+    "population": 39800,
+    "lat": 48.8645,
+    "lon": 2.5419,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "97213",
+    "nom": "Le Lamentin",
+    "slug": "le-lamentin",
+    "departementCode": "972",
+    "departementNom": "Martinique",
+    "departementSlug": "martinique-972",
+    "postalCodes": [
+      "97232"
+    ],
+    "population": 39400,
+    "lat": 14.6231,
+    "lon": -60.9923,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "97412",
+    "nom": "Saint-Joseph",
+    "slug": "saint-joseph",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97480"
+    ],
+    "population": 39207,
+    "lat": -21.2921,
+    "lon": 55.644,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "77373",
+    "nom": "Pontault-Combault",
+    "slug": "pontault-combault",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77340"
+    ],
+    "population": 39096,
+    "lat": 48.7885,
+    "lon": 2.6173,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "97410",
+    "nom": "Saint-Benoît",
+    "slug": "saint-benoit",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97437",
+      "97470"
+    ],
+    "population": 38604,
+    "lat": -21.0887,
+    "lon": 55.6313,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "13028",
+    "nom": "La Ciotat",
+    "slug": "la-ciotat",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13600"
+    ],
+    "population": 38477,
+    "lat": 43.1882,
+    "lon": 5.6175,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "37122",
+    "nom": "Joué-lès-Tours",
+    "slug": "joue-les-tours",
+    "departementCode": "37",
+    "departementNom": "Indre-et-Loire",
+    "departementSlug": "indre-et-loire-37",
+    "postalCodes": [
+      "37300"
+    ],
+    "population": 38423,
+    "lat": 47.3374,
+    "lon": 0.6544,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "93073",
+    "nom": "Tremblay-en-France",
+    "slug": "tremblay-en-france",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93290"
+    ],
+    "population": 38348,
+    "lat": 48.9744,
+    "lon": 2.5481,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "28085",
+    "nom": "Chartres",
+    "slug": "chartres",
+    "departementCode": "28",
+    "departementNom": "Eure-et-Loir",
+    "departementSlug": "eure-et-loir-28",
+    "postalCodes": [
+      "28000"
+    ],
+    "population": 38324,
+    "lat": 48.4481,
+    "lon": 1.5046,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "69149",
+    "nom": "Oullins-Pierre-Bénite",
+    "slug": "oullins-pierre-benite",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69310",
+      "69600"
+    ],
+    "population": 38168,
+    "lat": 45.708,
+    "lon": 4.8112,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "74281",
+    "nom": "Thonon-les-Bains",
+    "slug": "thonon-les-bains",
+    "departementCode": "74",
+    "departementNom": "Haute-Savoie",
+    "departementSlug": "haute-savoie-74",
+    "postalCodes": [
+      "74200"
+    ],
+    "population": 37928,
+    "lat": 46.3745,
+    "lon": 6.4776,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "95252",
+    "nom": "Franconville",
+    "slug": "franconville",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95130"
+    ],
+    "population": 37754,
+    "lat": 48.9879,
+    "lon": 2.2235,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "38421",
+    "nom": "Saint-Martin-d'Hères",
+    "slug": "saint-martin-dheres",
+    "departementCode": "38",
+    "departementNom": "Isère",
+    "departementSlug": "isere-38",
+    "postalCodes": [
+      "38400"
+    ],
+    "population": 37695,
+    "lat": 45.1782,
+    "lon": 5.7646,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "74012",
+    "nom": "Annemasse",
+    "slug": "annemasse",
+    "departementCode": "74",
+    "departementNom": "Haute-Savoie",
+    "departementSlug": "haute-savoie-74",
+    "postalCodes": [
+      "74100"
+    ],
+    "population": 37628,
+    "lat": 46.189,
+    "lon": 6.2476,
+    "pharmacyCount": 18
+  },
+  {
+    "insee": "91589",
+    "nom": "Savigny-sur-Orge",
+    "slug": "savigny-sur-orge",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91600"
+    ],
+    "population": 37601,
+    "lat": 48.6851,
+    "lon": 2.3493,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "38151",
+    "nom": "Échirolles",
+    "slug": "echirolles",
+    "departementCode": "38",
+    "departementNom": "Isère",
+    "departementSlug": "isere-38",
+    "postalCodes": [
+      "38130"
+    ],
+    "population": 37491,
+    "lat": 45.1441,
+    "lon": 5.7148,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "91477",
+    "nom": "Palaiseau",
+    "slug": "palaiseau",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91120"
+    ],
+    "population": 37471,
+    "lat": 48.7155,
+    "lon": 2.2293,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "93063",
+    "nom": "Romainville",
+    "slug": "romainville",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93230"
+    ],
+    "population": 37152,
+    "lat": 48.8849,
+    "lon": 2.4391,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "83118",
+    "nom": "Saint-Raphaël",
+    "slug": "saint-raphael",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83530",
+      "83700"
+    ],
+    "population": 37113,
+    "lat": 43.4582,
+    "lon": 6.8483,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "83129",
+    "nom": "Six-Fours-les-Plages",
+    "slug": "six-fours-les-plages",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83140"
+    ],
+    "population": 37109,
+    "lat": 43.0843,
+    "lon": 5.8079,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "97418",
+    "nom": "Sainte-Marie",
+    "slug": "sainte-marie",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97438"
+    ],
+    "population": 37093,
+    "lat": -20.9463,
+    "lon": 55.5234,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "78172",
+    "nom": "Conflans-Sainte-Honorine",
+    "slug": "conflans-sainte-honorine",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78700"
+    ],
+    "population": 36958,
+    "lat": 49.0016,
+    "lon": 2.0992,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "13117",
+    "nom": "Vitrolles",
+    "slug": "vitrolles",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13127"
+    ],
+    "population": 36758,
+    "lat": 43.4509,
+    "lon": 5.2656,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "92020",
+    "nom": "Châtillon",
+    "slug": "chatillon",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92320"
+    ],
+    "population": 36705,
+    "lat": 48.8031,
+    "lon": 2.2887,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "69282",
+    "nom": "Meyzieu",
+    "slug": "meyzieu",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69330"
+    ],
+    "population": 36687,
+    "lat": 45.7785,
+    "lon": 5.0114,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "91027",
+    "nom": "Athis-Mons",
+    "slug": "athis-mons",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91200"
+    ],
+    "population": 36613,
+    "lat": 48.7093,
+    "lon": 2.3848,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "97408",
+    "nom": "La Possession",
+    "slug": "la-possession",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97419"
+    ],
+    "population": 36568,
+    "lat": -20.9965,
+    "lon": 55.3918,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "97307",
+    "nom": "Matoury",
+    "slug": "matoury",
+    "departementCode": "973",
+    "departementNom": "Guyane",
+    "departementSlug": "guyane-973",
+    "postalCodes": [
+      "97351"
+    ],
+    "population": 36512,
+    "lat": 4.8281,
+    "lon": -52.3498,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "95063",
+    "nom": "Bezons",
+    "slug": "bezons",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95870"
+    ],
+    "population": 36434,
+    "lat": 48.925,
+    "lon": 2.2147,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "67180",
+    "nom": "Haguenau",
+    "slug": "haguenau",
+    "departementCode": "67",
+    "departementNom": "Bas-Rhin",
+    "departementSlug": "bas-rhin-67",
+    "postalCodes": [
+      "67500"
+    ],
+    "population": 36391,
+    "lat": 48.8388,
+    "lon": 7.8213,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "60175",
+    "nom": "Creil",
+    "slug": "creil",
+    "departementCode": "60",
+    "departementNom": "Oise",
+    "departementSlug": "oise-60",
+    "postalCodes": [
+      "60100"
+    ],
+    "population": 36301,
+    "lat": 49.2557,
+    "lon": 2.4841,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "94078",
+    "nom": "Villeneuve-Saint-Georges",
+    "slug": "villeneuve-saint-georges",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94190"
+    ],
+    "population": 36221,
+    "lat": 48.7389,
+    "lon": 2.4493,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "69264",
+    "nom": "Villefranche-sur-Saône",
+    "slug": "villefranche-sur-saone",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69400"
+    ],
+    "population": 36172,
+    "lat": 45.9837,
+    "lon": 4.726,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "97413",
+    "nom": "Saint-Leu",
+    "slug": "saint-leu",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97416",
+      "97424",
+      "97436"
+    ],
+    "population": 36163,
+    "lat": -21.1816,
+    "lon": 55.3432,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "92019",
+    "nom": "Châtenay-Malabry",
+    "slug": "chatenay-malabry",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92290"
+    ],
+    "population": 35825,
+    "lat": 48.7697,
+    "lon": 2.2603,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "42207",
+    "nom": "Saint-Chamond",
+    "slug": "saint-chamond",
+    "departementCode": "42",
+    "departementNom": "Loire",
+    "departementSlug": "loire-42",
+    "postalCodes": [
+      "42400"
+    ],
+    "population": 35646,
+    "lat": 45.4687,
+    "lon": 4.5082,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "91549",
+    "nom": "Sainte-Geneviève-des-Bois",
+    "slug": "sainte-genevieve-des-bois",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91700"
+    ],
+    "population": 35438,
+    "lat": 48.643,
+    "lon": 2.3272,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "42187",
+    "nom": "Roanne",
+    "slug": "roanne",
+    "departementCode": "42",
+    "departementNom": "Loire",
+    "departementSlug": "loire-42",
+    "postalCodes": [
+      "42300"
+    ],
+    "population": 35409,
+    "lat": 46.0443,
+    "lon": 4.0797,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "94058",
+    "nom": "Le Perreux-sur-Marne",
+    "slug": "le-perreux-sur-marne",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94170"
+    ],
+    "population": 35260,
+    "lat": 48.8433,
+    "lon": 2.5045,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "71270",
+    "nom": "Mâcon",
+    "slug": "macon",
+    "departementCode": "71",
+    "departementNom": "Saône-et-Loire",
+    "departementSlug": "saone-et-loire-71",
+    "postalCodes": [
+      "71000"
+    ],
+    "population": 35177,
+    "lat": 46.3265,
+    "lon": 4.8083,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "89024",
+    "nom": "Auxerre",
+    "slug": "auxerre",
+    "departementCode": "89",
+    "departementNom": "Yonne",
+    "departementSlug": "yonne-89",
+    "postalCodes": [
+      "89000",
+      "89290"
+    ],
+    "population": 35097,
+    "lat": 47.7939,
+    "lon": 3.5821,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "67447",
+    "nom": "Schiltigheim",
+    "slug": "schiltigheim",
+    "departementCode": "67",
+    "departementNom": "Bas-Rhin",
+    "departementSlug": "bas-rhin-67",
+    "postalCodes": [
+      "67300"
+    ],
+    "population": 34708,
+    "lat": 48.6118,
+    "lon": 7.7511,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "78621",
+    "nom": "Trappes",
+    "slug": "trappes",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78190"
+    ],
+    "population": 34689,
+    "lat": 48.7738,
+    "lon": 1.9964,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "78440",
+    "nom": "Les Mureaux",
+    "slug": "les-mureaux",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78130"
+    ],
+    "population": 34632,
+    "lat": 48.9877,
+    "lon": 1.911,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "78311",
+    "nom": "Houilles",
+    "slug": "houilles",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78800"
+    ],
+    "population": 33983,
+    "lat": 48.9266,
+    "lon": 2.1866,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "97407",
+    "nom": "Le Port",
+    "slug": "le-port",
+    "departementCode": "974",
+    "departementNom": "La Réunion",
+    "departementSlug": "la-reunion-974",
+    "postalCodes": [
+      "97420"
+    ],
+    "population": 33969,
+    "lat": -20.9459,
+    "lon": 55.3038,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "13054",
+    "nom": "Marignane",
+    "slug": "marignane",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13700"
+    ],
+    "population": 33692,
+    "lat": 43.4218,
+    "lon": 5.2178,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "26281",
+    "nom": "Romans-sur-Isère",
+    "slug": "romans-sur-isere",
+    "departementCode": "26",
+    "departementNom": "Drôme",
+    "departementSlug": "drome-26",
+    "postalCodes": [
+      "26100"
+    ],
+    "population": 33464,
+    "lat": 45.0611,
+    "lon": 5.0477,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "94079",
+    "nom": "Villiers-sur-Marne",
+    "slug": "villiers-sur-marne",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94350"
+    ],
+    "population": 33162,
+    "lat": 48.8278,
+    "lon": 2.5482,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "03185",
+    "nom": "Montluçon",
+    "slug": "montlucon",
+    "departementCode": "03",
+    "departementNom": "Allier",
+    "departementSlug": "allier-03",
+    "postalCodes": [
+      "03100"
+    ],
+    "population": 33147,
+    "lat": 46.3428,
+    "lon": 2.608,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "58194",
+    "nom": "Nevers",
+    "slug": "nevers",
+    "departementCode": "58",
+    "departementNom": "Nièvre",
+    "departementSlug": "nievre-58",
+    "postalCodes": [
+      "58000"
+    ],
+    "population": 33085,
+    "lat": 46.9852,
+    "lon": 3.1598,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "62498",
+    "nom": "Lens",
+    "slug": "lens",
+    "departementCode": "62",
+    "departementNom": "Pas-de-Calais",
+    "departementSlug": "pas-de-calais-62",
+    "postalCodes": [
+      "62300"
+    ],
+    "population": 32920,
+    "lat": 50.4395,
+    "lon": 2.8191,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "94073",
+    "nom": "Thiais",
+    "slug": "thiais",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94320"
+    ],
+    "population": 32918,
+    "lat": 48.7605,
+    "lon": 2.3869,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "33449",
+    "nom": "Saint-Médard-en-Jalles",
+    "slug": "saint-medard-en-jalles",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33160"
+    ],
+    "population": 32910,
+    "lat": 44.8861,
+    "lon": -0.7823,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "47001",
+    "nom": "Agen",
+    "slug": "agen",
+    "departementCode": "47",
+    "departementNom": "Lot-et-Garonne",
+    "departementSlug": "lot-et-garonne-47",
+    "postalCodes": [
+      "47000"
+    ],
+    "population": 32801,
+    "lat": 44.201,
+    "lon": 0.6302,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "78423",
+    "nom": "Montigny-le-Bretonneux",
+    "slug": "montigny-le-bretonneux",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78180"
+    ],
+    "population": 32465,
+    "lat": 48.7776,
+    "lon": 2.0252,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "94052",
+    "nom": "Nogent-sur-Marne",
+    "slug": "nogent-sur-marne",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94130"
+    ],
+    "population": 32455,
+    "lat": 48.837,
+    "lon": 2.4811,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "73008",
+    "nom": "Aix-les-Bains",
+    "slug": "aix-les-bains",
+    "departementCode": "73",
+    "departementNom": "Savoie",
+    "departementSlug": "savoie-73",
+    "postalCodes": [
+      "73100"
+    ],
+    "population": 32406,
+    "lat": 45.6943,
+    "lon": 5.9035,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "88160",
+    "nom": "Épinal",
+    "slug": "epinal",
+    "departementCode": "88",
+    "departementNom": "Vosges",
+    "departementSlug": "vosges-88",
+    "postalCodes": [
+      "88000"
+    ],
+    "population": 32251,
+    "lat": 48.1637,
+    "lon": 6.4867,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "06123",
+    "nom": "Saint-Laurent-du-Var",
+    "slug": "saint-laurent-du-var",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06700"
+    ],
+    "population": 32172,
+    "lat": 43.6865,
+    "lon": 7.1822,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "97610",
+    "nom": "Koungou",
+    "slug": "koungou",
+    "departementCode": "976",
+    "departementNom": "Mayotte",
+    "departementSlug": "mayotte-976",
+    "postalCodes": [
+      "97600"
+    ],
+    "population": 32156,
+    "lat": -12.7417,
+    "lon": 45.1912,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "95500",
+    "nom": "Pontoise",
+    "slug": "pontoise",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95000",
+      "95300"
+    ],
+    "population": 31970,
+    "lat": 49.0488,
+    "lon": 2.0996,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "33039",
+    "nom": "Bègles",
+    "slug": "begles",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33130"
+    ],
+    "population": 31831,
+    "lat": 44.803,
+    "lon": -0.5485,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "78490",
+    "nom": "Plaisir",
+    "slug": "plaisir",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78370"
+    ],
+    "population": 31811,
+    "lat": 48.8129,
+    "lon": 1.9483,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "95306",
+    "nom": "Herblay-sur-Seine",
+    "slug": "herblay-sur-seine",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95220"
+    ],
+    "population": 31779,
+    "lat": 49.0052,
+    "lon": 2.1556,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "38544",
+    "nom": "Vienne",
+    "slug": "vienne",
+    "departementCode": "38",
+    "departementNom": "Isère",
+    "departementSlug": "isere-38",
+    "postalCodes": [
+      "38200"
+    ],
+    "population": 31778,
+    "lat": 45.5221,
+    "lon": 4.8803,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "84031",
+    "nom": "Carpentras",
+    "slug": "carpentras",
+    "departementCode": "84",
+    "departementNom": "Vaucluse",
+    "departementSlug": "vaucluse-84",
+    "postalCodes": [
+      "84200"
+    ],
+    "population": 31619,
+    "lat": 44.0629,
+    "lon": 5.0584,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "40192",
+    "nom": "Mont-de-Marsan",
+    "slug": "mont-de-marsan",
+    "departementCode": "40",
+    "departementNom": "Landes",
+    "departementSlug": "landes-40",
+    "postalCodes": [
+      "40000"
+    ],
+    "population": 31592,
+    "lat": 43.8931,
+    "lon": -0.5009,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "28134",
+    "nom": "Dreux",
+    "slug": "dreux",
+    "departementCode": "28",
+    "departementNom": "Eure-et-Loir",
+    "departementSlug": "eure-et-loir-28",
+    "postalCodes": [
+      "28100"
+    ],
+    "population": 31543,
+    "lat": 48.7482,
+    "lon": 1.3578,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "91657",
+    "nom": "Vigneux-sur-Seine",
+    "slug": "vigneux-sur-seine",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91270"
+    ],
+    "population": 31466,
+    "lat": 48.7021,
+    "lon": 2.4274,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "69286",
+    "nom": "Rillieux-la-Pape",
+    "slug": "rillieux-la-pape",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69140"
+    ],
+    "population": 31389,
+    "lat": 45.8265,
+    "lon": 4.895,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "95280",
+    "nom": "Goussainville",
+    "slug": "goussainville",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95190"
+    ],
+    "population": 31301,
+    "lat": 49.0266,
+    "lon": 2.4683,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "91521",
+    "nom": "Ris-Orangis",
+    "slug": "ris-orangis",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91130"
+    ],
+    "population": 31189,
+    "lat": 48.6457,
+    "lon": 2.4104,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "94038",
+    "nom": "L'Haÿ-les-Roses",
+    "slug": "lhay-les-roses",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94240"
+    ],
+    "population": 31188,
+    "lat": 48.7777,
+    "lon": 2.3416,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "77445",
+    "nom": "Savigny-le-Temple",
+    "slug": "savigny-le-temple",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77176"
+    ],
+    "population": 31148,
+    "lat": 48.5846,
+    "lon": 2.5759,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "59122",
+    "nom": "Cambrai",
+    "slug": "cambrai",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59400"
+    ],
+    "population": 31134,
+    "lat": 50.1722,
+    "lon": 3.2413,
+    "pharmacyCount": 16
+  },
+  {
+    "insee": "94016",
+    "nom": "Cachan",
+    "slug": "cachan",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94230"
+    ],
+    "population": 31103,
+    "lat": 48.7914,
+    "lon": 2.3318,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "86066",
+    "nom": "Châtellerault",
+    "slug": "chatellerault",
+    "departementCode": "86",
+    "departementNom": "Vienne",
+    "departementSlug": "vienne-86",
+    "postalCodes": [
+      "86100"
+    ],
+    "population": 31003,
+    "lat": 46.8147,
+    "lon": 0.5583,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "97103",
+    "nom": "Baie-Mahault",
+    "slug": "baie-mahault",
+    "departementCode": "971",
+    "departementNom": "Guadeloupe",
+    "departementSlug": "guadeloupe-971",
+    "postalCodes": [
+      "97122"
+    ],
+    "population": 30924,
+    "lat": 16.2498,
+    "lon": -61.5951,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "91687",
+    "nom": "Viry-Châtillon",
+    "slug": "viry-chatillon",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91170"
+    ],
+    "population": 30838,
+    "lat": 48.6662,
+    "lon": 2.3758,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "78158",
+    "nom": "Le Chesnay-Rocquencourt",
+    "slug": "le-chesnay-rocquencourt",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78150"
+    ],
+    "population": 30689,
+    "lat": 48.8285,
+    "lon": 2.1188,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "06083",
+    "nom": "Menton",
+    "slug": "menton",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06500"
+    ],
+    "population": 30604,
+    "lat": 43.7961,
+    "lon": 7.498,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "78146",
+    "nom": "Chatou",
+    "slug": "chatou",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78400"
+    ],
+    "population": 30598,
+    "lat": 48.8964,
+    "lon": 2.1502,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "92046",
+    "nom": "Malakoff",
+    "slug": "malakoff",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92240"
+    ],
+    "population": 30557,
+    "lat": 48.817,
+    "lon": 2.2943,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "92035",
+    "nom": "La Garenne-Colombes",
+    "slug": "la-garenne-colombes",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92250"
+    ],
+    "population": 30197,
+    "lat": 48.9071,
+    "lon": 2.2437,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "31557",
+    "nom": "Tournefeuille",
+    "slug": "tournefeuille",
+    "departementCode": "31",
+    "departementNom": "Haute-Garonne",
+    "departementSlug": "haute-garonne-31",
+    "postalCodes": [
+      "31170"
+    ],
+    "population": 30168,
+    "lat": 43.5747,
+    "lon": 1.3338,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "38053",
+    "nom": "Bourgoin-Jallieu",
+    "slug": "bourgoin-jallieu",
+    "departementCode": "38",
+    "departementNom": "Isère",
+    "departementSlug": "isere-38",
+    "postalCodes": [
+      "38300"
+    ],
+    "population": 30151,
+    "lat": 45.6025,
+    "lon": 5.2747,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "91201",
+    "nom": "Draveil",
+    "slug": "draveil",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91210"
+    ],
+    "population": 30098,
+    "lat": 48.6777,
+    "lon": 2.4249,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "62510",
+    "nom": "Liévin",
+    "slug": "lievin",
+    "departementCode": "62",
+    "departementNom": "Pas-de-Calais",
+    "departementSlug": "pas-de-calais-62",
+    "postalCodes": [
+      "62800"
+    ],
+    "population": 30063,
+    "lat": 50.4231,
+    "lon": 2.7702,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "95680",
+    "nom": "Villiers-le-Bel",
+    "slug": "villiers-le-bel",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95400"
+    ],
+    "population": 30053,
+    "lat": 49.008,
+    "lon": 2.4036,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "54547",
+    "nom": "Vandœuvre-lès-Nancy",
+    "slug": "vanduvre-les-nancy",
+    "departementCode": "54",
+    "departementNom": "Meurthe-et-Moselle",
+    "departementSlug": "meurthe-et-moselle-54",
+    "postalCodes": [
+      "54500"
+    ],
+    "population": 29942,
+    "lat": 48.66,
+    "lon": 6.1603,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "34003",
+    "nom": "Agde",
+    "slug": "agde",
+    "departementCode": "34",
+    "departementNom": "Hérault",
+    "departementSlug": "herault-34",
+    "postalCodes": [
+      "34300"
+    ],
+    "population": 29939,
+    "lat": 43.3084,
+    "lon": 3.4838,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "69275",
+    "nom": "Décines-Charpieu",
+    "slug": "decines-charpieu",
+    "departementCode": "69",
+    "departementNom": "Rhône",
+    "departementSlug": "rhone-69",
+    "postalCodes": [
+      "69150"
+    ],
+    "population": 29877,
+    "lat": 45.7759,
+    "lon": 4.9589,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "92064",
+    "nom": "Saint-Cloud",
+    "slug": "saint-cloud",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92210"
+    ],
+    "population": 29855,
+    "lat": 48.844,
+    "lon": 2.2032,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "93077",
+    "nom": "Villemomble",
+    "slug": "villemomble",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93250"
+    ],
+    "population": 29795,
+    "lat": 48.8866,
+    "lon": 2.5085,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "78297",
+    "nom": "Guyancourt",
+    "slug": "guyancourt",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78280"
+    ],
+    "population": 29778,
+    "lat": 48.7735,
+    "lon": 2.0745,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "84087",
+    "nom": "Orange",
+    "slug": "orange",
+    "departementCode": "84",
+    "departementNom": "Vaucluse",
+    "departementSlug": "vaucluse-84",
+    "postalCodes": [
+      "84100"
+    ],
+    "population": 29706,
+    "lat": 44.1264,
+    "lon": 4.8031,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "94034",
+    "nom": "Fresnes",
+    "slug": "fresnes",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94260"
+    ],
+    "population": 29528,
+    "lat": 48.7572,
+    "lon": 2.3263,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "76575",
+    "nom": "Saint-Étienne-du-Rouvray",
+    "slug": "saint-etienne-du-rouvray",
+    "departementCode": "76",
+    "departementNom": "Seine-Maritime",
+    "departementSlug": "seine-maritime-76",
+    "postalCodes": [
+      "76800"
+    ],
+    "population": 29518,
+    "lat": 49.3833,
+    "lon": 1.0909,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "95219",
+    "nom": "Ermont",
+    "slug": "ermont",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95120"
+    ],
+    "population": 29489,
+    "lat": 48.9891,
+    "lon": 2.258,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "93014",
+    "nom": "Clichy-sous-Bois",
+    "slug": "clichy-sous-bois",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93390"
+    ],
+    "population": 29354,
+    "lat": 48.9081,
+    "lon": 2.5432,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "06155",
+    "nom": "Vallauris",
+    "slug": "vallauris",
+    "departementCode": "06",
+    "departementNom": "Alpes-Maritimes",
+    "departementSlug": "alpes-maritimes-06",
+    "postalCodes": [
+      "06220"
+    ],
+    "population": 29259,
+    "lat": 43.5787,
+    "lon": 7.0604,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "24322",
+    "nom": "Périgueux",
+    "slug": "perigueux",
+    "departementCode": "24",
+    "departementNom": "Dordogne",
+    "departementSlug": "dordogne-24",
+    "postalCodes": [
+      "24000"
+    ],
+    "population": 29055,
+    "lat": 45.1939,
+    "lon": 0.7105,
+    "pharmacyCount": 13
+  },
+  {
+    "insee": "76681",
+    "nom": "Sotteville-lès-Rouen",
+    "slug": "sotteville-les-rouen",
+    "departementCode": "76",
+    "departementNom": "Seine-Maritime",
+    "departementSlug": "seine-maritime-76",
+    "postalCodes": [
+      "76300"
+    ],
+    "population": 29003,
+    "lat": 49.4116,
+    "lon": 1.0944,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "92009",
+    "nom": "Bois-Colombes",
+    "slug": "bois-colombes",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92270"
+    ],
+    "population": 28909,
+    "lat": 48.9151,
+    "lon": 2.2688,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "92060",
+    "nom": "Le Plessis-Robinson",
+    "slug": "le-plessis-robinson",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92350"
+    ],
+    "population": 28848,
+    "lat": 48.7815,
+    "lon": 2.2592,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "94018",
+    "nom": "Charenton-le-Pont",
+    "slug": "charenton-le-pont",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94220"
+    ],
+    "population": 28830,
+    "lat": 48.8229,
+    "lon": 2.405,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "59392",
+    "nom": "Maubeuge",
+    "slug": "maubeuge",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59600"
+    ],
+    "population": 28767,
+    "lat": 50.2834,
+    "lon": 3.9611,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "93047",
+    "nom": "Montfermeil",
+    "slug": "montfermeil",
+    "departementCode": "93",
+    "departementNom": "Seine-Saint-Denis",
+    "departementSlug": "seine-saint-denis-93",
+    "postalCodes": [
+      "93370"
+    ],
+    "population": 28703,
+    "lat": 48.8976,
+    "lon": 2.5678,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "92075",
+    "nom": "Vanves",
+    "slug": "vanves",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92170"
+    ],
+    "population": 28622,
+    "lat": 48.8214,
+    "lon": 2.2869,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "44190",
+    "nom": "Saint-Sébastien-sur-Loire",
+    "slug": "saint-sebastien-sur-loire",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44230"
+    ],
+    "population": 28596,
+    "lat": 47.2065,
+    "lon": -1.5023,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "44114",
+    "nom": "Orvault",
+    "slug": "orvault",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44700"
+    ],
+    "population": 28534,
+    "lat": 47.2745,
+    "lon": -1.6195,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "76217",
+    "nom": "Dieppe",
+    "slug": "dieppe",
+    "departementCode": "76",
+    "departementNom": "Seine-Maritime",
+    "departementSlug": "seine-maritime-76",
+    "postalCodes": [
+      "76200",
+      "76370"
+    ],
+    "population": 28496,
+    "lat": 49.9199,
+    "lon": 1.0838,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "02722",
+    "nom": "Soissons",
+    "slug": "soissons",
+    "departementCode": "02",
+    "departementNom": "Aisne",
+    "departementSlug": "aisne-02",
+    "postalCodes": [
+      "02200"
+    ],
+    "population": 28046,
+    "lat": 49.3766,
+    "lon": 3.3235,
+    "pharmacyCount": 0
+  },
+  {
+    "insee": "91691",
+    "nom": "Yerres",
+    "slug": "yerres",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91330"
+    ],
+    "population": 27906,
+    "lat": 48.7129,
+    "lon": 2.4932,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "67218",
+    "nom": "Illkirch-Graffenstaden",
+    "slug": "illkirch-graffenstaden",
+    "departementCode": "67",
+    "departementNom": "Bas-Rhin",
+    "departementSlug": "bas-rhin-67",
+    "postalCodes": [
+      "67400"
+    ],
+    "population": 27872,
+    "lat": 48.522,
+    "lon": 7.7302,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "94071",
+    "nom": "Sucy-en-Brie",
+    "slug": "sucy-en-brie",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94370"
+    ],
+    "population": 27764,
+    "lat": 48.7688,
+    "lon": 2.5374,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "97113",
+    "nom": "Le Gosier",
+    "slug": "le-gosier",
+    "departementCode": "971",
+    "departementNom": "Guadeloupe",
+    "departementSlug": "guadeloupe-971",
+    "postalCodes": [
+      "97190"
+    ],
+    "population": 27757,
+    "lat": 16.2274,
+    "lon": -61.4749,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "78517",
+    "nom": "Rambouillet",
+    "slug": "rambouillet",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78120"
+    ],
+    "population": 27724,
+    "lat": 48.6538,
+    "lon": 1.8339,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "97309",
+    "nom": "Remire-Montjoly",
+    "slug": "remire-montjoly",
+    "departementCode": "973",
+    "departementNom": "Guyane",
+    "departementSlug": "guyane-973",
+    "postalCodes": [
+      "97354"
+    ],
+    "population": 27723,
+    "lat": 4.8897,
+    "lon": -52.2809,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "95277",
+    "nom": "Gonesse",
+    "slug": "gonesse",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95500"
+    ],
+    "population": 27707,
+    "lat": 48.9856,
+    "lon": 2.4602,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "31069",
+    "nom": "Blagnac",
+    "slug": "blagnac",
+    "departementCode": "31",
+    "departementNom": "Haute-Garonne",
+    "departementSlug": "haute-garonne-31",
+    "postalCodes": [
+      "31700"
+    ],
+    "population": 27604,
+    "lat": 43.641,
+    "lon": 1.377,
+    "pharmacyCount": 12
+  },
+  {
+    "insee": "95607",
+    "nom": "Taverny",
+    "slug": "taverny",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95150"
+    ],
+    "population": 27593,
+    "lat": 49.0274,
+    "lon": 2.2179,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "33529",
+    "nom": "La Teste-de-Buch",
+    "slug": "la-teste-de-buch",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33115",
+      "33260"
+    ],
+    "population": 27566,
+    "lat": 44.586,
+    "lon": -1.1809,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "77058",
+    "nom": "Bussy-Saint-Georges",
+    "slug": "bussy-saint-georges",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77600"
+    ],
+    "population": 27498,
+    "lat": 48.8297,
+    "lon": 2.7091,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "77083",
+    "nom": "Champs-sur-Marne",
+    "slug": "champs-sur-marne",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77420"
+    ],
+    "population": 27451,
+    "lat": 48.8485,
+    "lon": 2.594,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "94044",
+    "nom": "Limeil-Brévannes",
+    "slug": "limeil-brevannes",
+    "departementCode": "94",
+    "departementNom": "Val-de-Marne",
+    "departementSlug": "val-de-marne-94",
+    "postalCodes": [
+      "94450"
+    ],
+    "population": 27406,
+    "lat": 48.7463,
+    "lon": 2.4924,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "95176",
+    "nom": "Cormeilles-en-Parisis",
+    "slug": "cormeilles-en-parisis",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95240"
+    ],
+    "population": 27292,
+    "lat": 48.9701,
+    "lon": 2.201,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "24037",
+    "nom": "Bergerac",
+    "slug": "bergerac",
+    "departementCode": "24",
+    "departementNom": "Dordogne",
+    "departementSlug": "dordogne-24",
+    "postalCodes": [
+      "24100"
+    ],
+    "population": 27110,
+    "lat": 44.8519,
+    "lon": 0.4883,
+    "pharmacyCount": 15
+  },
+  {
+    "insee": "89387",
+    "nom": "Sens",
+    "slug": "sens",
+    "departementCode": "89",
+    "departementNom": "Yonne",
+    "departementSlug": "yonne-89",
+    "postalCodes": [
+      "89100"
+    ],
+    "population": 27106,
+    "lat": 48.1949,
+    "lon": 3.3039,
+    "pharmacyCount": 17
+  },
+  {
+    "insee": "59328",
+    "nom": "Lambersart",
+    "slug": "lambersart",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59130"
+    ],
+    "population": 27090,
+    "lat": 50.6538,
+    "lon": 3.0248,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "59017",
+    "nom": "Armentières",
+    "slug": "armentieres",
+    "departementCode": "59",
+    "departementNom": "Nord",
+    "departementSlug": "nord-59",
+    "postalCodes": [
+      "59280"
+    ],
+    "population": 26998,
+    "lat": 50.6925,
+    "lon": 2.8787,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "33192",
+    "nom": "Gradignan",
+    "slug": "gradignan",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33170"
+    ],
+    "population": 26952,
+    "lat": 44.7681,
+    "lon": -0.6163,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "77514",
+    "nom": "Villeparisis",
+    "slug": "villeparisis",
+    "departementCode": "77",
+    "departementNom": "Seine-et-Marne",
+    "departementSlug": "seine-et-marne-77",
+    "postalCodes": [
+      "77270"
+    ],
+    "population": 26946,
+    "lat": 48.9408,
+    "lon": 2.6178,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "95582",
+    "nom": "Sannois",
+    "slug": "sannois",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95110"
+    ],
+    "population": 26924,
+    "lat": 48.9731,
+    "lon": 2.2509,
+    "pharmacyCount": 9
+  },
+  {
+    "insee": "91223",
+    "nom": "Étampes",
+    "slug": "etampes",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91150"
+    ],
+    "population": 26857,
+    "lat": 48.4227,
+    "lon": 2.1524,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "91286",
+    "nom": "Grigny",
+    "slug": "grigny",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91350"
+    ],
+    "population": 26842,
+    "lat": 48.6584,
+    "lon": 2.3861,
+    "pharmacyCount": 4
+  },
+  {
+    "insee": "33119",
+    "nom": "Cenon",
+    "slug": "cenon",
+    "departementCode": "33",
+    "departementNom": "Gironde",
+    "departementSlug": "gironde-33",
+    "postalCodes": [
+      "33150"
+    ],
+    "population": 26834,
+    "lat": 44.8552,
+    "lon": -0.5223,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "91103",
+    "nom": "Brétigny-sur-Orge",
+    "slug": "bretigny-sur-orge",
+    "departementCode": "91",
+    "departementNom": "Essonne",
+    "departementSlug": "essonne-91",
+    "postalCodes": [
+      "91220"
+    ],
+    "population": 26658,
+    "lat": 48.601,
+    "lon": 2.2989,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "34145",
+    "nom": "Lunel",
+    "slug": "lunel",
+    "departementCode": "34",
+    "departementNom": "Hérault",
+    "departementSlug": "herault-34",
+    "postalCodes": [
+      "34400"
+    ],
+    "population": 26623,
+    "lat": 43.678,
+    "lon": 4.1329,
+    "pharmacyCount": 11
+  },
+  {
+    "insee": "83062",
+    "nom": "La Garde",
+    "slug": "la-garde",
+    "departementCode": "83",
+    "departementNom": "Var",
+    "departementSlug": "var-83",
+    "postalCodes": [
+      "83130"
+    ],
+    "population": 26476,
+    "lat": 43.129,
+    "lon": 6.0162,
+    "pharmacyCount": 10
+  },
+  {
+    "insee": "78208",
+    "nom": "Élancourt",
+    "slug": "elancourt",
+    "departementCode": "78",
+    "departementNom": "Yvelines",
+    "departementSlug": "yvelines-78",
+    "postalCodes": [
+      "78990"
+    ],
+    "population": 26365,
+    "lat": 48.7771,
+    "lon": 1.9612,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "49328",
+    "nom": "Saumur",
+    "slug": "saumur",
+    "departementCode": "49",
+    "departementNom": "Maine-et-Loire",
+    "departementSlug": "maine-et-loire-49",
+    "postalCodes": [
+      "49400"
+    ],
+    "population": 26241,
+    "lat": 47.2645,
+    "lon": -0.0837,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "44215",
+    "nom": "Vertou",
+    "slug": "vertou",
+    "departementCode": "44",
+    "departementNom": "Loire-Atlantique",
+    "departementSlug": "loire-atlantique-44",
+    "postalCodes": [
+      "44120"
+    ],
+    "population": 26227,
+    "lat": 47.1532,
+    "lon": -1.4679,
+    "pharmacyCount": 7
+  },
+  {
+    "insee": "15014",
+    "nom": "Aurillac",
+    "slug": "aurillac",
+    "departementCode": "15",
+    "departementNom": "Cantal",
+    "departementSlug": "cantal-15",
+    "postalCodes": [
+      "15000"
+    ],
+    "population": 26214,
+    "lat": 44.9281,
+    "lon": 2.4416,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "95203",
+    "nom": "Eaubonne",
+    "slug": "eaubonne",
+    "departementCode": "95",
+    "departementNom": "Val-d'Oise",
+    "departementSlug": "val-doise-95",
+    "postalCodes": [
+      "95600"
+    ],
+    "population": 26211,
+    "lat": 48.9912,
+    "lon": 2.2781,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "64122",
+    "nom": "Biarritz",
+    "slug": "biarritz",
+    "departementCode": "64",
+    "departementNom": "Pyrénées-Atlantiques",
+    "departementSlug": "pyrenees-atlantiques-64",
+    "postalCodes": [
+      "64200"
+    ],
+    "population": 26206,
+    "lat": 43.4709,
+    "lon": -1.5557,
+    "pharmacyCount": 21
+  },
+  {
+    "insee": "13063",
+    "nom": "Miramas",
+    "slug": "miramas",
+    "departementCode": "13",
+    "departementNom": "Bouches-du-Rhône",
+    "departementSlug": "bouches-du-rhone-13",
+    "postalCodes": [
+      "13140"
+    ],
+    "population": 26203,
+    "lat": 43.5841,
+    "lon": 5.0148,
+    "pharmacyCount": 8
+  },
+  {
+    "insee": "31395",
+    "nom": "Muret",
+    "slug": "muret",
+    "departementCode": "31",
+    "departementNom": "Haute-Garonne",
+    "departementSlug": "haute-garonne-31",
+    "postalCodes": [
+      "31600"
+    ],
+    "population": 26079,
+    "lat": 43.4407,
+    "lon": 1.2987,
+    "pharmacyCount": 14
+  },
+  {
+    "insee": "34057",
+    "nom": "Castelnau-le-Lez",
+    "slug": "castelnau-le-lez",
+    "departementCode": "34",
+    "departementNom": "Hérault",
+    "departementSlug": "herault-34",
+    "postalCodes": [
+      "34170"
+    ],
+    "population": 26058,
+    "lat": 43.6372,
+    "lon": 3.9113,
+    "pharmacyCount": 6
+  },
+  {
+    "insee": "92078",
+    "nom": "Villeneuve-la-Garenne",
+    "slug": "villeneuve-la-garenne",
+    "departementCode": "92",
+    "departementNom": "Hauts-de-Seine",
+    "departementSlug": "hauts-de-seine-92",
+    "postalCodes": [
+      "92390"
+    ],
+    "population": 26021,
+    "lat": 48.9354,
+    "lon": 2.3231,
+    "pharmacyCount": 7
+  }
+]

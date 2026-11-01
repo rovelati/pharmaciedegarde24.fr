@@ -1,0 +1,131 @@
+---
+---
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7V3z"/>
+          </svg>
+          <span>PharmacieDeGarde24.fr</span>
+        </div>
+        <p class="footer-desc">
+          Portail national d'information indépendant des pharmacies de garde et d'urgence en France. Données officielles du répertoire FINESS (Ministère du Travail, de la Santé et des Solidarités) sous Licence Ouverte Etalab 2.0.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Numéros d'Urgence</h3>
+        <ul class="footer-links">
+          <li><a href="tel:15"><strong>15</strong> — SAMU (Urgence vitale)</a></li>
+          <li><a href="tel:17"><strong>17</strong> — Police / Gendarmerie</a></li>
+          <li><a href="tel:3237"><strong>3237</strong> — Pharmacie de Garde</a></li>
+          <li><a href="tel:3624"><strong>3624</strong> — SOS Médecins</a></li>
+          <li><a href="tel:112"><strong>112</strong> — Urgence Européenne</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Informations</h3>
+        <ul class="footer-links">
+          <li><a href="/pharmacie-de-garde/">Tous les 101 Départements</a></li>
+          <li><a href="/autour-de-moi/">Pharmacies proches de moi</a></li>
+          <li><a href="/mentions-legales/">Mentions Légales</a></li>
+          <li><a href="/politique-de-confidentialite/">Politique de Confidentialité (RGPD)</a></li>
+          <li><a href="mailto:info@pharmaciedegarde24.fr">Contact : info@pharmaciedegarde24.fr</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="disclaimer">
+        <strong>Avertissement médical :</strong> Ce site fournit un annuaire des officines pharmaceutiques et de leurs tours de garde déclarés. En cas d'urgence médicale vitale ou d'intoxication grave, composez immédiatement le <strong>15</strong> ou le <strong>112</strong>. La nuit, munissez-vous impérativement d'une ordonnance médicale urgente pour accéder aux officines à volets fermés.
+      </p>
+      <div class="copy-row">
+        <span>© {new Date().getFullYear()} PharmacieDeGarde24.fr — Tous droits réservés.</span>
+        <span>Contact : info@pharmaciedegarde24.fr</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding: 3rem 0 2rem;
+    margin-top: 4rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.2fr;
+    gap: 2.5rem;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--cross);
+  }
+  .footer-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 0.8rem;
+    max-width: 440px;
+  }
+  .footer-col h3 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .footer-links a {
+    color: var(--ink-secondary);
+  }
+  .footer-links a:hover {
+    color: var(--cross);
+  }
+  .footer-bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .disclaimer {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+    background: var(--surface-2);
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .copy-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+  }
+</style>

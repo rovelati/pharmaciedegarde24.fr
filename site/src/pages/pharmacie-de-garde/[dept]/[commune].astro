@@ -1,0 +1,309 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PharmacyCard from '../../../components/PharmacyCard.astro';
+import PharmacyMap from '../../../components/PharmacyMap.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import departements from '../../../data/departements.json';
+import topCommunes from '../../../data/top-communes.json';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export async function getStaticPaths() {
+  const shardsDir = path.resolve('./src/data/shards');
+  const deptMap = new Map(departements.map(d => [d.code, d]));
+
+  // Cache shards in memory during build
+  const shardCache = new Map();
+
+  return topCommunes.map(commune => {
+    const deptCode = commune.departementCode;
+    const dept = deptMap.get(deptCode) || { code: deptCode, nom: deptCode, region: '' };
+
+    if (!shardCache.has(deptCode)) {
+      const shardFile = path.join(shardsDir, `${deptCode}.json`);
+      if (fs.existsSync(shardFile)) {
+        try {
+          shardCache.set(deptCode, JSON.parse(fs.readFileSync(shardFile, 'utf-8')));
+        } catch (e) {
+          shardCache.set(deptCode, []);
+        }
+      } else {
+        shardCache.set(deptCode, []);
+      }
+    }
+
+    const deptPharmacies = shardCache.get(deptCode) || [];
+    
+    // Filter pharmacies matching this commune name or postal code
+    const communeNameLower = commune.nom.toLowerCase();
+    const postal = commune.codePostal || '';
+
+    let matched = deptPharmacies.filter((p: any) => {
+      const pVille = (p.ville || '').toLowerCase();
+      const pCp = p.codePostal || '';
+      return pVille === communeNameLower || (postal && pCp.startsWith(postal.slice(0, 4)));
+    });
+
+    if (matched.length === 0) {
+      // Fallback to closest or first from dept
+      matched = deptPharmacies.slice(0, 10);
+    }
+
+    return {
+      params: {
+        dept: deptCode,
+        commune: commune.slug,
+      },
+      props: {
+        commune,
+        dept,
+        pharmacies: matched,
+      }
+    };
+  });
+}
+
+const { commune, dept, pharmacies } = Astro.props;
+
+// Active guard shifts
+const now = new Date();
+const onGuardList = pharmacies.filter((p: any) => {
+  if (p.isOpen24h) return true;
+  return (p.shifts || []).some((s: any) => {
+    const d = new Date(s.debut);
+    const f = new Date(s.fin);
+    return now >= d && now <= f;
+  });
+});
+
+const center: [number, number] = (commune.lat && commune.lon)
+  ? [commune.lat, commune.lon]
+  : [48.8566, 2.3522];
+
+const breadcrumbs = [
+  { name: 'Pharmacie de garde', href: '/pharmacie-de-garde/' },
+  { name: `${dept.nom} (${dept.code})`, href: `/pharmacie-de-garde/${dept.code}/` },
+  { name: commune.nom, href: `/pharmacie-de-garde/${dept.code}/${commune.slug}/` },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Où trouver une pharmacie de garde cette nuit à ${commune.nom} (${commune.codePostal || dept.code}) ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `À ${commune.nom}, la garde de nuit (20h-8h) s'effectue à volets fermés. Pour connaître l'officine d'astreinte exacte ou vous faire ouvrir, composez le 3237 ou contactez le commissariat / brigade de gendarmerie locale (composez le 17) muni de votre ordonnance médicale urgente.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Combien de pharmacies sont recensées à ${commune.nom} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `La commune de ${commune.nom} compte ${pharmacies.length} pharmacies d'officine référencées dans notre annuaire national de santé.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Quels sont les frais de garde en pharmacie à ${commune.nom} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Les honoraires de garde légaux s'élèvent à 5 € par ordonnance en journée les dimanches et jours fériés, et 8 € la nuit (20h-8h). Ils sont intégralement remboursés par la Sécurité Sociale avec une prescription médicale urgente.`
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title={`Pharmacie de Garde ${commune.nom} (${commune.codePostal || dept.code}) — Ouverte Aujourd'hui et Nuit`}
+  description={`Pharmacies de garde à ${commune.nom} (${commune.codePostal || dept.code}). Numéros de téléphone directs, adresses, carte interactive et officines ouvertes 24h/24, le dimanche et la nuit.`}
+  breadcrumbs={breadcrumbs}
+  jsonLd={faqLd}
+>
+  <div class="wrap commune-page">
+    <div class="commune-header">
+      <div class="commune-badges">
+        <span class="badge badge-open">Ville : {commune.nom}</span>
+        <span class="badge badge-garde">{commune.codePostal || dept.code}</span>
+        <span class="badge badge-night">{pharmacies.length} pharmacies</span>
+      </div>
+      <h1>Pharmacie de Garde à {commune.nom}</h1>
+      <p class="lead">
+        Consultez la liste des pharmacies ouvertes et de garde pour les urgences médicales de nuit, les dimanches et jours fériés à <strong>{commune.nom}</strong> ({dept.nom}).
+      </p>
+    </div>
+
+    <!-- Emergency notice -->
+    <div class="card urg-notice-box">
+      <div class="urg-notice-text">
+        <span class="urg-notice-icon">🌙</span>
+        <div>
+          <h3>Garde de nuit à {commune.nom} (20h00 — 08h00)</h3>
+          <p>
+            Pour la sécurité des équipes officinales, les portes restent verrouillées. Présentez impérativement une <strong>ordonnance médicale urgente</strong> datée du jour. Si la sonnette n'est pas accessible, contactez le <strong>3237</strong> ou le <strong>17</strong>.
+          </p>
+        </div>
+      </div>
+      <div class="urg-notice-btns">
+        <a href="tel:3237" class="btn btn-phone">3237 (Garde)</a>
+        <a href="tel:17" class="btn btn-outline">Police / Gendarmerie 17</a>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <section class="commune-map-section">
+      <h2>Carte des pharmacies à {commune.nom}</h2>
+      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} />
+    </section>
+
+    <AdSlot slot="8901234567" />
+
+    <!-- List of Pharmacies -->
+    <section class="commune-list-section">
+      <div class="list-heading">
+        <h2>
+          {onGuardList.length > 0 
+            ? `Officines de garde à ${commune.nom} (${onGuardList.length})` 
+            : `Toutes les pharmacies à ${commune.nom} (${pharmacies.length})`}
+        </h2>
+        <span class="muted">Mis à jour automatiquement</span>
+      </div>
+
+      <div class="grid grid-cols-2 pharma-grid">
+        {pharmacies.map((p: any) => (
+          <PharmacyCard pharmacy={p} />
+        ))}
+      </div>
+    </section>
+
+    <AdSlot slot="9012345678" />
+
+    <!-- Local FAQ -->
+    <section class="commune-faq-section">
+      <h2>Questions fréquentes — Pharmacie de garde à {commune.nom}</h2>
+      <div class="faq-list">
+        {faqLd.mainEntity.map(item => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{item.name}</span>
+              <span class="faq-arrow">▼</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{item.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .commune-page {
+    padding: 2.5rem 0;
+  }
+  .commune-header {
+    margin-bottom: 2rem;
+  }
+  .commune-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .urg-notice-box {
+    background: var(--surface);
+    border-left: 4px solid var(--gold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .urg-notice-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 650px;
+  }
+  .urg-notice-icon {
+    font-size: 2rem;
+  }
+  .urg-notice-text h3 {
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .urg-notice-text p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .urg-notice-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .commune-map-section {
+    margin-bottom: 2.5rem;
+  }
+  .list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .commune-faq-section {
+    margin-top: 3.5rem;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1.2rem;
+  }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 1.1rem 1.4rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-arrow {
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] .faq-arrow {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    padding: 0 1.4rem 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+  }
+  @media (max-width: 768px) {
+    .urg-notice-box {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .urg-notice-btns {
+      flex-direction: column;
+    }
+  }
+</style>

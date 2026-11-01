@@ -1,0 +1,292 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroSearch from '../components/HeroSearch.astro';
+import AdSlot from '../components/AdSlot.astro';
+
+const breadcrumbs = [
+  { name: 'Pharmacie autour de moi', href: '/autour-de-moi/' }
+];
+---
+
+<Base
+  title="Pharmacie de Garde Autour de Moi — Géolocalisation Immédiate"
+  description="Trouvez instantanément la pharmacie de garde ou ouverte la plus proche de votre position géographique. Horaires, itinéraires et numéros de téléphone directs."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="wrap around-me-page">
+    <div class="page-header">
+      <span class="badge badge-open">
+        <span class="pulse-dot"></span> Géolocalisation en direct
+      </span>
+      <h1>Pharmacie de Garde Autour de Moi</h1>
+      <p class="lead">
+        Activez votre localisation pour afficher automatiquement les pharmacies les plus proches et les officines de garde actuellement en astreinte.
+      </p>
+
+      <div class="geo-action-box">
+        <button id="locate-user-btn" class="btn btn-primary btn-locate">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>
+          </svg>
+          <span id="locate-btn-text">Localiser ma position</span>
+        </button>
+        <span id="geo-status-msg" class="geo-status">Cliquez pour détecter votre position GPS</span>
+      </div>
+    </div>
+
+    <!-- Map container -->
+    <div id="interactive-map-wrapper" style="display:none; margin: 1.5rem 0;">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+      <div id="live-geo-map" style="height: 380px; width: 100%; border-radius: var(--radius-md); border: 1px solid var(--line);"></div>
+    </div>
+
+    <!-- Results list -->
+    <div id="nearby-results-container" style="display:none; margin-top: 2rem;">
+      <div class="results-heading">
+        <h2 id="results-count-title">Pharmacies à proximité</h2>
+        <span class="muted">Triées par distance</span>
+      </div>
+      <div id="nearby-cards-grid" class="grid grid-cols-2"></div>
+    </div>
+
+    <!-- Fallback Search -->
+    <div id="fallback-search-box" class="card fallback-box">
+      <h3>Ou recherchez manuellement votre ville</h3>
+      <HeroSearch placeholder="Saisissez votre code postal ou commune..." />
+    </div>
+
+    <AdSlot slot="1234509876" />
+  </div>
+</Base>
+
+<style>
+  .around-me-page {
+    padding: 2.5rem 0;
+  }
+  .page-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+  }
+  .page-header h1 {
+    margin: 0.8rem 0 0.5rem;
+  }
+  .geo-action-box {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-locate {
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  }
+  .geo-status {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .fallback-box {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem;
+  }
+  .fallback-box h3 {
+    margin-top: 0;
+  }
+  :global(.dist-tag) {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cross);
+    background: var(--cross-bg);
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+  }
+</style>
+
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const locateBtn = document.getElementById('locate-user-btn');
+    const btnText = document.getElementById('locate-btn-text');
+    const statusMsg = document.getElementById('geo-status-msg');
+    const mapWrap = document.getElementById('interactive-map-wrapper');
+    const resultsContainer = document.getElementById('nearby-results-container');
+    const grid = document.getElementById('nearby-cards-grid');
+    const title = document.getElementById('results-count-title');
+
+    let leafletMap = null;
+
+    // Haversine distance in km
+    function getDistanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    async function handleGeolocation(pos) {
+      const userLat = pos.coords.latitude;
+      const userLon = pos.coords.longitude;
+      statusMsg.textContent = "Position détectée ! Recherche des pharmacies les plus proches...";
+
+      try {
+        // Fetch top communes to identify closest department
+        const res = await fetch('/data/top-communes.json');
+        const communes = await res.json();
+
+        let closestCommune = null;
+        let minDist = Infinity;
+
+        communes.forEach(c => {
+          if (c.lat && c.lon) {
+            const d = getDistanceKm(userLat, userLon, c.lat, c.lon);
+            if (d < minDist) {
+              minDist = d;
+              closestCommune = c;
+            }
+          }
+        });
+
+        const deptCode = closestCommune ? closestCommune.departementCode : '75';
+
+        // Load shard
+        const shardRes = await fetch(`/data/shards/${deptCode}.json`);
+        const pharmacies = await shardRes.json();
+
+        // Calculate distance for all pharmacies in shard
+        const withDist = pharmacies
+          .filter(p => p.lat && p.lon)
+          .map(p => ({
+            ...p,
+            distance: getDistanceKm(userLat, userLon, p.lat, p.lon)
+          }))
+          .sort((a, b) => a.distance - b.distance);
+
+        const topNearest = withDist.slice(0, 20);
+
+        statusMsg.textContent = `${topNearest.length} pharmacies trouvées dans votre secteur.`;
+        btnText.textContent = "Actualiser ma position";
+        mapWrap.style.display = 'block';
+        resultsContainer.style.display = 'block';
+        title.textContent = `Pharmacies les plus proches (${topNearest.length})`;
+
+        // Render Map
+        if (!leafletMap && typeof L !== 'undefined') {
+          leafletMap = L.map('live-geo-map').setView([userLat, userLon], 14);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+          }).addTo(leafletMap);
+        } else if (leafletMap) {
+          leafletMap.setView([userLat, userLon], 14);
+        }
+
+        // Add user marker
+        const userIcon = L.divIcon({
+          html: '<div style="background:#2563eb;width:18px;height:18px;border-radius:50%;border:3px solid #ffffff;box-shadow:0 0 10px rgba(37,99,235,0.8);"></div>',
+          className: 'user-pin',
+          iconSize: [18, 18],
+          iconAnchor: [9, 9]
+        });
+        L.marker([userLat, userLon], { icon: userIcon }).bindPopup('<strong>Votre position actuelle</strong>').addTo(leafletMap);
+
+        // Add pharmacy markers
+        topNearest.forEach(p => {
+          const isGarde = (p.shifts && p.shifts.length > 0);
+          const pinColor = isGarde ? '#d97706' : '#059669';
+          const icon = L.divIcon({
+            html: `<div style="background:${pinColor};width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,0.3);"></div>`,
+            className: 'pharma-pin',
+            iconSize: [16, 16],
+            iconAnchor: [8, 8]
+          });
+          const popup = `
+            <div style="font-family:system-ui,sans-serif;">
+              <strong>${p.nom}</strong><br>
+              <small>${p.adresse}</small><br>
+              <span style="color:#059669;font-weight:700;">${p.distance < 1 ? Math.round(p.distance*1000)+' m' : p.distance.toFixed(1)+' km'}</span><br>
+              ${p.telephone ? `<a href="tel:${p.telephone.replace(/\s+/g,'')}" style="color:#2563eb;font-weight:600;">📞 ${p.telephone}</a><br>` : ''}
+              <a href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" style="display:inline-block;margin-top:4px;background:#0f172a;color:#fff;padding:3px 8px;border-radius:4px;text-decoration:none;font-size:12px;">Itinéraire</a>
+            </div>
+          `;
+          L.marker([p.lat, p.lon], { icon }).bindPopup(popup).addTo(leafletMap);
+        });
+
+        // Render Cards
+        grid.innerHTML = topNearest.map(p => {
+          const distStr = p.distance < 1 
+            ? `${Math.round(p.distance * 1000)} mètres`
+            : `${p.distance.toFixed(1)} km`;
+
+          const isGarde = (p.shifts && p.shifts.length > 0);
+          const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}`;
+
+          return `
+            <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                  <span class="dist-tag">📍 à ${distStr}</span>
+                  ${isGarde ? '<span class="badge badge-garde">De Garde</span>' : '<span class="badge badge-open">Ouverte</span>'}
+                </div>
+                <h3 style="margin:0 0 4px;font-size:1.1rem;"><a href="/pharmacie/${p.slug}/" style="color:var(--ink);">${p.nom}</a></h3>
+                <p style="margin:0;font-size:0.88rem;color:var(--ink-secondary);">${p.adresse}</p>
+              </div>
+              <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:8px;margin-top:6px;">
+                ${p.telephone ? `<a href="tel:${p.telephone.replace(/\s+/g,'')}" class="btn btn-phone" style="padding:8px 12px;font-size:0.9rem;">📞 Appeler</a>` : '<a href="tel:3237" class="btn btn-outline" style="padding:8px 12px;font-size:0.9rem;">Appeler 3237</a>'}
+                <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding:8px 12px;font-size:0.9rem;">Itinéraire</a>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error(err);
+        statusMsg.textContent = "Erreur lors du chargement des officines locales. Utilisez la recherche ci-dessous.";
+      }
+    }
+
+    function handleGeoError(err) {
+      statusMsg.textContent = "Géolocalisation non disponible ou refusée. Utilisez la recherche ci-dessous.";
+      btnText.textContent = "Réessayer";
+    }
+
+    if (locateBtn) {
+      locateBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+          statusMsg.textContent = "La géolocalisation n'est pas prise en charge par votre navigateur.";
+          return;
+        }
+        statusMsg.textContent = "Localisation en cours...";
+        navigator.geolocation.getCurrentPosition(handleGeolocation, handleGeoError, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        });
+      });
+    }
+
+    // Auto trigger on page load if permission granted
+    if (navigator.permissions && navigator.permissions.query) {
+      navigator.permissions.query({ name: 'geolocation' }).then(res => {
+        if (res.state === 'granted') {
+          locateBtn.click();
+        }
+      });
+    }
+  });
+</script>

@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+
+const breadcrumbs = [
+  { name: 'Mentions Légales', href: '/mentions-legales/' }
+];
+---
+
+<Base
+  title="Mentions Légales | PharmacieDeGarde24.fr"
+  description="Mentions légales, conditions d'utilisation et politique éditoriale du site PharmacieDeGarde24.fr."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="wrap legal-page">
+    <h1>Mentions Légales</h1>
+
+    <section class="card legal-card">
+      <h2>1. Éditeur du site</h2>
+      <p>
+        Le site internet <strong>PharmacieDeGarde24.fr</strong> est un service d'information citoyen indépendant dédié à la recherche et à l'orientation vers les pharmacies de garde et d'urgence en France.
+      </p>
+      <p>
+        <strong>Contact Rédaction & Support :</strong> <a href="mailto:info@pharmaciedegarde24.fr">info@pharmaciedegarde24.fr</a>
+      </p>
+
+      <h2>2. Hébergement & Infrastructure</h2>
+      <p>
+        Le site est hébergé sur le réseau mondial haute disponibilité de <strong>Cloudflare, Inc.</strong><br>
+        Adresse : 101 Townsend St, San Francisco, CA 94107, USA.<br>
+        Site web : <a href="https://www.cloudflare.com" target="_blank" rel="noopener">www.cloudflare.com</a>
+      </p>
+
+      <h2>3. Sources des données et Licence</h2>
+      <p>
+        Les données relatives aux officines de pharmacie (raison sociale, numéro FINESS, adresse, géolocalisation, téléphone) proviennent des jeux de données publics du <strong>Fichier National des Établissements Sanitaires et Sociaux (FINESS)</strong>, publié par le Ministère de la Santé et de la Prévention sous <strong>Licence Ouverte / Open Licence 2.0 (Etalab)</strong>.
+      </p>
+      <p>
+        Les données cartographiques et fonds de carte sont fournis par le projet libre et collaboratif <strong>OpenStreetMap</strong> (&copy; Contributeurs d'OpenStreetMap) sous licence ODbL.
+      </p>
+
+      <h2>4. Avertissement médical et d'urgence</h2>
+      <p>
+        <strong>PharmacieDeGarde24.fr ne constitue pas un service médical d'urgence.</strong> En cas d'urgence médicale vitale, de détresse respiratoire, de douleur thoracique aiguë ou de malaise grave, composez immédiatement le <strong>15 (SAMU)</strong> ou le <strong>112</strong> (numéro d'urgence européen).
+      </p>
+      <p>
+        Pour la garde de nuit à volets fermés (20h-8h), les pharmaciens d'astreinte exigent la présentation d'une ordonnance médicale d'urgence. Dans certaines circonscriptions, l'accord préalable du commissariat de police ou de la gendarmerie (17) est obligatoire pour des impératifs de sécurité.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .legal-page {
+    padding: 3rem 0;
+    max-width: 820px;
+  }
+  .legal-card {
+    margin-top: 1.5rem;
+    padding: 2rem;
+  }
+  .legal-card h2 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-light);
+    padding-bottom: 0.4rem;
+  }
+  .legal-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+</style>

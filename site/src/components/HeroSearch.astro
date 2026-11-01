@@ -1,0 +1,243 @@
+---
+export interface Props {
+  placeholder?: string;
+}
+const { placeholder = "Entrez votre ville ou code postal (ex: 75015, Lyon, Bordeaux...)" } = Astro.props;
+---
+<div class="search-hero-box">
+  <form id="hero-search-form" class="search-form" action="/autour-de-moi/" method="GET" onsubmit="return false;">
+    <div class="search-input-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <input
+        type="search"
+        id="hero-search-input"
+        placeholder={placeholder}
+        autocomplete="off"
+        aria-label="Rechercher une commune ou code postal"
+      />
+      <button type="button" id="clear-search-btn" class="clear-btn" aria-label="Effacer la recherche" style="display:none;">
+        ✕
+      </button>
+    </div>
+    
+    <div class="search-actions">
+      <button type="button" id="geo-btn-hero" class="btn btn-primary btn-geo">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>
+        </svg>
+        <span>Autour de moi</span>
+      </button>
+    </div>
+
+    <!-- Autocomplete results dropdown -->
+    <div id="search-suggestions" class="search-dropdown" style="display: none;"></div>
+  </form>
+</div>
+
+<style>
+  .search-hero-box {
+    position: relative;
+    max-width: 680px;
+    margin: 1.5rem auto 1rem;
+    width: 100%;
+  }
+  .search-form {
+    display: flex;
+    gap: 8px;
+    position: relative;
+  }
+  .search-input-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  #hero-search-input {
+    width: 100%;
+    padding: 14px 44px 14px 48px;
+    font-size: 1.05rem;
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    border: 2px solid var(--line);
+    box-shadow: var(--shadow-md);
+  }
+  #hero-search-input:focus {
+    border-color: var(--cross);
+  }
+  .clear-btn {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+  }
+  .btn-geo {
+    white-space: nowrap;
+    padding: 12px 20px;
+    box-shadow: var(--shadow-md);
+  }
+  .search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    max-height: 380px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  :global(.suggestion-item) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-light);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.1s ease;
+  }
+  :global(.suggestion-item:hover),
+  :global(.suggestion-item.active) {
+    background: var(--surface-2);
+    text-decoration: none;
+  }
+  :global(.suggestion-main) {
+    display: flex;
+    flex-direction: column;
+  }
+  :global(.suggestion-nom) {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  :global(.suggestion-dept) {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  :global(.suggestion-badge) {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    background: var(--cross-bg);
+    color: var(--cross);
+    border: 1px solid var(--cross-border);
+    font-weight: 600;
+  }
+  :global(.suggestion-empty) {
+    padding: 16px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 600px) {
+    .search-form {
+      flex-direction: column;
+    }
+    .btn-geo {
+      width: 100%;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const input = document.getElementById('hero-search-input');
+    const dropdown = document.getElementById('search-suggestions');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const geoBtn = document.getElementById('geo-btn-hero');
+
+    if (!input || !dropdown) return;
+
+    let communesData = null;
+
+    async function loadData() {
+      if (!communesData) {
+        try {
+          const res = await fetch('/data/top-communes.json');
+          communesData = await res.json();
+        } catch (e) {
+          console.error("Erreur de chargement des communes:", e);
+          communesData = [];
+        }
+      }
+      return communesData;
+    }
+
+    // Geolocation trigger
+    if (geoBtn) {
+      geoBtn.addEventListener('click', () => {
+        window.location.href = '/autour-de-moi/';
+      });
+    }
+
+    // Input autocomplete
+    input.addEventListener('input', async (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      if (clearBtn) clearBtn.style.display = q ? 'block' : 'none';
+
+      if (q.length < 2) {
+        dropdown.style.display = 'none';
+        dropdown.innerHTML = '';
+        return;
+      }
+
+      const list = await loadData();
+      const matches = list.filter(c => {
+        const nom = (c.nom || '').toLowerCase();
+        const code = c.codePostal || '';
+        const dept = c.departementCode || '';
+        return nom.includes(q) || code.startsWith(q) || dept === q;
+      }).slice(0, 10);
+
+      if (matches.length === 0) {
+        dropdown.innerHTML = '<div class="suggestion-empty">Aucune commune trouvée pour cette recherche.</div>';
+        dropdown.style.display = 'block';
+        return;
+      }
+
+      dropdown.innerHTML = matches.map(c => `
+        <a href="/pharmacie-de-garde/${c.departementCode}/${c.slug}/" class="suggestion-item">
+          <div class="suggestion-main">
+            <span class="suggestion-nom">${c.nom} (${c.codePostal || c.departementCode})</span>
+            <span class="suggestion-dept">Département ${c.departementCode}</span>
+          </div>
+          <span class="suggestion-badge">${c.pharmacyCount || 0} pharmacies</span>
+        </a>
+      `).join('');
+      dropdown.style.display = 'block';
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        clearBtn.style.display = 'none';
+        dropdown.style.display = 'none';
+        input.focus();
+      });
+    }
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#hero-search-form')) {
+        dropdown.style.display = 'none';
+      }
+    });
+  });
+</script>

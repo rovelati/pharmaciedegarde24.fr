@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+.astro/
+dist/
+
+# Credentials
+.new-server-passwd
+.cloudflare-token
+NUOVO-SERVER.ssh
+
+# OS
+.DS_Store
+Thumbs.db

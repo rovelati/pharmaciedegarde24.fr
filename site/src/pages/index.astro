@@ -1,0 +1,377 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroSearch from '../components/HeroSearch.astro';
+import AdSlot from '../components/AdSlot.astro';
+import departements from '../data/departements.json';
+import topCommunes from '../data/top-communes.json';
+
+const topCities = topCommunes.slice(0, 15);
+
+// FAQ Schema
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment trouver une pharmacie de garde ouverte la nuit en France ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour trouver une pharmacie de garde la nuit (entre 20h et 8h), consultez notre moteur de recherche par commune ou contactez le service Résogardes au 3237 (0,35€/min). La nuit, les officines fonctionnent généralement à volets fermés : il est nécessaire de présenter une ordonnance médicale d'urgence et une pièce d'identité, et dans certains départements de passer par le commissariat de police ou la gendarmerie (17)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le coût des honoraires de garde en pharmacie ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les honoraires de garde sont réglementés par l'Assurance Maladie : 5 € par ordonnance les dimanches et jours fériés (8h-20h), et 8 € par ordonnance la nuit (20h-8h). Si l'ordonnance médicale est urgente et établie en dehors des heures ouvrables, ces frais sont remboursés à 100% par la Sécurité Sociale."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il obligatoirement une ordonnance pour aller à la pharmacie de garde ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le dimanche et les jours fériés en journée (8h-20h), l'accès est libre et vous pouvez acheter des médicaments sans ordonnance. En revanche, la nuit (20h-8h), les pharmaciens ne peuvent vous ouvrir la porte qu'en cas d'urgence médicale avérée munie d'une ordonnance délivrée le jour même par un médecin ou un service d'urgences."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire en cas d'urgence vitale ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En cas d'urgence vitale, de douleur thoracique aiguë, de malaise grave, de traumatisme ou de détresse respiratoire, n'attendez pas la pharmacie : appelez immédiatement le 15 (SAMU) ou le 112 (numéro d'urgence européen)."
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title="Pharmacie de Garde Ouverte 24h/24 en France | PharmacieDeGarde24"
+  description="Trouvez immédiatement la pharmacie de garde ouverte près de chez vous cette nuit, ce dimanche et les jours fériés. Annuaire officiel des 101 départements français."
+  jsonLd={faqLd}
+>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="wrap hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span>Service d'Urgence Pharmaceutique National</span>
+      </div>
+      <h1 class="hero-title">
+        Trouvez une <span class="text-cross">Pharmacie de Garde</span> Ouverte 24h/24
+      </h1>
+      <p class="hero-subtitle">
+        Annuaire officiel en temps réel des officines ouvertes la nuit, le dimanche et les jours fériés dans toute la France.
+      </p>
+
+      <HeroSearch />
+
+      <!-- Top Cities Quick Pills -->
+      <div class="top-cities-box">
+        <span class="cities-label">Accès direct grandes villes :</span>
+        <div class="cities-pills">
+          {topCities.map(c => (
+            <a href={`/pharmacie-de-garde/${c.departementCode}/${c.slug}/`} class="city-pill">
+              {c.nom}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Protocol & Explanation Section -->
+  <section class="wrap guide-section">
+    <h2 class="section-title">Comment fonctionne la garde pharmaceutique en France ?</h2>
+    <p class="section-lead">
+      En France, le service de garde est organisé par l'Ordre National des Pharmaciens et les Agences Régionales de Santé (ARS) pour assurer la continuité des soins 24h/24 et 7j/7.
+    </p>
+
+    <div class="grid grid-cols-3 guide-grid">
+      <div class="card guide-card">
+        <div class="guide-icon icon-sun">☀️</div>
+        <h3>Garde de Jour (Dimanche & Fériés)</h3>
+        <p>
+          De <strong>8h00 à 20h00</strong>, les pharmacies de garde sont ouvertes en <strong>accès libre</strong>. Vous pouvez vous y rendre directement pour des ordonnances urgentes ou des médicaments de première nécessité (paracétamol, pansements, laits infantiles).
+        </p>
+      </div>
+
+      <div class="card guide-card">
+        <div class="guide-icon icon-moon">🌙</div>
+        <h3>Garde de Nuit (Volets Fermés)</h3>
+        <p>
+          De <strong>20h00 à 8h00</strong>, pour des raisons de sécurité, les pharmacies sont à <strong>volets fermés</strong>. Une <strong>ordonnance médicale urgente</strong> datée du jour est indispensable. Dans plusieurs communes, contactez d'abord le <strong>17</strong> (police/gendarmerie) qui préviendra le pharmacien d'astreinte.
+        </p>
+      </div>
+
+      <div class="card guide-card">
+        <div class="guide-icon icon-euro">💶</div>
+        <h3>Tarifs & Remboursement Sécu</h3>
+        <p>
+          Une indemnité légale de garde s'applique : <strong>5 €</strong> le dimanche/férié et <strong>8 €</strong> la nuit. Ces honoraires sont <strong>pris en charge à 100%</strong> par la Sécurité Sociale (CPAM) sur présentation de l'ordonnance médicale urgente et de votre carte Vitale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AdSense Banner -->
+  <div class="wrap">
+    <AdSlot slot="3456789012" />
+  </div>
+
+  <!-- Departments Hub -->
+  <section class="wrap depts-section">
+    <div class="depts-header">
+      <div>
+        <h2 class="section-title">Trouver par département</h2>
+        <p class="section-lead">Sélectionnez votre département pour consulter la liste des pharmacies et tours de garde.</p>
+      </div>
+      <a href="/pharmacie-de-garde/" class="btn btn-outline">Voir les 101 départements →</a>
+    </div>
+
+    <div class="grid grid-cols-4 depts-grid">
+      {departements.slice(0, 32).map(d => (
+        <a href={`/pharmacie-de-garde/${d.code}/`} class="dept-card">
+          <span class="dept-code">{d.code}</span>
+          <div class="dept-info">
+            <span class="dept-name">{d.nom}</span>
+            <span class="dept-count">{d.pharmacyCount} pharmacies</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="depts-more">
+      <a href="/pharmacie-de-garde/" class="btn btn-primary">
+        Afficher tous les 101 départements français (+ DOM-TOM)
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="wrap faq-section">
+    <h2 class="section-title">Questions fréquentes sur les pharmacies de garde</h2>
+    <div class="faq-list">
+      {faqLd.mainEntity.map(item => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{item.name}</span>
+            <span class="faq-arrow">▼</span>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.acceptedAnswer.text}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero-section {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 3.5rem 0 3rem;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cross-bg);
+    color: var(--cross);
+    border: 1px solid var(--cross-border);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+  .hero-title {
+    max-width: 820px;
+    margin-inline: auto;
+  }
+  .text-cross {
+    color: var(--cross);
+  }
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--ink-secondary);
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+  }
+  .top-cities-box {
+    margin-top: 1.8rem;
+  }
+  .cities-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .cities-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .city-pill {
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    transition: all 0.15s ease;
+  }
+  .city-pill:hover {
+    background: var(--cross-bg);
+    color: var(--cross);
+    border-color: var(--cross-border);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .guide-section {
+    margin-top: 3rem;
+  }
+  .section-title {
+    text-align: left;
+    margin-bottom: 0.4rem;
+  }
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1.8rem;
+  }
+  .guide-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .guide-icon {
+    font-size: 2rem;
+    margin-bottom: 4px;
+  }
+  .guide-card h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .guide-card p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .depts-section {
+    margin-top: 3.5rem;
+  }
+  .depts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .depts-header .section-lead {
+    margin-bottom: 0;
+  }
+  .dept-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.15s ease;
+  }
+  .dept-card:hover {
+    border-color: var(--cross);
+    background: var(--surface-2);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .dept-code {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--cross);
+    min-width: 32px;
+  }
+  .dept-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .dept-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dept-count {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .depts-more {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .faq-section {
+    margin-top: 4rem;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 1.1rem 1.4rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .faq-arrow {
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] .faq-arrow {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    padding: 0 1.4rem 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 2rem 0;
+    }
+  }
+</style>

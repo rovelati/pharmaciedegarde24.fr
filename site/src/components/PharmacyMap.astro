@@ -1,0 +1,136 @@
+---
+export interface Props {
+  pharmacies: Array<{
+    nom: string;
+    adresse: string;
+    lat: number | null;
+    lon: number | null;
+    telephone: string;
+    shifts?: Array<{ type: string }>;
+  }>;
+  center?: [number, number];
+  zoom?: number;
+}
+
+const { pharmacies, center = [46.603354, 1.888334], zoom = 6 } = Astro.props;
+
+// Filter pharmacies with valid lat/lon
+const validPharmacies = pharmacies.filter(p => p.lat && p.lon && !isNaN(p.lat) && !isNaN(p.lon));
+const mapDataJson = JSON.stringify(validPharmacies.map(p => ({
+  nom: p.nom,
+  adresse: p.adresse,
+  lat: p.lat,
+  lon: p.lon,
+  tel: p.telephone,
+  isGarde: (p.shifts && p.shifts.length > 0)
+})));
+---
+
+<div class="map-container">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <div id="pharma-map" class="map-box" data-pharmacies={mapDataJson} data-center={JSON.stringify(center)} data-zoom={zoom}></div>
+</div>
+
+<style>
+  .map-container {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .map-box {
+    width: 100%;
+    height: 380px;
+    background: var(--surface-2);
+  }
+  :global(.pharma-popup) {
+    font-family: system-ui, sans-serif;
+  }
+  :global(.pharma-popup h4) {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  :global(.pharma-popup p) {
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+    color: #475569;
+  }
+  :global(.pharma-popup a.popup-call) {
+    display: inline-block;
+    background: #059669;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-right: 4px;
+  }
+  :global(.pharma-popup a.popup-route) {
+    display: inline-block;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+</style>
+
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('pharma-map');
+    if (!el || typeof L === 'undefined') return;
+
+    const data = JSON.parse(el.getAttribute('data-pharmacies') || '[]');
+    const center = JSON.parse(el.getAttribute('data-center') || '[46.6, 1.88]');
+    const zoom = parseInt(el.getAttribute('data-zoom') || '6', 10);
+
+    const map = L.map('pharma-map').setView(center, zoom);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    if (data.length > 0) {
+      const markers = [];
+      data.forEach(p => {
+        const markerColor = p.isGarde ? '#d97706' : '#059669';
+        const iconHtml = `<div style="background:${markerColor};width:16px;height:16px;border-radius:50%;border:2px solid #ffffff;box-shadow:0 2px 5px rgba(0,0,0,0.3);"></div>`;
+        const customIcon = L.divIcon({
+          html: iconHtml,
+          className: 'pharma-pin',
+          iconSize: [16, 16],
+          iconAnchor: [8, 8]
+        });
+
+        const popupContent = `
+          <div class="pharma-popup">
+            <h4>${p.nom}</h4>
+            <p>${p.adresse}</p>
+            ${p.tel ? `<a href="tel:${p.tel.replace(/\s+/g,'')}" class="popup-call">📞 ${p.tel}</a>` : ''}
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" class="popup-route">Itinéraire</a>
+          </div>
+        `;
+
+        const m = L.marker([p.lat, p.lon], { icon: customIcon }).bindPopup(popupContent);
+        m.addTo(map);
+        markers.push(m);
+      });
+
+      if (markers.length > 1) {
+        const group = new L.featureGroup(markers);
+        map.fitBounds(group.getBounds().pad(0.1));
+      } else if (markers.length === 1) {
+        map.setView([data[0].lat, data[0].lon], 14);
+      }
+    }
+  });
+</script>

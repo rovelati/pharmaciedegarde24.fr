@@ -1,0 +1,342 @@
+---
+import Base from '../../layouts/Base.astro';
+import PharmacyMap from '../../components/PharmacyMap.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import departements from '../../data/departements.json';
+import topCommunes from '../../data/top-communes.json';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export async function getStaticPaths() {
+  const shardsDir = path.resolve('./src/data/shards');
+  const deptMap = new Map(departements.map(d => [d.code, d]));
+  const shardCache = new Map();
+
+  // Collect pharmacies in top communes (up to ~5,000 distinct pharmacies)
+  const paths: any[] = [];
+  const seenSlugs = new Set<string>();
+
+  for (const c of topCommunes) {
+    const dCode = c.departementCode;
+    if (!shardCache.has(dCode)) {
+      const f = path.join(shardsDir, `${dCode}.json`);
+      if (fs.existsSync(f)) {
+        try {
+          shardCache.set(dCode, JSON.parse(fs.readFileSync(f, 'utf-8')));
+        } catch (e) {
+          shardCache.set(dCode, []);
+        }
+      } else {
+        shardCache.set(dCode, []);
+      }
+    }
+
+    const list = shardCache.get(dCode) || [];
+    const cName = c.nom.toLowerCase();
+    const postal = c.codePostal || '';
+
+    const matched = list.filter((p: any) => {
+      const pV = (p.ville || '').toLowerCase();
+      const pC = p.codePostal || '';
+      return pV === cName || (postal && pC.startsWith(postal.slice(0, 4)));
+    });
+
+    for (const pharma of matched) {
+      if (pharma.slug && !seenSlugs.has(pharma.slug)) {
+        seenSlugs.add(pharma.slug);
+        const dept = deptMap.get(dCode) || { code: dCode, nom: dCode };
+        paths.push({
+          params: { slug: pharma.slug },
+          props: { pharmacy: pharma, dept, commune: c }
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { pharmacy, dept, commune } = Astro.props;
+
+const now = new Date();
+const activeShift = (pharmacy.shifts || []).find((s: any) => {
+  const d = new Date(s.debut);
+  const f = new Date(s.fin);
+  return now >= d && now <= f;
+});
+
+const is24h = pharmacy.isOpen24h;
+const isNight = activeShift && activeShift.type === 'nuit';
+const isSunday = activeShift && activeShift.type === 'dimanche';
+
+const mapUrl = (pharmacy.lat && pharmacy.lon)
+  ? `https://www.google.com/maps/dir/?api=1&destination=${pharmacy.lat},${pharmacy.lon}`
+  : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pharmacy.nom + ' ' + pharmacy.adresse)}`;
+
+const center: [number, number] = (pharmacy.lat && pharmacy.lon)
+  ? [pharmacy.lat, pharmacy.lon]
+  : [48.8566, 2.3522];
+
+const breadcrumbs = [
+  { name: 'Pharmacie de garde', href: '/pharmacie-de-garde/' },
+  { name: `${dept.nom} (${dept.code})`, href: `/pharmacie-de-garde/${dept.code}/` },
+  { name: pharmacy.nom, href: `/pharmacie/${pharmacy.slug}/` },
+];
+
+// Schema.org Pharmacy / LocalBusiness
+const pharmacySchema: any = {
+  "@context": "https://schema.org",
+  "@type": "Pharmacy",
+  "name": pharmacy.nom,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": pharmacy.adresse,
+    "addressLocality": pharmacy.ville,
+    "postalCode": pharmacy.codePostal,
+    "addressCountry": "FR"
+  },
+  "url": `https://pharmaciedegarde24.fr/pharmacie/${pharmacy.slug}/`,
+};
+
+if (pharmacy.telephone) {
+  pharmacySchema.telephone = pharmacy.telephone;
+}
+
+if (pharmacy.lat && pharmacy.lon) {
+  pharmacySchema.geo = {
+    "@type": "GeoCoordinates",
+    "latitude": pharmacy.lat,
+    "longitude": pharmacy.lon
+  };
+}
+---
+
+<Base
+  title={`${pharmacy.nom} — Pharmacie de Garde à ${pharmacy.ville} (${pharmacy.codePostal})`}
+  description={`Consultez les informations de ${pharmacy.nom} à ${pharmacy.ville} (${pharmacy.codePostal}) : téléphone direct, adresse, géolocalisation, tour de garde et horaires d'urgence.`}
+  breadcrumbs={breadcrumbs}
+  jsonLd={pharmacySchema}
+>
+  <div class="wrap pharmacy-detail-page">
+    <div class="pharma-hero-box">
+      <div class="status-badge-row">
+        {is24h ? (
+          <span class="badge badge-open">
+            <span class="pulse-dot"></span> Ouverte 24h/24
+          </span>
+        ) : isNight ? (
+          <span class="badge badge-night">
+            <span class="pulse-dot"></span> Actuellement de garde (Nuit)
+          </span>
+        ) : isSunday ? (
+          <span class="badge badge-garde">
+            <span class="pulse-dot"></span> Actuellement de garde (Jour)
+          </span>
+        ) : (
+          <span class="badge badge-open">
+            Officine conventionnée FINESS
+          </span>
+        )}
+        <span class="badge badge-outline">N° FINESS : {pharmacy.finessId || 'Officiel'}</span>
+      </div>
+
+      <h1>{pharmacy.nom}</h1>
+      <p class="pharma-full-address">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span>{pharmacy.adresse}</span>
+      </p>
+
+      <div class="pharma-primary-actions">
+        {pharmacy.telephone ? (
+          <a href={`tel:${pharmacy.telephone.replace(/\s+/g, '')}`} class="btn btn-phone btn-lg" title={`Appeler ${pharmacy.nom}`}>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>Appeler le {pharmacy.telephone}</span>
+          </a>
+        ) : (
+          <a href="tel:3237" class="btn btn-phone btn-lg" title="Appeler le 3237">
+            <span>Appeler le 3237 (Garde)</span>
+          </a>
+        )}
+
+        <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+          </svg>
+          <span>Itinéraire GPS</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Active shift notice -->
+    {activeShift && (
+      <div class="card shift-alert-box">
+        <span class="shift-alert-icon">🔔</span>
+        <div>
+          <h3>Cette pharmacie effectue actuellement une garde</h3>
+          <p>{activeShift.notes}</p>
+          <p class="shift-time">
+            Période de garde : du {new Date(activeShift.debut).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })} au {new Date(activeShift.fin).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })}
+          </p>
+        </div>
+      </div>
+    )}
+
+    <!-- Map Section -->
+    <section class="pharma-map-wrap">
+      <h2>Plan d'accès et localisation</h2>
+      <PharmacyMap pharmacies={[pharmacy]} center={center} zoom={15} />
+    </section>
+
+    <AdSlot slot="0123456789" />
+
+    <!-- Guard Shifts Schedule -->
+    <section class="shifts-schedule-section">
+      <h2>Planning prévisionnel des gardes</h2>
+      <p class="section-lead">
+        Tours de garde officiels déclarés auprès de l'Ordre National des Pharmaciens pour {pharmacy.nom}.
+      </p>
+
+      {(pharmacy.shifts && pharmacy.shifts.length > 0) ? (
+        <div class="tablewrap card">
+          <table>
+            <thead>
+              <tr>
+                <th>Type de Garde</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Accès & Modalités</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pharmacy.shifts.map((s: any) => (
+                <tr>
+                  <td>
+                    <span class={`badge ${s.type === 'nuit' ? 'badge-night' : 'badge-garde'}`}>
+                      {s.type === 'nuit' ? 'Garde de Nuit' : 'Dimanche / Férié'}
+                    </span>
+                  </td>
+                  <td>{new Date(s.debut).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })} à {new Date(s.debut).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</td>
+                  <td>{new Date(s.fin).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })} à {new Date(s.fin).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</td>
+                  <td><small>{s.notes}</small></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div class="card note-box">
+          <p>
+            Cette officine assure les tours de garde rotatifs selon le calendrier établi par le syndicat pharmaceutique du département <strong>{dept.nom} ({dept.code})</strong>. En cas d'urgence en dehors des horaires d'ouverture habituels, contactez le <strong>3237</strong> ou le <strong>17</strong>.
+          </p>
+        </div>
+      )}
+    </section>
+
+    <!-- Administrative details card -->
+    <section class="admin-details-section">
+      <div class="card admin-card">
+        <h3>Informations officielles et réglementaires</h3>
+        <ul class="admin-list">
+          <li><strong>Raison sociale :</strong> {pharmacy.nom}</li>
+          <li><strong>Identifiant national FINESS :</strong> {pharmacy.finessId || 'Répertoire FINESS'}</li>
+          <li><strong>Commune de rattachement :</strong> {pharmacy.ville} ({pharmacy.codePostal})</li>
+          <li><strong>Département :</strong> {dept.nom} ({dept.code}) — Région {dept.region}</li>
+          <li><strong>Conventionné Assurance Maladie :</strong> Oui (Délivrance de médicaments sur prescription, tiers-payant Carte Vitale)</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .pharmacy-detail-page {
+    padding: 2.5rem 0;
+  }
+  .pharma-hero-box {
+    margin-bottom: 2rem;
+  }
+  .status-badge-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .badge-outline {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+  }
+  .pharma-full-address {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.15rem;
+    color: var(--ink-secondary);
+    margin: 0.6rem 0 1.5rem;
+  }
+  .pharma-full-address svg {
+    color: var(--cross);
+  }
+  .pharma-primary-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-lg {
+    padding: 14px 28px;
+    font-size: 1.1rem;
+  }
+  .shift-alert-box {
+    background: var(--gold-bg);
+    border: 1px solid var(--gold-border);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 2.5rem;
+  }
+  .shift-alert-icon {
+    font-size: 2rem;
+  }
+  .shift-alert-box h3 {
+    margin: 0 0 6px;
+    color: var(--gold);
+  }
+  .shift-alert-box p {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+  }
+  .shift-time {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .pharma-map-wrap {
+    margin-bottom: 2.5rem;
+  }
+  .shifts-schedule-section {
+    margin-bottom: 2.5rem;
+  }
+  .note-box {
+    background: var(--surface-2);
+  }
+  .admin-details-section {
+    margin-top: 2rem;
+  }
+  .admin-card {
+    background: var(--surface);
+  }
+  .admin-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+  }
+  .admin-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line-light);
+    font-size: 0.92rem;
+  }
+</style>

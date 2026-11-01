@@ -1,0 +1,85 @@
+---
+---
+<div class="emergency-bar">
+  <div class="wrap emergency-inner">
+    <div class="urg-info">
+      <span class="urg-icon">🚨</span>
+      <span class="urg-title">Besoin urgent de médicaments ou détresse ?</span>
+    </div>
+    <div class="urg-actions">
+      <a href="tel:3237" class="urg-btn urg-pharma" title="Pharmacies de garde (0,35€/min)">
+        <span class="pulse-dot"></span>
+        <strong>3237</strong> Garde
+      </a>
+      <a href="tel:17" class="urg-btn urg-police" title="Police / Gendarmerie (Garde de nuit volets fermés)">
+        <strong>17</strong> Police
+      </a>
+      <a href="tel:15" class="urg-btn urg-samu" title="SAMU - Urgence Vitale">
+        <strong>15</strong> SAMU
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .emergency-bar {
+    background: var(--urgent-bg);
+    border-bottom: 1px solid var(--urgent-border);
+    padding: 8px 0;
+  }
+  .emergency-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .urg-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--urgent);
+  }
+  .urg-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .urg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.1s ease;
+  }
+  .urg-btn:hover {
+    transform: scale(1.04);
+    text-decoration: none;
+  }
+  .urg-pharma {
+    background: var(--gold);
+    color: #ffffff;
+  }
+  .urg-police {
+    background: #1e3a8a;
+    color: #ffffff;
+  }
+  .urg-samu {
+    background: var(--urgent);
+    color: #ffffff;
+  }
+  @media (max-width: 600px) {
+    .urg-title {
+      display: none;
+    }
+    .emergency-inner {
+      justify-content: center;
+    }
+  }
+</style>

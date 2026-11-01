@@ -1,0 +1,269 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PharmacyCard from '../../../components/PharmacyCard.astro';
+import PharmacyMap from '../../../components/PharmacyMap.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import departements from '../../../data/departements.json';
+import topCommunes from '../../../data/top-communes.json';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export async function getStaticPaths() {
+  const shardsDir = path.resolve('./src/data/shards');
+
+  return departements.map(d => {
+    let pharmacies = [];
+    const shardFile = path.join(shardsDir, `${d.code}.json`);
+    if (fs.existsSync(shardFile)) {
+      try {
+        pharmacies = JSON.parse(fs.readFileSync(shardFile, 'utf-8'));
+      } catch (e) {
+        pharmacies = [];
+      }
+    }
+
+    // Filter communes belonging to this département
+    const deptCommunes = topCommunes.filter(c => c.departementCode === d.code);
+
+    return {
+      params: { dept: d.code },
+      props: {
+        dept: d,
+        communes: deptCommunes,
+        pharmacies: pharmacies,
+      }
+    };
+  });
+}
+
+const { dept, communes, pharmacies } = Astro.props;
+
+// Find pharmacies on guard (active shift or 24h)
+const now = new Date();
+const onGuardPharmacies = pharmacies.filter(p => {
+  if (p.isOpen24h) return true;
+  return (p.shifts || []).some((s: any) => {
+    const d = new Date(s.debut);
+    const f = new Date(s.fin);
+    return now >= d && now <= f;
+  });
+});
+
+// If no active shift at this very second, show upcoming guards or first 20
+const displayList = onGuardPharmacies.length > 0 
+  ? onGuardPharmacies 
+  : pharmacies.slice(0, 24);
+
+const breadcrumbs = [
+  { name: 'Pharmacie de garde', href: '/pharmacie-de-garde/' },
+  { name: `${dept.nom} (${dept.code})`, href: `/pharmacie-de-garde/${dept.code}/` },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Comment trouver la pharmacie de garde dans le département ${dept.nom} (${dept.code}) ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Dans le ${dept.nom} (${dept.code}), consultez la liste en temps réel sur notre portail ou composez le 3237 (Résogardes). La nuit (20h-8h), l'accès se fait généralement à volets fermés après régulation par le commissariat ou la gendarmerie locale (composez le 17).`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Combien y a-t-il de pharmacies en activité dans le département ${dept.nom} ?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Le département ${dept.nom} compte ${dept.pharmacyCount} pharmacies d'officine répertoriées au registre national FINESS de la santé.`
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title={`Pharmacie de Garde ${dept.nom} (${dept.code}) — Dimanche, Nuit, 24h/24`}
+  description={`Trouvez la pharmacie de garde ouverte dans le département ${dept.nom} (${dept.code}). Horaires, adresses, téléphones directs et tour de garde officiel d'urgence.`}
+  breadcrumbs={breadcrumbs}
+  jsonLd={faqLd}
+>
+  <div class="wrap dept-page">
+    <div class="dept-header-box">
+      <div class="dept-badge-row">
+        <span class="badge badge-open">Département {dept.code}</span>
+        <span class="badge badge-garde">{dept.pharmacyCount} pharmacies répertoriées</span>
+      </div>
+      <h1>Pharmacie de Garde {dept.nom} ({dept.code})</h1>
+      <p class="lead">
+        Toutes les officines pharmaceutiques et le service de garde d'urgence (dimanche, jours fériés et nuit) dans le département de <strong>{dept.nom}</strong> en région {dept.region}.
+      </p>
+    </div>
+
+    <!-- Emergency callout box -->
+    <div class="card emergency-dept-box">
+      <div class="urg-box-content">
+        <span class="urg-big-icon">🚨</span>
+        <div>
+          <h3>Consignes d'urgence pour le département {dept.nom}</h3>
+          <p>
+            Pour la <strong>garde de nuit (20h - 8h)</strong>, les officines sont à volets fermés. Munissez-vous impérativement de votre <strong>ordonnance médicale urgente</strong> et contactez le <strong>3237</strong> ou la gendarmerie / police au <strong>17</strong> pour vous faire ouvrir.
+          </p>
+        </div>
+      </div>
+      <div class="urg-box-actions">
+        <a href="tel:3237" class="btn btn-phone">Appeler le 3237</a>
+        <a href="tel:17" class="btn btn-outline">Police / Gendarmerie (17)</a>
+      </div>
+    </div>
+
+    <!-- Communes in this département -->
+    {communes.length > 0 && (
+      <section class="communes-section">
+        <h2>Principales communes du département {dept.nom}</h2>
+        <div class="communes-pills">
+          {communes.map(c => (
+            <a href={`/pharmacie-de-garde/${dept.code}/${c.slug}/`} class="commune-pill">
+              <strong>{c.nom}</strong>
+              <span>({c.pharmacyCount} pharm.)</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Map of pharmacies -->
+    {displayList.length > 0 && (
+      <section class="map-section">
+        <h2>Localisation des pharmacies — {dept.nom}</h2>
+        <PharmacyMap pharmacies={displayList} />
+      </section>
+    )}
+
+    <AdSlot slot="6789012345" />
+
+    <!-- Pharmacies List -->
+    <section class="pharma-list-section">
+      <div class="list-title-row">
+        <h2>
+          {onGuardPharmacies.length > 0 
+            ? `Pharmacies actuellement de garde (${onGuardPharmacies.length})`
+            : `Officines du département (${pharmacies.length})`}
+        </h2>
+        <span class="muted">Mise à jour officielle FINESS</span>
+      </div>
+
+      <div class="grid grid-cols-2 pharma-grid">
+        {displayList.map(p => (
+          <PharmacyCard pharmacy={p} />
+        ))}
+      </div>
+    </section>
+
+    <AdSlot slot="7890123456" />
+  </div>
+</Base>
+
+<style>
+  .dept-page {
+    padding: 2.5rem 0;
+  }
+  .dept-header-box {
+    margin-bottom: 2rem;
+  }
+  .dept-badge-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .emergency-dept-box {
+    background: var(--surface);
+    border-left: 4px solid var(--urgent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .urg-box-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 650px;
+  }
+  .urg-big-icon {
+    font-size: 2rem;
+  }
+  .urg-box-content h3 {
+    margin: 0 0 4px;
+    color: var(--urgent);
+  }
+  .urg-box-content p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .urg-box-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .communes-section {
+    margin-bottom: 2.5rem;
+  }
+  .communes-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+  .commune-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: var(--radius-full);
+    color: var(--ink);
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+  }
+  .commune-pill:hover {
+    border-color: var(--cross);
+    background: var(--cross-bg);
+    color: var(--cross);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .commune-pill span {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .map-section {
+    margin-bottom: 2.5rem;
+  }
+  .list-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pharma-grid {
+    margin-top: 1rem;
+  }
+  @media (max-width: 768px) {
+    .emergency-dept-box {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .urg-box-actions {
+      flex-direction: column;
+    }
+  }
+</style>

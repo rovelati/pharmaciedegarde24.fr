@@ -1,0 +1,25 @@
+---
+export interface Props {
+  pubId?: string;
+}
+const { pubId = 'ca-pub-7294584988081191' } = Astro.props;
+---
+<!-- Google Consent Mode v2 Default Settings -->
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'wait_for_update': 500
+  });
+</script>
+
+<!-- Google AdSense & Funding Choices CMP -->
+<script
+  async
+  src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubId}`}
+  crossorigin="anonymous"
+></script>

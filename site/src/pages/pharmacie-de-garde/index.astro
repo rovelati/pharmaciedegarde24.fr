@@ -1,0 +1,133 @@
+---
+import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import departements from '../../data/departements.json';
+
+// Group by region
+const byRegion: Record<string, typeof departements> = {};
+departements.forEach(d => {
+  const reg = d.region || 'Autres / Outre-Mer';
+  if (!byRegion[reg]) byRegion[reg] = [];
+  byRegion[reg].push(d);
+});
+
+const regionsSorted = Object.keys(byRegion).sort();
+
+const breadcrumbs = [
+  { name: 'Pharmacie de garde', href: '/pharmacie-de-garde/' }
+];
+---
+
+<Base
+  title="Pharmacie de Garde par Département (101 Départements) | PharmacieDeGarde24"
+  description="Consultez l'annuaire complet des pharmacies de garde dans les 101 départements français. Coordonnées, numéros de téléphone et tours de garde en temps réel."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="wrap depts-hub-page">
+    <div class="hub-header">
+      <span class="badge badge-open">Annuaire National</span>
+      <h1>Pharmacies de Garde par Département</h1>
+      <p class="lead">
+        Sélectionnez votre département pour accéder à la liste des communes, des pharmacies d'officine et des tours de garde (dimanche, jours fériés et nuits).
+      </p>
+    </div>
+
+    <AdSlot slot="4567890123" />
+
+    <div class="regions-container">
+      {regionsSorted.map(regionName => (
+        <section class="region-block">
+          <h2 class="region-title">{regionName}</h2>
+          <div class="grid grid-cols-4 region-grid">
+            {byRegion[regionName].map(d => (
+              <a href={`/pharmacie-de-garde/${d.code}/`} class="dept-box">
+                <span class="dept-badge-code">{d.code}</span>
+                <div class="dept-meta">
+                  <strong class="dept-title">{d.nom}</strong>
+                  <span class="dept-sub">{d.pharmacyCount} pharmacies</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <AdSlot slot="5678901234" />
+  </div>
+</Base>
+
+<style>
+  .depts-hub-page {
+    padding: 2.5rem 0;
+  }
+  .hub-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 2rem;
+  }
+  .hub-header h1 {
+    margin: 0.8rem 0 0.5rem;
+  }
+  .regions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+  .region-title {
+    font-size: 1.35rem;
+    border-bottom: 2px solid var(--cross-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .dept-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.15s ease;
+  }
+  .dept-box:hover {
+    border-color: var(--cross);
+    background: var(--surface-2);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  .dept-badge-code {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--cross);
+    background: var(--cross-bg);
+    border: 1px solid var(--cross-border);
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .dept-meta {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .dept-title {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dept-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+</style>

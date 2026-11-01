@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+
+const breadcrumbs = [
+  { name: 'Politique de Confidentialité', href: '/politique-de-confidentialite/' }
+];
+---
+
+<Base
+  title="Politique de Confidentialité & Cookies (RGPD) | PharmacieDeGarde24.fr"
+  description="Politique de protection des données personnelles, conformité RGPD et gestion des cookies sur PharmacieDeGarde24.fr."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="wrap legal-page">
+    <h1>Politique de Confidentialité & Gestion des Cookies</h1>
+
+    <section class="card legal-card">
+      <h2>1. Principes généraux et Conformité RGPD</h2>
+      <p>
+        PharmacieDeGarde24.fr s'engage à respecter la vie privée des internautes et se conforme rigoureusement au <strong>Règlement Général sur la Protection des Données (RGPD 2016/679)</strong> ainsi qu'à la loi Informatique et Libertés.
+      </p>
+
+      <h2>2. Données de Géolocalisation</h2>
+      <p>
+        Lorsque vous utilisez la fonctionnalité <strong>« Autour de moi »</strong>, votre navigateur sollicite votre autorisation explicite pour accéder à vos coordonnées GPS.
+      </p>
+      <p>
+        <strong>Traitement purement local :</strong> Vos coordonnées géographiques sont traitées exclusivement dans votre navigateur web pour calculer la distance vers les officines les plus proches. <strong>Elles ne sont jamais enregistrées, ni conservées sur nos serveurs, ni transmises à des tiers.</strong>
+      </p>
+
+      <h2>3. Publicité et Cookies (Google AdSense & CMP TCF v2.2)</h2>
+      <p>
+        Notre site diffuse des annonces publicitaires via <strong>Google AdSense</strong>. Afin de respecter la réglementation européenne, nous utilisons une plateforme de gestion du consentement (CMP certifiée IAB Europe TCF v2.2 / Google Funding Choices).
+      </p>
+      <p>
+        Vous avez la liberté d'accepter ou de refuser les cookies publicitaires et de personnalisation lors de votre première visite, ou à tout moment via les paramètres de consentement.
+      </p>
+
+      <h2>4. Vos Droits</h2>
+      <p>
+        Conformément à la réglementation, vous disposez d'un droit d'accès, de rectification et d'effacement de toute donnée vous concernant. Pour toute demande, vous pouvez contacter notre délégué à la protection des données par courriel :
+      </p>
+      <p>
+        <strong>Email :</strong> <a href="mailto:info@pharmaciedegarde24.fr">info@pharmaciedegarde24.fr</a>
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .legal-page {
+    padding: 3rem 0;
+    max-width: 820px;
+  }
+  .legal-card {
+    margin-top: 1.5rem;
+    padding: 2rem;
+  }
+  .legal-card h2 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-light);
+    padding-bottom: 0.4rem;
+  }
+  .legal-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+</style>

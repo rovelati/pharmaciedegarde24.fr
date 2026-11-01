@@ -1,0 +1,97 @@
+---
+import '../styles/tokens.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
+import CmpConsent from '../components/CmpConsent.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  breadcrumbs?: Array<{ name: string; href: string }>;
+  jsonLd?: Record<string, any> | Array<Record<string, any>>;
+  showEmergencyBanner?: boolean;
+}
+
+const {
+  title,
+  description,
+  breadcrumbs = [],
+  jsonLd,
+  showEmergencyBanner = true,
+} = Astro.props;
+
+const SITE = process.env.PUBLIC_SITE_URL || 'https://pharmaciedegarde24.fr';
+const canonical = new URL(Astro.url.pathname, SITE).href;
+
+const breadcrumbLd = breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ name: 'Accueil', href: '/' }, ...breadcrumbs].map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.href, SITE).href,
+      })),
+    }
+  : null;
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  'name': 'PharmacieDeGarde24.fr',
+  'url': SITE,
+  'description': 'Annuaire national des pharmacies de garde ouvertes 24h/24, la nuit, le dimanche et les jours fériés en France.',
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'PharmacieDeGarde24',
+    'email': 'info@pharmaciedegarde24.fr',
+    'url': SITE,
+  }
+};
+
+const ldBlocks = [
+  orgLd,
+  breadcrumbLd,
+  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+].filter(Boolean);
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr" href={canonical} />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PharmacieDeGarde24.fr" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="theme-color" content="#059669" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD Structured Data -->
+    {ldBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
+    <!-- AdSense & CMP -->
+    <CmpConsent pubId="ca-pub-7294584988081191" />
+  </head>
+  <body>
+    {showEmergencyBanner && <EmergencyBanner />}
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

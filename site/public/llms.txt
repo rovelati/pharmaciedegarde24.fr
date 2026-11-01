@@ -1,0 +1,16 @@
+# PharmacieDeGarde24.fr
+> Annuaire officiel et temps réel des pharmacies de garde en France (24h/24, 7j/7, dimanches, nuits et jours fériés).
+
+## Présentation
+PharmacieDeGarde24.fr référence plus de 18 000 officines en France métropolitaine et outre-mer (données FINESS Ministère de la Santé / Etalab 2.0).
+
+## Services
+- Recherche de pharmacies de garde par code postal ou commune
+- Géolocalisation immédiate ("Autour de moi")
+- Horaires, adresses, coordonnées GPS et numéros de téléphone directs
+- Protocoles d'accès d'urgence (3237, Commissariat 17, SAMU 15)
+
+## URL Principales
+- Accueil : https://pharmaciedegarde24.fr/
+- Annuaire national : https://pharmaciedegarde24.fr/pharmacie-de-garde/
+- Autour de moi : https://pharmaciedegarde24.fr/autour-de-moi/
