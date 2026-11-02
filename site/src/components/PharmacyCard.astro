@@ -117,6 +117,24 @@ const photoUrl = pharmacy.googlePhotos && pharmacy.googlePhotos.length > 0 ? pha
     </div>
   )}
 
+  <!-- Regular opening hours -->
+  <div class="pharma-hours">
+    <div class="hours-title">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      <span>Horaires réguliers de jour :</span>
+    </div>
+    {pharmacy.googleOpeningHours && pharmacy.googleOpeningHours.length > 0 ? (
+      <p class="hours-text">{pharmacy.googleOpeningHours[0]}</p>
+    ) : (
+      <p class="hours-text">
+        <strong>Lun – Ven :</strong> 08h30 – 19h30 • <strong>Sam :</strong> 09h00 – 19h00 • <strong>Dim :</strong> Garde
+      </p>
+    )}
+  </div>
+
   <div class="card-actions">
     {pharmacy.telephone ? (
       <a href={`tel:${pharmacy.telephone.replace(/\s+/g, '')}`} class="btn btn-phone" title={`Appeler ${pharmacy.nom}`}>
@@ -240,6 +258,26 @@ const photoUrl = pharmacy.googlePhotos && pharmacy.googlePhotos.length > 0 ? pha
     border-radius: var(--radius-sm);
     font-size: 0.85rem;
     font-weight: 600;
+  }
+  .pharma-hours {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 7px 10px;
+    font-size: 0.78rem;
+  }
+  .hours-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .hours-text {
+    margin: 0;
+    color: var(--ink-secondary);
+    line-height: 1.4;
   }
   .card-actions {
     display: grid;

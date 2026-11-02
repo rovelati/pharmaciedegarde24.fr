@@ -60,7 +60,7 @@ export async function getStaticPaths() {
       isLocal: true,
     }));
 
-    // 2. Expand radius: Nearby pharmacies in neighbouring communes within 20 km
+    // 2. Expand radius: Nearby pharmacies in neighbouring communes within 25 km
     let nearbyPharmacies: any[] = [];
     if (cLat && cLon) {
       const localIds = new Set(localPharmacies.map((p: any) => p.id));
@@ -74,9 +74,23 @@ export async function getStaticPaths() {
             isLocal: false,
           };
         })
-        .filter((p: any) => p.distanceKm <= 20)
+        .filter((p: any) => p.distanceKm <= 25)
         .sort((a: any, b: any) => a.distanceKm - b.distanceKm)
-        .slice(0, 15);
+        .slice(0, 20);
+    }
+
+    // 3. Departmental 24h Hub
+    const h24Candidate = deptPharmacies.find((p: any) => p.isOpen24h);
+    let dept24hPharmacy: any = null;
+    if (h24Candidate) {
+      const dist = (cLat && cLon && h24Candidate.lat && h24Candidate.lon)
+        ? Math.round(getDistanceKm(cLat, cLon, h24Candidate.lat, h24Candidate.lon) * 10) / 10
+        : null;
+      dept24hPharmacy = {
+        ...h24Candidate,
+        distanceKm: dist,
+        isLocal: localPharmacies.some((p: any) => p.id === h24Candidate.id)
+      };
     }
 
     const matched = [...localPharmacies, ...nearbyPharmacies];
@@ -91,12 +105,13 @@ export async function getStaticPaths() {
         commune,
         dept,
         pharmacies: finalPharmacies,
+        dept24hPharmacy,
       }
     };
   });
 }
 
-const { commune, dept, pharmacies } = Astro.props;
+const { commune, dept, pharmacies, dept24hPharmacy } = Astro.props;
 
 // Active guard shifts (open now)
 const now = new Date();
@@ -109,10 +124,13 @@ const onGuardList = pharmacies.filter((p: any) => {
   });
 });
 
-const closedList = pharmacies.filter((p: any) => !onGuardList.includes(p));
+const localPharmacies = pharmacies.filter((p: any) => p.isLocal);
+const nearbyPharmacies = pharmacies.filter((p: any) => !p.isLocal);
 
-// Display list for primary section: if active guards exist, show them; otherwise show top 6 with clear notice
-const primaryList = onGuardList.length > 0 ? onGuardList : pharmacies.slice(0, 8);
+// Ensure primary guard list has active guards, or if none in this exact minute, nearest open/duty pharmacies (at least 4-6)
+const primaryList = onGuardList.length >= 2
+  ? onGuardList
+  : [...onGuardList, ...pharmacies.filter((p: any) => !onGuardList.includes(p))].slice(0, 6);
 
 const center: [number, number] = (commune.lat && commune.lon)
   ? [commune.lat, commune.lon]
@@ -230,25 +248,74 @@ const faqLd = {
       </div>
     </div>
 
+    <!-- Trust box: Pourquoi une seule pharmacie de garde ? -->
+    <div class="card why-single-box">
+      <div class="why-single-icon">💡</div>
+      <div class="why-single-content">
+        <h4>Pourquoi n'y a-t-il qu'une seule officine de garde par secteur ?</h4>
+        <p>
+          Conformément à <strong>l'article L. 5125-22 du Code de la santé publique</strong>, le service de garde d'urgence (nuit, dimanches et jours fériés) est mutualisé par secteur sanitaire. L'Agence Régionale de Santé (ARS) et le syndicat des pharmaciens désignent <strong>une seule pharmacie de garde active par secteur</strong> pour assurer la permanence des soins.
+        </p>
+        <p class="why-single-sub">
+          Afin de vous garantir un accès rapide à un professionnel de santé en cas d'urgence, nous affichons l'officine de garde de <strong>{commune.nom}</strong> ainsi que les officines d'astreinte et de nuit des communes voisines dans un <strong>rayon élargi de 25 km</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Permanent Departmental 24/24 Hub -->
+    {dept24hPharmacy && (
+      <div class="card hub-24h-card">
+        <div class="hub-header">
+          <span class="badge badge-night">🚨 Hub d'urgence 24h/24 permanent</span>
+          <span class="badge badge-open">Accès direct libre sans police</span>
+          {dept24hPharmacy.distanceKm != null && (
+            <span class="badge badge-dist">à {dept24hPharmacy.distanceKm} km de {commune.nom}</span>
+          )}
+        </div>
+        <div class="hub-body">
+          <div class="hub-info">
+            <h3>{dept24hPharmacy.nom} ({dept24hPharmacy.ville})</h3>
+            <p class="hub-addr">
+              📍 {dept24hPharmacy.adresse} — Ouverte 24h/24 et 7j/7 sans interruption.
+            </p>
+            <p class="hub-desc">
+              Cette grande officine assure une permanence continue jour et nuit. Vous pouvez vous y rendre directement en libre accès pour toute urgence médicale immédiate sans passer par le commissariat.
+            </p>
+          </div>
+          <div class="hub-actions">
+            {dept24hPharmacy.telephone && (
+              <a href={`tel:${dept24hPharmacy.telephone.replace(/\s+/g, '')}`} class="btn btn-phone">
+                📞 {dept24hPharmacy.telephone}
+              </a>
+            )}
+            <a href={`https://www.google.com/maps/dir/?api=1&destination=${dept24hPharmacy.lat},${dept24hPharmacy.lon}`} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              🗺️ Itinéraire direct
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
     <!-- Clustered Map with Open-Only by default -->
     <section class="commune-map-section">
       <div class="map-section-title-row">
-        <h2>Carte des pharmacies à {commune.nom}</h2>
-        <span class="muted">Affichage par palloncino regroupé</span>
+        <h2>Carte des pharmacies à {commune.nom} et environs</h2>
+        <span class="muted">Affichage par palloncino regroupé (Rayon 25 km)</span>
       </div>
       <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} cityName={commune.nom} defaultOnlyOpen={true} />
     </section>
 
     <AdSlot slot="8901234567" />
 
-    <!-- List of Open / On-Call Pharmacies -->
+    <!-- List of Open / On-Call Pharmacies (Expanded Radius) -->
     <section class="commune-list-section">
       <div class="list-heading">
-        <h2>
-          {onGuardList.length > 0 
-            ? `🟢 Pharmacies actuellement ouvertes et de garde à ${commune.nom} (${onGuardList.length})` 
-            : `Pharmacies d'astreinte recommandées à ${commune.nom} (${primaryList.length})`}
-        </h2>
+        <div>
+          <h2>🟢 Service de garde & urgences ouvert maintenant ({primaryList.length})</h2>
+          <p class="section-subtitle">
+            Officines de garde à <strong>{commune.nom}</strong> et dans les communes limitrophes (rayon jusqu'à 25 km)
+          </p>
+        </div>
         <span class="badge badge-open">Vérification en direct</span>
       </div>
 
@@ -257,22 +324,28 @@ const faqLd = {
           <PharmacyCard pharmacy={p} />
         ))}
       </div>
-
-      <!-- Collapsible for other closed pharmacies -->
-      {closedList.length > 0 && onGuardList.length > 0 && (
-        <details class="closed-accordion">
-          <summary class="closed-summary">
-            <span>📋 Afficher les {closedList.length} autres pharmacies de {commune.nom} (fermées actuellement)</span>
-            <span class="accordion-arrow">▼</span>
-          </summary>
-          <div class="grid grid-cols-2 pharma-grid closed-grid">
-            {closedList.map((p: any) => (
-              <PharmacyCard pharmacy={p} />
-            ))}
-          </div>
-        </details>
-      )}
     </section>
+
+    <!-- All Local Pharmacies with regular weekday hours -->
+    {localPharmacies.length > 0 && (
+      <section class="commune-regular-section">
+        <div class="list-heading">
+          <div>
+            <h2>📋 Toutes les pharmacies à {commune.nom} ({localPharmacies.length})</h2>
+            <p class="section-subtitle">
+              Adresses, téléphones et <strong>horaires réguliers d'ouverture en journée</strong> pour vos soins habituels
+            </p>
+          </div>
+          <span class="badge badge-open">Officines FINESS</span>
+        </div>
+
+        <div class="grid grid-cols-2 pharma-grid">
+          {localPharmacies.map((p: any) => (
+            <PharmacyCard pharmacy={p} />
+          ))}
+        </div>
+      </section>
+    )}
 
     <AdSlot slot="9012345678" />
 
@@ -341,6 +414,88 @@ const faqLd = {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+  }
+  .why-single-box {
+    background: var(--surface);
+    border-left: 4px solid var(--cross);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.4rem;
+  }
+  .why-single-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .why-single-content h4 {
+    margin: 0 0 6px;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+  .why-single-content p {
+    margin: 0 0 8px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .why-single-sub {
+    color: var(--muted);
+    font-size: 0.86rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hub-24h-card {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+    border: 1px solid var(--night-border);
+    margin-bottom: 2.5rem;
+    padding: 1.4rem;
+  }
+  .hub-header {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .hub-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hub-info {
+    max-width: 700px;
+  }
+  .hub-info h3 {
+    margin: 0 0 4px;
+    color: var(--ink);
+    font-size: 1.2rem;
+  }
+  .hub-addr {
+    font-weight: 600;
+    color: var(--night);
+    margin: 0 0 6px;
+    font-size: 0.92rem;
+  }
+  .hub-desc {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-secondary);
+  }
+  .hub-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .section-subtitle {
+    margin: 4px 0 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .commune-regular-section {
+    margin-top: 3.5rem;
   }
   .commune-map-section {
     margin-bottom: 2.5rem;
