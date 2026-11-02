@@ -20,7 +20,7 @@ try:
 except ImportError:
     HAS_GOOGLE_AUTH = False
 
-HOST = "pharmaciedegarde24.fr"
+HOST = "www.pharmaciedegarde24.fr"
 SITE_ORIGIN = f"https://{HOST}"
 ENDPOINT = "https://indexing.googleapis.com/v3/urlNotifications:publish"
 SCOPES = ["https://www.googleapis.com/auth/indexing"]

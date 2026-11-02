@@ -21,7 +21,7 @@ const {
   showEmergencyBanner = true,
 } = Astro.props;
 
-const SITE = process.env.PUBLIC_SITE_URL || 'https://pharmaciedegarde24.fr';
+const SITE = process.env.PUBLIC_SITE_URL || 'https://www.pharmaciedegarde24.fr';
 const canonical = new URL(Astro.url.pathname, SITE).href;
 
 const breadcrumbLd = breadcrumbs.length

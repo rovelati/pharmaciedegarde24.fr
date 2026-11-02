@@ -38,6 +38,6 @@ curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cac
 
 echo "================================================="
 echo " Deployment Complete!"
-echo " Production URL: https://pharmaciedegarde24.fr/"
+echo " Production URL: https://www.pharmaciedegarde24.fr/"
 echo " Pages Subdomain: https://pharmaciedegarde24.pages.dev/"
 echo "================================================="

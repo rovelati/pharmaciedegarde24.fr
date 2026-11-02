@@ -16,7 +16,7 @@ import urllib.error
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-HOST = "pharmaciedegarde24.fr"
+HOST = "www.pharmaciedegarde24.fr"
 SITE_ORIGIN = f"https://{HOST}"
 INDEXNOW_KEY = os.environ.get("INDEXNOW_KEY", "c8d2a6e95f144e0fb23d7a8e51b3c99a")
 KEY_LOCATION = f"{SITE_ORIGIN}/{INDEXNOW_KEY}.txt"

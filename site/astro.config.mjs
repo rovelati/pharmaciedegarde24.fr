@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = process.env.PUBLIC_SITE_URL || 'https://pharmaciedegarde24.fr';
+const SITE = process.env.PUBLIC_SITE_URL || 'https://www.pharmaciedegarde24.fr';
 
 export default defineConfig({
   site: SITE,
