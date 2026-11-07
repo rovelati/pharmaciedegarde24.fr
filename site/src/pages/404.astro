@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+
+const breadcrumbs = [
+  { name: 'Page non trouvée (404)', href: '/404/' }
+];
+---
+
+<Base
+  title="Page non trouvée (Erreur 404) | PharmacieDeGarde24.fr"
+  description="La page ou la pharmacie demandée est introuvable ou a été déplacée. Trouvez la pharmacie de garde la plus proche sur PharmacieDeGarde24.fr."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="wrap notfound-page">
+    <div class="notfound-card card">
+      <span class="notfound-code">404</span>
+      <h1>Page ou pharmacie introuvable</h1>
+      <p class="notfound-lead">
+        La page que vous recherchez n'existe pas ou l'adresse a été modifiée.
+      </p>
+
+      <div class="emergency-reminder card">
+        <span class="icon">🚨</span>
+        <div>
+          <strong>En cas d'urgence médicale vitale :</strong> composez immédiatement le <strong>15</strong> (SAMU) ou le <strong>112</strong>. Pour les gardes de nuit, appelez le <strong>3237</strong> ou le commissariat / gendarmerie (<strong>17</strong>).
+        </div>
+      </div>
+
+      <div class="notfound-actions">
+        <a href="/" class="btn btn-primary btn-lg">Retour à l'accueil</a>
+        <a href="/pharmacie-de-garde/" class="btn btn-outline btn-lg">Voir par département</a>
+        <a href="/autour-de-moi/" class="btn btn-outline btn-lg">Pharmacie autour de moi</a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .notfound-page {
+    padding: 3rem 0;
+    max-width: 720px;
+  }
+  .notfound-card {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+  .notfound-code {
+    display: inline-block;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--cross);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .notfound-lead {
+    font-size: 1.15rem;
+    color: var(--ink-secondary);
+    margin: 1rem 0 2rem;
+  }
+  .emergency-reminder {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--gold-bg);
+    border: 1px solid var(--gold-border);
+    color: var(--ink);
+    text-align: left;
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+  }
+  .emergency-reminder .icon {
+    font-size: 1.8rem;
+  }
+  .notfound-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

@@ -4,59 +4,58 @@ import PharmacyMap from '../../components/PharmacyMap.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import LiveDateBadge from '../../components/LiveDateBadge.astro';
 import departements from '../../data/departements.json';
-import topCommunes from '../../data/top-communes.json';
 import fs from 'node:fs';
 import path from 'node:path';
 
 export async function getStaticPaths() {
   const shardsDir = path.resolve('./src/data/shards');
   const deptMap = new Map(departements.map(d => [d.code, d]));
-  const shardCache = new Map();
 
-  const paths: any[] = [];
+  // Maximum static pharmacy pages to keep total deployment comfortably under Cloudflare Free 20,000 files limit
+  const MAX_PHARMACIES = 18000;
+
+  const candidateList: any[] = [];
   const seenSlugs = new Set<string>();
 
-  for (const c of topCommunes) {
-    const dCode = c.departementCode;
-    if (!shardCache.has(dCode)) {
-      const f = path.join(shardsDir, `${dCode}.json`);
-      if (fs.existsSync(f)) {
-        try {
-          shardCache.set(dCode, JSON.parse(fs.readFileSync(f, 'utf-8')));
-        } catch (e) {
-          shardCache.set(dCode, []);
-        }
-      } else {
-        shardCache.set(dCode, []);
+  const shardFiles = fs.readdirSync(shardsDir).filter(f => f.endsWith('.json'));
+  for (const file of shardFiles) {
+    const dCode = file.replace('.json', '');
+    try {
+      const phs = JSON.parse(fs.readFileSync(path.join(shardsDir, file), 'utf-8'));
+      const dept = deptMap.get(dCode) || { code: dCode, nom: dCode };
+
+      for (const p of phs) {
+        if (!p.slug || seenSlugs.has(p.slug)) continue;
+        seenSlugs.add(p.slug);
+
+        let priority = 0;
+        // Priority 1: Has active or declared guard shifts
+        if (p.shifts && p.shifts.length > 0) priority += 1000;
+        // Priority 2: 24h
+        if (p.isOpen24h) priority += 200;
+        // Priority 3: Has Google Rating / Reviews
+        if (p.googleRating) priority += 50;
+        if (p.googleReviewsTotal) priority += Math.min(p.googleReviewsTotal, 50);
+
+        candidateList.push({ pharmacy: p, dept, priority });
       }
-    }
-
-    const list = shardCache.get(dCode) || [];
-    const cName = c.nom.toLowerCase();
-    const postal = c.codePostal || '';
-
-    const matched = list.filter((p: any) => {
-      const pV = (p.ville || '').toLowerCase();
-      const pC = p.codePostal || '';
-      return pV === cName || (postal && pC.startsWith(postal.slice(0, 4)));
-    });
-
-    for (const pharma of matched) {
-      if (pharma.slug && !seenSlugs.has(pharma.slug)) {
-        seenSlugs.add(pharma.slug);
-        const dept = deptMap.get(dCode) || { code: dCode, nom: dCode };
-        paths.push({
-          params: { slug: pharma.slug },
-          props: { pharmacy: pharma, dept, commune: c }
-        });
-      }
+    } catch (e) {
+      // Ignore read errors
     }
   }
 
-  return paths;
+  // Sort by priority descending
+  candidateList.sort((a, b) => b.priority - a.priority);
+
+  const selected = candidateList.slice(0, MAX_PHARMACIES);
+
+  return selected.map(item => ({
+    params: { slug: item.pharmacy.slug },
+    props: { pharmacy: item.pharmacy, dept: item.dept }
+  }));
 }
 
-const { pharmacy, dept, commune } = Astro.props;
+const { pharmacy, dept } = Astro.props;
 
 const now = new Date();
 const activeShift = (pharmacy.shifts || []).find((s: any) => {
