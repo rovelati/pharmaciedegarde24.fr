@@ -61,7 +61,7 @@ const mappedData = validPharmacies.map(p => {
   };
 });
 
-const openCount = mappedData.filter(p => p.isOpenNow).length;
+const openCount = mappedData.filter(p => p.isOpenNow || p.is24h).length;
 const totalCount = mappedData.length;
 ---
 
@@ -398,6 +398,8 @@ const totalCount = mappedData.length;
     .map-top-bar {
       flex-direction: column;
       align-items: stretch;
+      padding: 6px 10px;
+      gap: 6px;
     }
     .map-actions-group {
       width: 100%;
@@ -407,9 +409,20 @@ const totalCount = mappedData.length;
     }
     .map-search-wrapper input {
       width: 100%;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+    }
+    .btn-map-control {
+      padding: 5px 10px;
+      font-size: 0.8rem;
     }
     .map-canvas {
-      height: 380px;
+      height: 280px; /* Compact on mobile so it doesn't take 2 meters of scrolling */
+    }
+    .map-legend {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      gap: 10px;
     }
   }
 </style>
@@ -428,12 +441,22 @@ const totalCount = mappedData.length;
     const initialZoom = parseInt(el.getAttribute('data-zoom') || '13', 10);
     let filterOnlyOpen = el.getAttribute('data-default-only-open') === 'true';
 
-    // If no open pharmacies at this exact second, default to all so map isn't empty
-    const hasAnyOpen = allData.some(p => p.isOpenNow);
-    if (!hasAnyOpen) {
+    // Auto-detect guard hours on user device (night: 20h-8h, or Sunday)
+    const clientNow = new Date();
+    const clientHour = clientNow.getHours();
+    const clientDay = clientNow.getDay();
+    const isGuardHours = clientHour >= 20 || clientHour < 8 || clientDay === 0;
+
+    const hasGuardOr24h = allData.some(p => p.isOpenNow || p.is24h);
+    const btnAll = document.getElementById('btn-filter-all');
+    const btnOpen = document.getElementById('btn-filter-open-only');
+
+    if (isGuardHours && hasGuardOr24h) {
+      filterOnlyOpen = true;
+      if (btnOpen) btnOpen.classList.add('active');
+      if (btnAll) btnAll.classList.remove('active');
+    } else if (!hasGuardOr24h) {
       filterOnlyOpen = false;
-      const btnAll = document.getElementById('btn-filter-all');
-      const btnOpen = document.getElementById('btn-filter-open-only');
       if (btnAll) btnAll.classList.add('active');
       if (btnOpen) btnOpen.classList.remove('active');
     }
@@ -472,7 +495,7 @@ const totalCount = mappedData.length;
       const q = searchQuery.toLowerCase().trim();
 
       const filtered = allData.filter(p => {
-        if (filterOnlyOpen && !p.isOpenNow) return false;
+        if (filterOnlyOpen && !(p.isOpenNow || p.is24h)) return false;
         if (q) {
           const nom = (p.nom || '').toLowerCase();
           const adr = (p.adresse || '').toLowerCase();

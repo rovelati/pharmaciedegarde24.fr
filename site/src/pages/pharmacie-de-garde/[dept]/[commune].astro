@@ -138,6 +138,13 @@ const onGuardList = pharmacies.filter((p: any) => {
   });
 });
 
+// Primary emergency list (prioritizes 24h pharmacies and active guards, fallback to nearby 24h or scheduled)
+const primaryEmergencyList = onGuardList.length > 0
+  ? onGuardList
+  : pharmacies.filter((p: any) => p.isOpen24h || (p.shifts && p.shifts.length > 0)).slice(0, 4);
+
+const hasEmergencyPharmacies = primaryEmergencyList.length > 0 || !!dept24hPharmacy;
+
 const center: [number, number] = (commune.lat && commune.lon)
   ? [commune.lat, commune.lon]
   : [48.8566, 2.3522];
@@ -242,28 +249,164 @@ const faqLd = {
       </p>
     </div>
 
-    <!-- Context notice: Daytime vs Night Guard -->
+    <!-- Context notice: Daytime vs Night Guard (Mobile-first, compact emergency buttons) -->
     <div class="card urg-notice-box">
       <div class="urg-notice-text">
-        <span class="urg-notice-icon">ℹ️</span>
+        <span class="urg-notice-icon">🚨</span>
         <div>
-          <h3>Organisation des soins à {commune.nom} : En journée & De garde</h3>
+          <h3>Service d'urgence & de garde à {commune.nom}</h3>
           <p>
-            <strong>☀️ En journée (Lun – Sam, 08h30 – 19h30) :</strong> Les {localPharmacies.length} officines de {commune.nom} et des environs sont ouvertes en libre accès. Vous pouvez vous y rendre directement sans ordonnance d'urgence.
-          </p>
-          <p style="margin-top: 6px;">
-            <strong>🌙 La nuit (20h00 — 08h00) & le dimanche :</strong> La garde s'effectue à volets fermés. Présentez-vous muni de votre ordonnance médicale d'urgence du jour ou contactez le <strong>3237</strong> ou le <strong>17</strong> (Police / Gendarmerie).
+            <strong>Nuit (20h-8h), dimanches & jours fériés :</strong> La permanence s'effectue à volets fermés. En cas d'urgence avec ordonnance, contactez le <strong>3237</strong> ou présentez-vous au commissariat (<strong>17</strong>).
           </p>
         </div>
       </div>
       <div class="urg-notice-btns">
-        <a href="tel:3237" class="btn btn-phone">3237 (Garde)</a>
-        <a href="tel:17" class="btn btn-outline">Police 17</a>
-        <a href="tel:15" class="btn btn-outline">SAMU 15</a>
+        <a href="tel:3237" class="btn btn-phone">📞 3237</a>
+        <a href="tel:17" class="btn btn-outline">👮 17 Police</a>
+        <a href="tel:15" class="btn btn-outline">🚑 15 SAMU</a>
       </div>
     </div>
 
-    <!-- Trust box: Pourquoi une seule pharmacie de garde ? -->
+    <!-- 1. Pharmacies de Garde & 24h/24 Actives (Priorité Absolue) -->
+    {(primaryEmergencyList.length > 0 || dept24hPharmacy) && (
+      <section class="commune-emergency-section">
+        <div class="list-heading">
+          <div>
+            <h2>🚨 Officines de garde & 24h/24 ouvertes</h2>
+            <p class="section-subtitle">
+              Pharmacies assurant la permanence de nuit ou ouvertes en continu 24h/24
+            </p>
+          </div>
+          <span class="badge badge-night">Urgences de garde</span>
+        </div>
+
+        {dept24hPharmacy && !primaryEmergencyList.some((p: any) => p.id === dept24hPharmacy.id) && (
+          <div class="card hub-24h-card">
+            <div class="hub-header">
+              <span class="badge badge-night">🚨 Hub d'urgence 24h/24 permanent</span>
+              <span class="badge badge-open">Accès libre 24h/24 sans police</span>
+              {dept24hPharmacy.distanceKm != null && (
+                <span class="badge badge-dist">à {dept24hPharmacy.distanceKm} km</span>
+              )}
+            </div>
+            <div class="hub-body">
+              <div class="hub-info">
+                <h3>{dept24hPharmacy.nom} ({dept24hPharmacy.ville})</h3>
+                <p class="hub-addr">📍 {dept24hPharmacy.adresse} — Ouverte 24h/24 et 7j/7 en continu.</p>
+              </div>
+              <div class="hub-actions">
+                {dept24hPharmacy.telephone && (
+                  <a href={`tel:${dept24hPharmacy.telephone.replace(/\s+/g, '')}`} class="btn btn-phone">
+                    📞 {dept24hPharmacy.telephone}
+                  </a>
+                )}
+                <a href={`https://www.google.com/maps/dir/?api=1&destination=${dept24hPharmacy.lat},${dept24hPharmacy.lon}`} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                  🗺️ Itinéraire
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {primaryEmergencyList.length > 0 && (
+          <div class="grid grid-cols-2 pharma-grid">
+            {primaryEmergencyList.map((p: any) => (
+              <PharmacyCard pharmacy={p} />
+            ))}
+          </div>
+        )}
+      </section>
+    )}
+
+    <!-- 2. Clustered Map (Auto-filtered to open/garde during night/Sunday) -->
+    <section class="commune-map-section">
+      <div class="map-section-title-row">
+        <h2>🗺️ Carte des officines à {commune.nom} et alentours ({pharmacies.length})</h2>
+        <span class="muted">Filtrage instantané sur les gardes & 24h</span>
+      </div>
+      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} cityName={commune.nom} defaultOnlyOpen={hasEmergencyPharmacies} />
+    </section>
+
+    <AdSlot slot="8901234567" />
+
+    <!-- 3. Toutes les pharmacies en journée à la commune -->
+    {localPharmacies.length > 0 && (
+      <section class="commune-regular-section">
+        {localPharmacies.length <= 8 ? (
+          <div>
+            <div class="list-heading">
+              <div>
+                <h2>📋 Toutes les pharmacies à {commune.nom} ({localPharmacies.length})</h2>
+                <p class="section-subtitle">
+                  Adresses, téléphones directs et <strong>horaires habituels en journée</strong>
+                </p>
+              </div>
+              <span class="badge badge-open">Officines de la ville</span>
+            </div>
+            <div class="grid grid-cols-2 pharma-grid">
+              {localPharmacies.map((p: any) => (
+                <PharmacyCard pharmacy={p} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div class="regular-drawer-wrapper">
+            <details class="regular-drawer">
+              <summary class="regular-drawer-summary">
+                <div class="drawer-summary-left">
+                  <span class="drawer-icon">📋</span>
+                  <div>
+                    <span class="drawer-title">Consulter les {localPharmacies.length} pharmacies en journée à {commune.nom}</span>
+                    <p class="drawer-sub">Horaires habituels de jour (cliquez pour déplier / rechercher dans la liste)</p>
+                  </div>
+                </div>
+                <span class="drawer-toggle-badge">Afficher les {localPharmacies.length} officines ▼</span>
+              </summary>
+              <div class="drawer-content">
+                <div class="drawer-search-bar">
+                  <input
+                    type="text"
+                    id="filter-commune-pharmacies"
+                    placeholder="🔍 Filtrer rapidement par nom, rue ou code postal..."
+                    class="drawer-search-input"
+                  />
+                </div>
+                <div class="grid grid-cols-2 pharma-grid" id="commune-pharmacies-grid">
+                  {localPharmacies.map((p: any) => (
+                    <div class="commune-pharma-item" data-search={`${p.nom} ${p.adresse} ${p.codePostal}`.toLowerCase()}>
+                      <PharmacyCard pharmacy={p} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </details>
+          </div>
+        )}
+      </section>
+    )}
+
+    <!-- 4. Pharmacies dans les communes limitrophes -->
+    {nearbyPharmacies.length > 0 && (
+      <section class="commune-nearby-section">
+        <div class="list-heading">
+          <div>
+            <h2>📍 Pharmacies dans les communes voisines ({nearbyPharmacies.length})</h2>
+            <p class="section-subtitle">
+              Officines limitrophes à proximité de <strong>{commune.nom}</strong> (rayon 1 à 15 km)
+            </p>
+          </div>
+          <span class="badge badge-dist">Communes limitrophes</span>
+        </div>
+
+        <div class="grid grid-cols-2 pharma-grid">
+          {nearbyPharmacies.slice(0, 8).map((p: any) => (
+            <PharmacyCard pharmacy={p} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- 5. Trust box: Pourquoi une seule pharmacie de garde ? (Placed below listings) -->
     <div class="card why-single-box">
       <div class="why-single-icon">💡</div>
       <div class="why-single-content">
@@ -272,119 +415,11 @@ const faqLd = {
           Conformément à <strong>l'article L. 5125-22 du Code de la santé publique</strong>, le service de garde d'urgence (nuit, dimanches et jours fériés) est mutualisé par secteur sanitaire. L'Agence Régionale de Santé (ARS) et le syndicat des pharmaciens désignent <strong>une seule pharmacie de garde active par secteur</strong> pour assurer la permanence des soins.
         </p>
         <p class="why-single-sub">
-          Afin de vous garantir un accès rapide à un professionnel de santé en cas d'urgence, nous affichons les officines de <strong>{commune.nom}</strong> ainsi que les officines des communes voisines dans un <strong>rayon élargi de 15 km</strong>.
+          Pour vous garantir un accès rapide à un professionnel de santé en cas d'urgence, nous affichons les officines de <strong>{commune.nom}</strong> ainsi que les officines des communes voisines dans un <strong>rayon élargi de 15 km</strong>.
         </p>
       </div>
     </div>
 
-    <!-- Permanent Departmental 24/24 Hub -->
-    {dept24hPharmacy && (
-      <div class="card hub-24h-card">
-        <div class="hub-header">
-          <span class="badge badge-night">🚨 Hub d'urgence 24h/24 permanent</span>
-          <span class="badge badge-open">Accès direct libre sans police</span>
-          {dept24hPharmacy.distanceKm != null && (
-            <span class="badge badge-dist">à {dept24hPharmacy.distanceKm} km de {commune.nom}</span>
-          )}
-        </div>
-        <div class="hub-body">
-          <div class="hub-info">
-            <h3>{dept24hPharmacy.nom} ({dept24hPharmacy.ville})</h3>
-            <p class="hub-addr">
-              📍 {dept24hPharmacy.adresse} — Ouverte 24h/24 et 7j/7 sans interruption.
-            </p>
-            <p class="hub-desc">
-              Cette grande officine assure une permanence continue jour et nuit. Vous pouvez vous y rendre directement en libre accès pour toute urgence médicale immédiate sans passer par le commissariat.
-            </p>
-          </div>
-          <div class="hub-actions">
-            {dept24hPharmacy.telephone && (
-              <a href={`tel:${dept24hPharmacy.telephone.replace(/\s+/g, '')}`} class="btn btn-phone">
-                📞 {dept24hPharmacy.telephone}
-              </a>
-            )}
-            <a href={`https://www.google.com/maps/dir/?api=1&destination=${dept24hPharmacy.lat},${dept24hPharmacy.lon}`} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-              🗺️ Itinéraire direct
-            </a>
-          </div>
-        </div>
-      </div>
-    )}
-
-    <!-- Clustered Map with All Pharmacies by default -->
-    <section class="commune-map-section">
-      <div class="map-section-title-row">
-        <h2>🗺️ Carte des pharmacies à {commune.nom} et communes voisines ({pharmacies.length})</h2>
-        <span class="muted">Regroupement interactif (Rayon 15 km) — Cliquez sur une officine pour voir ses coordonnées et l'itinéraire</span>
-      </div>
-      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} cityName={commune.nom} defaultOnlyOpen={false} />
-    </section>
-
-    <AdSlot slot="8901234567" />
-
-    <!-- Active Emergency Guard Shift (if on guard right now) -->
-    {onGuardList.length > 0 && (
-      <section class="commune-list-section" style="margin-bottom: 2.5rem;">
-        <div class="list-heading">
-          <div>
-            <h2>🚨 Service de garde actif en ce moment ({onGuardList.length})</h2>
-            <p class="section-subtitle">
-              Pharmacies de garde assurant la permanence d'urgence actuelle
-            </p>
-          </div>
-          <span class="badge badge-night">Garde d'urgence</span>
-        </div>
-
-        <div class="grid grid-cols-2 pharma-grid">
-          {onGuardList.map((p: any) => (
-            <PharmacyCard pharmacy={p} />
-          ))}
-        </div>
-      </section>
-    )}
-
-    <!-- 1. All Local Pharmacies with regular weekday hours -->
-    {localPharmacies.length > 0 && (
-      <section class="commune-regular-section">
-        <div class="list-heading">
-          <div>
-            <h2>📋 Toutes les pharmacies à {commune.nom} ({localPharmacies.length})</h2>
-            <p class="section-subtitle">
-              Adresses, téléphones directs et <strong>horaires réguliers d'ouverture en journée</strong> pour vos soins habituels
-            </p>
-          </div>
-          <span class="badge badge-open">Officines de la ville</span>
-        </div>
-
-        <div class="grid grid-cols-2 pharma-grid">
-          {localPharmacies.map((p: any) => (
-            <PharmacyCard pharmacy={p} />
-          ))}
-        </div>
-      </section>
-    )}
-
-    <!-- 2. Nearby Pharmacies in Neighbouring Communes -->
-    {nearbyPharmacies.length > 0 && (
-      <section class="commune-nearby-section" style="margin-top: 2.5rem;">
-        <div class="list-heading">
-          <div>
-            <h2>📍 Pharmacies à proximité dans les communes voisines ({nearbyPharmacies.length})</h2>
-            <p class="section-subtitle">
-              Officines situées à proximité immédiate de <strong>{commune.nom}</strong> (rayon 1 à 15 km, triées par distance)
-            </p>
-          </div>
-          <span class="badge badge-dist">Communes limitrophes</span>
-        </div>
-
-        <div class="grid grid-cols-2 pharma-grid">
-          {nearbyPharmacies.map((p: any) => (
-            <PharmacyCard pharmacy={p} />
-          ))}
-        </div>
-      </section>
-    )}
-
     <AdSlot slot="9012345678" />
 
     <!-- Local FAQ -->
@@ -407,34 +442,29 @@ const faqLd = {
   </div>
 </Base>
 
-    <AdSlot slot="9012345678" />
-
-    <!-- Local FAQ -->
-    <section class="commune-faq-section">
-      <h2>Questions fréquentes — Pharmacie de garde à {commune.nom}</h2>
-      <div class="faq-list">
-        {faqLd.mainEntity.map(item => (
-          <details class="faq-item">
-            <summary class="faq-question">
-              <span>{item.name}</span>
-              <span class="faq-arrow">▼</span>
-            </summary>
-            <div class="faq-answer">
-              <p>{item.acceptedAnswer.text}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </section>
-  </div>
-</Base>
+<!-- Client script for drawer filter -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('filter-commune-pharmacies');
+    const grid = document.getElementById('commune-pharmacies-grid');
+    if (!input || !grid) return;
+    const items = grid.querySelectorAll('.commune-pharma-item');
+    input.addEventListener('input', (e) => {
+      const val = e.target.value.toLowerCase().trim();
+      items.forEach(el => {
+        const text = el.getAttribute('data-search') || '';
+        el.style.display = (!val || text.includes(val)) ? '' : 'none';
+      });
+    });
+  });
+</script>
 
 <style>
   .commune-page {
-    padding: 2.5rem 0;
+    padding: 2rem 0;
   }
   .commune-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
   .commune-badges {
     display: flex;
@@ -449,8 +479,9 @@ const faqLd = {
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
+    padding: 1.2rem 1.4rem;
   }
   .urg-notice-text {
     display: flex;
@@ -459,106 +490,29 @@ const faqLd = {
     max-width: 650px;
   }
   .urg-notice-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .urg-notice-text h3 {
     margin: 0 0 4px;
     color: var(--ink);
+    font-size: 1.1rem;
   }
   .urg-notice-text p {
     margin: 0;
-    font-size: 0.92rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.45;
   }
   .urg-notice-btns {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
   }
-  .why-single-box {
-    background: var(--surface);
-    border-left: 4px solid var(--cross);
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
+
+  .commune-emergency-section {
     margin-bottom: 2rem;
-    padding: 1.25rem 1.4rem;
-  }
-  .why-single-icon {
-    font-size: 1.8rem;
-    flex-shrink: 0;
-  }
-  .why-single-content h4 {
-    margin: 0 0 6px;
-    color: var(--ink);
-    font-size: 1.05rem;
-  }
-  .why-single-content p {
-    margin: 0 0 8px;
-    font-size: 0.92rem;
-    line-height: 1.5;
-  }
-  .why-single-sub {
-    color: var(--muted);
-    font-size: 0.86rem !important;
-    margin-bottom: 0 !important;
-  }
-
-  .hub-24h-card {
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
-    border: 1px solid var(--night-border);
-    margin-bottom: 2.5rem;
-    padding: 1.4rem;
-  }
-  .hub-header {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  }
-  .hub-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .hub-info {
-    max-width: 700px;
-  }
-  .hub-info h3 {
-    margin: 0 0 4px;
-    color: var(--ink);
-    font-size: 1.2rem;
-  }
-  .hub-addr {
-    font-weight: 600;
-    color: var(--night);
-    margin: 0 0 6px;
-    font-size: 0.92rem;
-  }
-  .hub-desc {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--ink-secondary);
-  }
-  .hub-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .section-subtitle {
-    margin: 4px 0 0;
-    font-size: 0.92rem;
-    color: var(--muted);
-  }
-
-  .commune-regular-section {
-    margin-top: 3.5rem;
   }
   .commune-map-section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
   .map-section-title-row {
     display: flex;
@@ -566,58 +520,184 @@ const faqLd = {
     align-items: flex-end;
     margin-bottom: 0.5rem;
   }
-  .list-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.2rem;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .pharma-grid {
-    margin-top: 1rem;
-  }
-  .closed-accordion {
+  .commune-regular-section {
     margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .commune-nearby-section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .regular-drawer-wrapper {
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
   }
-  .closed-summary {
-    padding: 1rem 1.4rem;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--ink-secondary);
-    cursor: pointer;
+  .regular-drawer-summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
     background: var(--surface-2);
     user-select: none;
+    transition: background 0.15s ease;
   }
-  .closed-summary:hover {
+  .regular-drawer-summary:hover {
+    background: var(--surface-hover);
+  }
+  .drawer-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .drawer-icon {
+    font-size: 1.4rem;
+  }
+  .drawer-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+    display: block;
+  }
+  .drawer-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 2px 0 0;
+  }
+  .drawer-toggle-badge {
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .regular-drawer[open] .drawer-toggle-badge {
+    background: var(--cross-bg);
+    border-color: var(--cross-border);
     color: var(--cross);
   }
-  .accordion-arrow {
-    font-size: 0.8rem;
+  .drawer-content {
+    padding: 1rem 1.25rem 1.5rem;
+  }
+  .drawer-search-bar {
+    margin-bottom: 1rem;
+  }
+  .drawer-search-input {
+    width: 100%;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .drawer-search-input:focus {
+    outline: none;
+    border-color: var(--cross);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+  }
+
+  .why-single-box {
+    background: var(--surface);
+    border-left: 4px solid var(--cross);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.1rem 1.3rem;
+  }
+  .why-single-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+  .why-single-content h4 {
+    margin: 0 0 4px;
+    color: var(--ink);
+    font-size: 1rem;
+  }
+  .why-single-content p {
+    margin: 0 0 6px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .why-single-sub {
     color: var(--muted);
-    transition: transform 0.2s ease;
+    font-size: 0.82rem !important;
+    margin-bottom: 0 !important;
   }
-  .closed-accordion[open] .accordion-arrow {
-    transform: rotate(180deg);
-  }
-  .closed-grid {
+
+  .hub-24h-card {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+    border: 1px solid var(--night-border);
+    margin-bottom: 1.5rem;
     padding: 1.2rem;
   }
+  .hub-header {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .hub-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hub-info {
+    max-width: 650px;
+  }
+  .hub-info h3 {
+    margin: 0 0 4px;
+    color: var(--ink);
+    font-size: 1.15rem;
+  }
+  .hub-addr {
+    font-weight: 600;
+    color: var(--night);
+    margin: 0;
+    font-size: 0.88rem;
+  }
+  .hub-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .section-subtitle {
+    margin: 4px 0 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pharma-grid {
+    margin-top: 0.8rem;
+  }
+
   .commune-faq-section {
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
   }
   .faq-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 1.2rem;
+    gap: 10px;
+    margin-top: 1rem;
   }
   .faq-item {
     background: var(--surface);
@@ -626,9 +706,9 @@ const faqLd = {
     overflow: hidden;
   }
   .faq-question {
-    padding: 1.1rem 1.4rem;
+    padding: 0.9rem 1.2rem;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -636,25 +716,67 @@ const faqLd = {
   }
   .faq-arrow {
     color: var(--muted);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     transition: transform 0.2s ease;
   }
   .faq-item[open] .faq-arrow {
     transform: rotate(180deg);
   }
   .faq-answer {
-    padding: 0 1.4rem 1.2rem;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    padding: 0 1.2rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
     color: var(--ink-secondary);
   }
+
   @media (max-width: 768px) {
+    .commune-page {
+      padding: 1rem 0;
+    }
+    .commune-header {
+      margin-bottom: 1rem;
+    }
+    .commune-header h1 {
+      font-size: 1.4rem;
+      line-height: 1.25;
+    }
     .urg-notice-box {
       flex-direction: column;
       align-items: stretch;
+      padding: 0.85rem 1rem;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
     }
     .urg-notice-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      width: 100%;
+      gap: 6px;
+    }
+    .urg-notice-btns .btn {
+      padding: 8px 4px;
+      font-size: 0.8rem;
+      text-align: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+    .map-section-title-row {
       flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .regular-drawer-summary {
+      padding: 0.85rem 1rem;
+    }
+    .drawer-title {
+      font-size: 0.9rem;
+    }
+    .drawer-toggle-badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+    }
+    .drawer-content {
+      padding: 0.75rem 0.75rem 1.2rem;
     }
   }
 </style>
