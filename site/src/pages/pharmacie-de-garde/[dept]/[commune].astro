@@ -42,25 +42,31 @@ export async function getStaticPaths() {
     }
 
     const deptPharmacies = shardCache.get(deptCode) || [];
-    const communeNameLower = commune.nom.toLowerCase();
-    const postal = commune.codePostal || '';
+    const postalCodes = (commune.postalCodes && commune.postalCodes.length > 0)
+      ? commune.postalCodes
+      : (commune.codePostal ? [commune.codePostal] : []);
+    const normCNom = (commune.nom || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/-/g, ' ').trim();
     const cLat = commune.lat;
     const cLon = commune.lon;
 
-    // 1. Direct commune pharmacies
+    // 1. Direct commune pharmacies (matched by postal code, exact or merged commune name)
     const localPharmacies = deptPharmacies.filter((p: any) => {
-      const pVille = (p.ville || '').toLowerCase();
-      const pCp = p.codePostal || '';
-      return pVille === communeNameLower || (postal && pCp.startsWith(postal.slice(0, 4)));
+      const pCp = (p.codePostal || '').trim();
+      if (postalCodes.includes(pCp)) return true;
+      const normPVille = (p.ville || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/-/g, ' ').trim();
+      if (normPVille === normCNom) return true;
+      if (normCNom.split(' ').length > 1 && normCNom.includes(normPVille) && normPVille.length >= 4) return true;
+      if (normPVille.includes(normCNom) && normCNom.length >= 4) return true;
+      return false;
     }).map((p: any) => ({
       ...p,
       distanceKm: (cLat && cLon && p.lat && p.lon)
         ? Math.round(getDistanceKm(cLat, cLon, p.lat, p.lon) * 10) / 10
         : null,
       isLocal: true,
-    }));
+    })).sort((a: any, b: any) => (a.distanceKm || 0) - (b.distanceKm || 0));
 
-    // 2. Expand radius: Nearby pharmacies in neighbouring communes within 25 km
+    // 2. Expand radius: Nearby pharmacies in neighbouring communes within 15 km
     let nearbyPharmacies: any[] = [];
     if (cLat && cLon) {
       const localIds = new Set(localPharmacies.map((p: any) => p.id));
@@ -74,9 +80,9 @@ export async function getStaticPaths() {
             isLocal: false,
           };
         })
-        .filter((p: any) => p.distanceKm <= 25)
+        .filter((p: any) => p.distanceKm <= 15)
         .sort((a: any, b: any) => a.distanceKm - b.distanceKm)
-        .slice(0, 20);
+        .slice(0, 16);
     }
 
     // 3. Departmental 24h Hub
@@ -113,6 +119,14 @@ export async function getStaticPaths() {
 
 const { commune, dept, pharmacies, dept24hPharmacy } = Astro.props;
 
+const localPharmacies = pharmacies.filter((p: any) => p.isLocal);
+const nearbyPharmacies = pharmacies.filter((p: any) => !p.isLocal);
+
+// Postal code display (e.g. "69310, 69600" or single postal code)
+const postalDisplay = (commune.postalCodes && commune.postalCodes.length > 0)
+  ? (commune.postalCodes.length <= 3 ? commune.postalCodes.join(', ') : `${commune.postalCodes[0]} - ${commune.postalCodes[commune.postalCodes.length - 1]}`)
+  : (commune.codePostal || dept.code);
+
 // Active guard shifts (open now)
 const now = new Date();
 const onGuardList = pharmacies.filter((p: any) => {
@@ -123,14 +137,6 @@ const onGuardList = pharmacies.filter((p: any) => {
     return now >= d && now <= f;
   });
 });
-
-const localPharmacies = pharmacies.filter((p: any) => p.isLocal);
-const nearbyPharmacies = pharmacies.filter((p: any) => !p.isLocal);
-
-// Ensure primary guard list has active guards, or if none in this exact minute, nearest open/duty pharmacies (at least 4-6)
-const primaryList = onGuardList.length >= 2
-  ? onGuardList
-  : [...onGuardList, ...pharmacies.filter((p: any) => !onGuardList.includes(p))].slice(0, 6);
 
 const center: [number, number] = (commune.lat && commune.lon)
   ? [commune.lat, commune.lon]
@@ -147,7 +153,7 @@ const itemListLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": `Pharmacies de garde à ${commune.nom}`,
-  "description": `Liste officielle des officines de pharmacie et gardes d'urgence à ${commune.nom} (${commune.codePostal || dept.code}).`,
+  "description": `Liste officielle des officines de pharmacie et gardes d'urgence à ${commune.nom} (${postalDisplay}).`,
   "numberOfItems": pharmacies.length,
   "itemListElement": pharmacies.map((p: any, idx: number) => ({
     "@type": "ListItem",
@@ -174,7 +180,7 @@ const faqLd = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": `Où trouver une pharmacie de garde aujourd'hui ou cette nuit à ${commune.nom} (${commune.codePostal || dept.code}) ?`,
+      "name": `Où trouver une pharmacie de garde aujourd'hui ou cette nuit à ${commune.nom} (${postalDisplay}) ?`,
       "acceptedAnswer": {
         "@type": "Answer",
         "text": `À ${commune.nom}, la garde de nuit (20h00 - 08h00) est assurée à volets fermés. Pour obtenir l'adresse de l'officine d'astreinte ou vous faire ouvrir, contactez le 3237 (Résogardes) ou présentez-vous au commissariat de police ou à la brigade de gendarmerie la plus proche (composez le 17) avec votre ordonnance médicale urgente.`
@@ -193,7 +199,7 @@ const faqLd = {
       "name": `Combien de pharmacies d'officine sont recensées à ${commune.nom} ?`,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": `La commune de ${commune.nom} compte actuellement ${pharmacies.length} pharmacies d'officine répertoriées au fichier national officiel FINESS.`
+        "text": `La commune de ${commune.nom} compte actuellement ${localPharmacies.length} pharmacies d'officine répertoriées au fichier national officiel FINESS (${pharmacies.length} avec les officines voisines).`
       }
     },
     {
@@ -209,8 +215,8 @@ const faqLd = {
 ---
 
 <Base
-  title={`Pharmacie de Garde à ${commune.nom} (${commune.codePostal || dept.code}) Aujourd'hui : Ouverte Maintenant et Nuit 24h`}
-  description={`Trouvez les pharmacies de garde à ${commune.nom} ouvertes maintenant : horaires aujourd'hui, service de garde de nuit 24h/24, plan d'accès et téléphone direct pour appeler immédiatement.`}
+  title={`Pharmacie de Garde à ${commune.nom} (${postalDisplay}) : Ouverte Maintenant, Nuit et Dimanche`}
+  description={`Trouvez les pharmacies de garde et ouvertes maintenant à ${commune.nom} (${postalDisplay}) : coordonnées, téléphones directs, horaires de jour et service d'urgence de nuit.`}
   breadcrumbs={breadcrumbs}
   jsonLd={[itemListLd, faqLd]}
 >
@@ -220,31 +226,40 @@ const faqLd = {
     <div class="commune-header">
       <div class="commune-badges">
         <span class="badge badge-open">Ville : {commune.nom}</span>
-        <span class="badge badge-garde">{commune.codePostal || dept.code}</span>
+        <span class="badge badge-garde">{postalDisplay}</span>
         <span class="badge badge-night">
-          {onGuardList.length > 0 ? `${onGuardList.length} de garde maintenant` : `${pharmacies.length} pharmacies`}
+          {localPharmacies.length} pharmacie{localPharmacies.length > 1 ? 's' : ''} à {commune.nom}
         </span>
+        {nearbyPharmacies.length > 0 && (
+          <span class="badge badge-dist">
+            +{nearbyPharmacies.length} aux alentours
+          </span>
+        )}
       </div>
-      <h1>Pharmacie de Garde à {commune.nom}</h1>
+      <h1>Pharmacie de Garde à {commune.nom} ({postalDisplay})</h1>
       <p class="lead">
-        Officines actuellement ouvertes et service de garde d'urgence (dimanches, nuits et jours fériés) à <strong>{commune.nom}</strong> ({dept.nom}).
+        Officines de proximité, permanence de nuit et service de garde d'urgence (dimanches et jours fériés) à <strong>{commune.nom}</strong> ({dept.nom}).
       </p>
     </div>
 
-    <!-- Emergency notice -->
+    <!-- Context notice: Daytime vs Night Guard -->
     <div class="card urg-notice-box">
       <div class="urg-notice-text">
-        <span class="urg-notice-icon">🌙</span>
+        <span class="urg-notice-icon">ℹ️</span>
         <div>
-          <h3>Garde de nuit à {commune.nom} (20h00 — 08h00)</h3>
+          <h3>Organisation des soins à {commune.nom} : En journée & De garde</h3>
           <p>
-            Pour la sécurité des équipes officinales, les portes restent verrouillées. Présentez impérativement une <strong>ordonnance médicale urgente</strong> datée du jour. Si la sonnette n'est pas accessible, contactez le <strong>3237</strong> ou le <strong>17</strong>.
+            <strong>☀️ En journée (Lun – Sam, 08h30 – 19h30) :</strong> Les {localPharmacies.length} officines de {commune.nom} et des environs sont ouvertes en libre accès. Vous pouvez vous y rendre directement sans ordonnance d'urgence.
+          </p>
+          <p style="margin-top: 6px;">
+            <strong>🌙 La nuit (20h00 — 08h00) & le dimanche :</strong> La garde s'effectue à volets fermés. Présentez-vous muni de votre ordonnance médicale d'urgence du jour ou contactez le <strong>3237</strong> ou le <strong>17</strong> (Police / Gendarmerie).
           </p>
         </div>
       </div>
       <div class="urg-notice-btns">
         <a href="tel:3237" class="btn btn-phone">3237 (Garde)</a>
-        <a href="tel:17" class="btn btn-outline">Police / Gendarmerie 17</a>
+        <a href="tel:17" class="btn btn-outline">Police 17</a>
+        <a href="tel:15" class="btn btn-outline">SAMU 15</a>
       </div>
     </div>
 
@@ -257,7 +272,7 @@ const faqLd = {
           Conformément à <strong>l'article L. 5125-22 du Code de la santé publique</strong>, le service de garde d'urgence (nuit, dimanches et jours fériés) est mutualisé par secteur sanitaire. L'Agence Régionale de Santé (ARS) et le syndicat des pharmaciens désignent <strong>une seule pharmacie de garde active par secteur</strong> pour assurer la permanence des soins.
         </p>
         <p class="why-single-sub">
-          Afin de vous garantir un accès rapide à un professionnel de santé en cas d'urgence, nous affichons l'officine de garde de <strong>{commune.nom}</strong> ainsi que les officines d'astreinte et de nuit des communes voisines dans un <strong>rayon élargi de 25 km</strong>.
+          Afin de vous garantir un accès rapide à un professionnel de santé en cas d'urgence, nous affichons les officines de <strong>{commune.nom}</strong> ainsi que les officines des communes voisines dans un <strong>rayon élargi de 15 km</strong>.
         </p>
       </div>
     </div>
@@ -296,47 +311,49 @@ const faqLd = {
       </div>
     )}
 
-    <!-- Clustered Map with Open-Only by default -->
+    <!-- Clustered Map with All Pharmacies by default -->
     <section class="commune-map-section">
       <div class="map-section-title-row">
-        <h2>Carte des pharmacies à {commune.nom} et environs</h2>
-        <span class="muted">Affichage par palloncino regroupé (Rayon 25 km)</span>
+        <h2>🗺️ Carte des pharmacies à {commune.nom} et communes voisines ({pharmacies.length})</h2>
+        <span class="muted">Regroupement interactif (Rayon 15 km) — Cliquez sur une officine pour voir ses coordonnées et l'itinéraire</span>
       </div>
-      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} cityName={commune.nom} defaultOnlyOpen={true} />
+      <PharmacyMap pharmacies={pharmacies} center={center} zoom={13} cityName={commune.nom} defaultOnlyOpen={false} />
     </section>
 
     <AdSlot slot="8901234567" />
 
-    <!-- List of Open / On-Call Pharmacies (Expanded Radius) -->
-    <section class="commune-list-section">
-      <div class="list-heading">
-        <div>
-          <h2>🟢 Service de garde & urgences ouvert maintenant ({primaryList.length})</h2>
-          <p class="section-subtitle">
-            Officines de garde à <strong>{commune.nom}</strong> et dans les communes limitrophes (rayon jusqu'à 25 km)
-          </p>
+    <!-- Active Emergency Guard Shift (if on guard right now) -->
+    {onGuardList.length > 0 && (
+      <section class="commune-list-section" style="margin-bottom: 2.5rem;">
+        <div class="list-heading">
+          <div>
+            <h2>🚨 Service de garde actif en ce moment ({onGuardList.length})</h2>
+            <p class="section-subtitle">
+              Pharmacies de garde assurant la permanence d'urgence actuelle
+            </p>
+          </div>
+          <span class="badge badge-night">Garde d'urgence</span>
         </div>
-        <span class="badge badge-open">Vérification en direct</span>
-      </div>
 
-      <div class="grid grid-cols-2 pharma-grid">
-        {primaryList.map((p: any) => (
-          <PharmacyCard pharmacy={p} />
-        ))}
-      </div>
-    </section>
+        <div class="grid grid-cols-2 pharma-grid">
+          {onGuardList.map((p: any) => (
+            <PharmacyCard pharmacy={p} />
+          ))}
+        </div>
+      </section>
+    )}
 
-    <!-- All Local Pharmacies with regular weekday hours -->
+    <!-- 1. All Local Pharmacies with regular weekday hours -->
     {localPharmacies.length > 0 && (
       <section class="commune-regular-section">
         <div class="list-heading">
           <div>
             <h2>📋 Toutes les pharmacies à {commune.nom} ({localPharmacies.length})</h2>
             <p class="section-subtitle">
-              Adresses, téléphones et <strong>horaires réguliers d'ouverture en journée</strong> pour vos soins habituels
+              Adresses, téléphones directs et <strong>horaires réguliers d'ouverture en journée</strong> pour vos soins habituels
             </p>
           </div>
-          <span class="badge badge-open">Officines FINESS</span>
+          <span class="badge badge-open">Officines de la ville</span>
         </div>
 
         <div class="grid grid-cols-2 pharma-grid">
@@ -346,6 +363,49 @@ const faqLd = {
         </div>
       </section>
     )}
+
+    <!-- 2. Nearby Pharmacies in Neighbouring Communes -->
+    {nearbyPharmacies.length > 0 && (
+      <section class="commune-nearby-section" style="margin-top: 2.5rem;">
+        <div class="list-heading">
+          <div>
+            <h2>📍 Pharmacies à proximité dans les communes voisines ({nearbyPharmacies.length})</h2>
+            <p class="section-subtitle">
+              Officines situées à proximité immédiate de <strong>{commune.nom}</strong> (rayon 1 à 15 km, triées par distance)
+            </p>
+          </div>
+          <span class="badge badge-dist">Communes limitrophes</span>
+        </div>
+
+        <div class="grid grid-cols-2 pharma-grid">
+          {nearbyPharmacies.map((p: any) => (
+            <PharmacyCard pharmacy={p} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <AdSlot slot="9012345678" />
+
+    <!-- Local FAQ -->
+    <section class="commune-faq-section">
+      <h2>Questions fréquentes — Pharmacie de garde à {commune.nom}</h2>
+      <div class="faq-list">
+        {faqLd.mainEntity.map(item => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{item.name}</span>
+              <span class="faq-arrow">▼</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{item.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>
 
     <AdSlot slot="9012345678" />
 

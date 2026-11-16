@@ -76,24 +76,22 @@ const totalCount = mappedData.length;
     <div class="map-filter-group">
       <button
         type="button"
+        id="btn-filter-all"
+        class={`filter-pill ${!defaultOnlyOpen ? 'active' : ''}`}
+        data-filter="all"
+      >
+        <span>Toutes les officines ({totalCount})</span>
+      </button>
+
+      <button
+        type="button"
         id="btn-filter-open-only"
         class={`filter-pill ${defaultOnlyOpen ? 'active' : ''}`}
         data-filter="open"
       >
         <span class="pulse-dot"></span>
-        <span>Ouvertes & de garde ({openCount})</span>
+        <span>De garde / 24h ({openCount})</span>
       </button>
-
-      {totalCount > openCount && (
-        <button
-          type="button"
-          id="btn-filter-all"
-          class={`filter-pill ${!defaultOnlyOpen ? 'active' : ''}`}
-          data-filter="all"
-        >
-          <span>Toutes les officines ({totalCount})</span>
-        </button>
-      )}
     </div>
 
     <div class="map-actions-group">
@@ -125,7 +123,11 @@ const totalCount = mappedData.length;
   <div class="map-legend">
     <div class="legend-item">
       <span class="legend-dot dot-garde"></span>
-      <span>Pharmacie de garde (accès prioritaire / nuit)</span>
+      <span>Pharmacie de garde / 24h</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-dot dot-day"></span>
+      <span>Pharmacie ouverte en journée</span>
     </div>
     <div class="legend-item">
       <span class="legend-dot dot-cluster"></span>
@@ -242,6 +244,10 @@ const totalCount = mappedData.length;
     border: 2px solid #ffffff;
     box-shadow: 0 0 4px rgba(5, 150, 105, 0.6);
   }
+  .dot-day {
+    background: #0284c7;
+    border: 2px solid #ffffff;
+  }
   .dot-cluster {
     background: #d97706;
     border: 2px solid #ffffff;
@@ -291,6 +297,16 @@ const totalCount = mappedData.length;
     font-size: 15px;
     font-weight: bold;
   }
+  :global(.pin-day) {
+    background: #0284c7;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 3px 6px rgba(2, 132, 199, 0.4);
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    font-weight: bold;
+  }
   :global(.pin-closed) {
     background: #64748b;
     color: #ffffff;
@@ -327,6 +343,11 @@ const totalCount = mappedData.length;
     background: #ecfdf5;
     color: #059669;
     border: 1px solid #a7f3d0;
+  }
+  :global(.badge-day-pop) {
+    background: #eff6ff;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
   }
   :global(.badge-closed-pop) {
     background: #f1f5f9;
@@ -461,27 +482,48 @@ const totalCount = mappedData.length;
       });
 
       filtered.forEach(p => {
-        const pinClass = p.isOpenNow ? 'pin-open' : 'pin-closed';
+        const nowClient = new Date();
+        const clientHour = nowClient.getHours();
+        const clientDay = nowClient.getDay(); // 0 = Sun
+        const isDayTime = clientDay !== 0 && clientHour >= 8 && clientHour < 20;
+
+        let statusBadge = '';
+        let pinClass = '';
+        if (p.is24h) {
+          statusBadge = '<span class="pharma-popup-badge badge-open-pop">🚨 Ouverte 24h/24</span>';
+          pinClass = 'pin-open';
+        } else if (p.isOpenNow) {
+          statusBadge = '<span class="pharma-popup-badge badge-open-pop">🟢 De garde</span>';
+          pinClass = 'pin-open';
+        } else if (isDayTime) {
+          statusBadge = '<span class="pharma-popup-badge badge-day-pop">🕒 Horaires réguliers de jour</span>';
+          pinClass = 'pin-day';
+        } else {
+          statusBadge = '<span class="pharma-popup-badge badge-closed-pop">🌙 Fermée (Hors service de garde)</span>';
+          pinClass = 'pin-closed';
+        }
+
+        const isHighlighted = p.isOpenNow || p.is24h;
         const pinIcon = L.divIcon({
           className: `single-pharma-pin ${pinClass}`,
-          html: p.isOpenNow ? '➕' : '💊',
-          iconSize: p.isOpenNow ? [32, 32] : [26, 26],
-          iconAnchor: p.isOpenNow ? [16, 16] : [13, 13]
+          html: isHighlighted ? '➕' : '💊',
+          iconSize: isHighlighted ? [32, 32] : [28, 28],
+          iconAnchor: isHighlighted ? [16, 16] : [14, 14]
         });
-
-        const statusBadge = p.isOpenNow 
-          ? '<span class="pharma-popup-badge badge-open-pop">🟢 Ouverte / De Garde</span>'
-          : '<span class="pharma-popup-badge badge-closed-pop">Fermée actuellement</span>';
 
         const ratingHtml = p.rating 
           ? `<div class="pharma-popup-rating">★ ${p.rating} (${p.reviewsCount || 0} avis Google)</div>`
+          : '';
+
+        const distBadge = p.distanceKm != null 
+          ? `<span style="display:inline-block;margin-left:6px;font-size:11px;color:#059669;font-weight:700;">à ${p.distanceKm} km</span>` 
           : '';
 
         const detailLink = p.slug ? `<a href="/pharmacie/${p.slug}/" style="color:#059669;font-weight:700;text-decoration:none;">${p.nom}</a>` : p.nom;
 
         const popup = `
           <div class="pharma-popup-box">
-            <h4 class="pharma-popup-title">${detailLink}</h4>
+            <h4 class="pharma-popup-title">${detailLink} ${distBadge}</h4>
             ${statusBadge}
             ${ratingHtml}
             <p class="pharma-popup-addr">📍 ${p.adresse}</p>
